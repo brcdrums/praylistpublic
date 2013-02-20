@@ -13,3 +13,7 @@ def submit(request):
 	else:
 		form = PrayerForm()
 	return render_to_response('submit.html', {'form': form})
+
+def new(request):
+	obj_list = Prayer.objects.all()
+	return render_to_response('new.html', {'prayers': obj_list})

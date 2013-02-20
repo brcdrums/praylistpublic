@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from views import submit
+from views import submit, new
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
@@ -9,6 +9,7 @@ urlpatterns = patterns('',
     # url(r'^$', 'PrayList.views.home', name='home'),
     # url(r'^PrayList/', include('PrayList.foo.urls')),
     url(r'^submit/$', submit),
+    url(r'^new/$', new),
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 

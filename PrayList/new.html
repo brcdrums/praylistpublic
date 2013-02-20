@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+	{% for prayer in prayers %}
+	<hr>
+	<h2>{{ prayer.subject }}</h2>
+	<p>{{ prayer.prayer }}</p>
+	{% endfor %}
+{% endblock %}
