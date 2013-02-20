@@ -15,5 +15,5 @@ def submit(request):
 	return render_to_response('submit.html', {'form': form})
 
 def new(request):
-	obj_list = Prayer.objects.all()
+	obj_list = Prayer.objects.order_by("-id")
 	return render_to_response('new.html', {'prayers': obj_list})
