@@ -8,8 +8,10 @@ def submit(request):
 	if request.method == "POST":
 		form = PrayerForm(request.POST)
 		if form.is_valid():
+			dt = datetime.datetime.now()
+			dtclean = dt.strftime('%Y-%m-%d %H:%M:%S')
 		#	return HttpResponseRedirect('/submit/thanks/')
-			p= Prayer(subject = request.POST['subject'], prayer = request.POST['prayer'], timestamp=datetime.datetime.now())
+			p= Prayer(subject = request.POST['subject'], prayer = request.POST['prayer'], timestamp=dtclean)
 			p.save()
 	else:
 		form = PrayerForm()
