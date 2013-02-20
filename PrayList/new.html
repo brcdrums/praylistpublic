@@ -3,7 +3,8 @@
 {% block content %}
 	{% for prayer in prayers %}
 	<hr>
-	<h2>{{ prayer.subject }}</h2>
+	<h3>{{ prayer.subject }}  </h3>
+	<p>posted on {{ prayer.timestamp }}</p>
 	<p>{{ prayer.prayer }}</p>
 	{% endfor %}
 {% endblock %}
