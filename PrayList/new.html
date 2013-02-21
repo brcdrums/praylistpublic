@@ -1,10 +1,25 @@
 {% extends "base.html" %}
+{% block title %}new{% endblock %}
 
 {% block content %}
 	{% for prayer in prayers %}
-	<hr>
-	<h3>{{ prayer.subject }}  </h3>
-	<h5>Posted on {{ prayer.timestamp }}</h5>
-	<p>{{ prayer.prayer }}</p>
-	{% endfor %}
+	<br />
+	<div id="prayers">
+		<div id="number">{{ forloop.counter }}</div>
+		<div id="subject"> {{ prayer.subject }} </div>
+		<br>
+		<br>
+		{% for timestamp in timestamps %} 
+			{% if timestamp == forloop.parentloop.counter %}
+			<div id="timestamp"> Posted {{ prayer.timestamp|timesince }} ago </div>
+			{% endif %}
+		{% endfor %}
+		 
+	</div>
+
+	<!-- <h3 style="text-align: center;">{{ prayer.subject }}  </h3>
+	<h5 style="text-align: right; inline:">Posted on {{ prayer.timestamp }}</h5>
+	<p style="text-align: center;">{{ prayer.prayer }}</p>
+	 -->
+	 {% endfor %}
 {% endblock %}

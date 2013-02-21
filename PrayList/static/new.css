@@ -1,0 +1,42 @@
+#title {
+	text-align: center;
+	display: inline;
+	margin-left: -10px;
+	padding-bottom: 20px;
+}
+
+#prayers {
+	 overflow: hidden; 
+}
+
+#subject {
+	text-align: left;
+	font-family: Verdana;
+	float: left;
+	padding-left: 10px;
+	font-size: 27;
+	color: rgb(0, 0, 255);
+}
+
+#prayer {
+	text-align: center;
+}
+
+#timestamp {
+	display: inline;
+	padding-left: 24px;
+	font-size: 14;
+}
+
+#number {
+	float: left;
+	font-size: 20;
+	padding-top: 8px;
+}
+
+img {
+	height: 100px;
+	width: 100px;
+	display: inline;
+	margin-bottom: -10px;
+}
