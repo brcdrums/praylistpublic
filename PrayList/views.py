@@ -27,6 +27,13 @@ def new(request):
 		timedifflist[index + 1] = humanizeTimeDiff(obj.timestamp)
 	return render_to_response('new.html', {'prayers': obj_list, 'timestamps': timedifflist, 'current_time': dtclean})
 
+def post_page(request, postid):
+	prayer = Prayer.objects.get(id=postid)
+	subject = prayer.subject
+	timestamp = prayer.timestamp
+	prayer = prayer.prayer
+	return render_to_response('post_page.html', {'subject': subject, 'timestamp': timestamp, 'prayer': prayer})
+
 def humanizeTimeDiff(timestamp = None):
     """
     Returns a humanized string representing time difference
