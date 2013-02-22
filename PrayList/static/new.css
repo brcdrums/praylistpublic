@@ -86,3 +86,20 @@ a button:hover {
 	margin-top:70px;
 	cursor: hand;
 }
+
+#postsubject {
+	text-align: center;
+	font-family: cursive;
+	font-size: 40;
+}
+
+#poststamp {
+	text-align: center;
+	font-size: 20;
+}
+
+#postprayer {
+	text-align: center;
+	font-size: 18;
+	font-family: verdana, arial, helvetica, sans-serif;
+}
