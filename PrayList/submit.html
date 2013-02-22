@@ -1,8 +1,5 @@
-<html>
-<head>
-	<title>Submit Prayer</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block content %}
 	<h1>Submit a Prayer</h1>
 
 	{% if form.errors %}
@@ -17,5 +14,4 @@
 		</table>
 		<input type="submit" value="Submit">
 	</form>
-</body>
-</html>
+{% endblock %}

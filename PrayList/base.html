@@ -4,10 +4,35 @@
 	<title>{% block title %}{% endblock %}</title>
 </head>
 <body>
-	<img src="/static/PrayingHands.bmp">
-	<h1 id="title">PrayList</h1>
-	<a href="/submit/"><button>Submit New Prayer!</button></a>
-	<hr>
+	<div id="topnav">
+		<h1 id="title">PrayList</h1>
+		<a href="/"><img src="/static/PrayingHands.bmp"></a>
+		<a href="/submit/"><button class= "submitbutton">Submit New Prayer!</button></a>
+		<ul class="tabmenu">
+			{% if path == "/" %}
+			<li class = "selected">
+			{% else %}
+			<li>
+			{% endif %}
+				<a href="/">Trending</a>
+			</li>
+			{% if path == "/new/" %}
+			<li class = "selected">
+			{% else %}
+			<li>
+			{% endif %}
+				<a href="/new/">New</a>
+			</li>
+			{% if path == "/top/" %}
+			<li class="selected">
+			{% else %}
+			<li>
+			{% endif %}
+				<a href="/top/">Top</a>
+			</li>
+		</ul>
+		
+	</div>
 	{% block content %}{% endblock %}
 	{% block footer %}
 	<br>

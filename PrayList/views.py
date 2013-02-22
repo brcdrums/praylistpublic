@@ -4,6 +4,7 @@ from django.shortcuts import render_to_response
 from django.shortcuts import HttpResponseRedirect
 import datetime
 from django.utils.timezone import utc
+from django.template import RequestContext
 
 def submit(request):
 	if request.method == "POST":
@@ -21,13 +22,14 @@ def submit(request):
 	return render_to_response('submit.html', {'form': form})
 
 def new(request):
-	obj_list = Prayer.objects.order_by("-id")
-	timedifflist = {}
-	dt = datetime.datetime.now()
-	dtclean = dt.strftime('%Y-%m-%d %H:%M:%S')
-	for index, obj in enumerate(obj_list):
-		timedifflist[index + 1] = humanizeTimeDiff(obj.timestamp)
-	return render_to_response('new.html', {'prayers': obj_list, 'timestamps': timedifflist, 'current_time': dtclean})
+    obj_list = Prayer.objects.order_by("-id")
+    timedifflist = {}
+    dt = datetime.datetime.now()
+    dtclean = dt.strftime('%Y-%m-%d %H:%M:%S') 
+    path = request.get_full_path
+    for index, obj in enumerate(obj_list):
+        timedifflist[index + 1] = humanizeTimeDiff(obj.timestamp)
+    return render_to_response('new.html', {'prayers': obj_list, 'timestamps': timedifflist, 'current_time': dtclean, 'path': path})
 
 def post_page(request, postid):
 	prayer = Prayer.objects.get(id=postid)

@@ -76,6 +76,10 @@ STATICFILES_FINDERS = (
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.core.context_processors.request',
+)
+
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'd-8hw-yu6yovxbe(30#&amp;@(m9vajqawz&amp;*o=z_widyyf_e=96f_'
 
