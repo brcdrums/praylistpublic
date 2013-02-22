@@ -225,9 +225,9 @@ a button:hover {
 .roundfield-content {
 	margin-top: 5px;
 	border: none;
-	vertical-align: top;
+	vertical-align: text-top;
 }
-.roundfieldbig {
+.field{
 	width: 500px;
 	background-color: #D5F3D3;
 	border-radius: 4px;
@@ -253,20 +253,39 @@ a button:hover {
 }
 .spacer {
 	display: block;
-font-family: verdana, arial, helvetica, sans-serif;
-font-size: 5px;
-font-style: normal;
-font-variant: normal;
-font-weight: normal;
-height: 2px;
-line-height: normal;
-margin-bottom: 5px;
-margin-left: 0px;
-margin-right: 0px;
-margin-top: 15px;
-padding-bottom: 0px;
-padding-left: 0px;
-padding-right: 0px;
-padding-top: 0px;
-width: 520px;
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-size: 5px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: normal;
+	height: 2px;
+	line-height: normal;
+	margin-bottom: 5px;
+	margin-left: 0px;
+	margin-right: 0px;
+	margin-top: 15px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+	padding-top: 0px;
+	width: 520px;
 }
+
+textarea {
+	margin-top: 5px;
+	border: 1px solid gray;
+	vertical-align: text-top;
+}
+
+ul.errorlist {
+        margin: 0;
+        padding: 0;
+    }
+.errorlist li {
+        background-color: red;
+        color: white;
+        display: block;
+        font-size: 10px;
+        margin: 0 0 3px;
+        padding: 4px 5px;
+    }
