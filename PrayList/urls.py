@@ -11,6 +11,7 @@ urlpatterns = patterns('',
     url(r'^submit/$', submit),
     url(r'^new/$', new),
     url(r'^post/(?P<postid>\d{1,3})/$', post_page),
+    # url(r'^top/$', top),
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 

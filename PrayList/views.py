@@ -38,6 +38,10 @@ def post_page(request, postid):
 	prayer = prayer.prayer
 	return render_to_response('post_page.html', {'subject': subject, 'timestamp': timestamp, 'prayer': prayer})
 
+# def top(request):
+#     timestamps = Prayer.objects.get(timestamp)
+#     obj_list = Prayer.objects.get(timestamp < )
+
 def humanizeTimeDiff(timestamp = None):
     """
     Returns a humanized string representing time difference

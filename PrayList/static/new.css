@@ -39,32 +39,12 @@ img {
 	height: 100px;
 	width: 100px;
 	display: inline-block;
-	vertical-align: baseline;
-	float:left;
+	padding-bottom: 0px;
+	margin-bottom: 0px;
 
 }
 
-button {
-	background:#00A0D1;
-	background:-moz-linear-gradient(top,#00A0D1 0%,#008DB8 100%);
-	background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#00A0D1),color-stop(100%,#008DB8));
-	background:-webkit-linear-gradient(top,#00A0D1 0%,#008DB8 100%);
-	background:-o-linear-gradient(top,#00A0D1 0%,#008DB8 100%);
-	background:-ms-linear-gradient(top,#00A0D1 0%,#008DB8 100%);
-	background:linear-gradient(top,#00A0D1 0%,#008DB8 100%);
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#00A0D1',endColorstr='#008DB8',GradientType=0);
-	padding:8px 20px;
-	color:#cfebf3;
-	font-family:'Helvetica Neue',sans-serif;
-	font-size:13px;
-	border-radius:40px;
-	-moz-border-radius:40px;
-	-webkit-border-radius:40px;
-	border:1px solid #095B7E;
-	float: right;
-	margin-top:70px;
-	cursor: hand;
-}
+
 
 a button:hover {
 	background:#2F2060;
@@ -108,25 +88,14 @@ a button:hover {
 .tabmenu {
 	font-family: verdana, arial, helvetica, sans-serif;
 	font-size: 12px;
-	font-style: normal;
-	font-variant: normal;
-	font-weight: normal;
-	line-height: normal;
-	list-style-image: none;
-	list-style-position: outside;
-	list-style-type: none;
 	padding-bottom: 0px;
 	padding-left: 0px;
 	padding-right: 0px;
 	padding-top: 0px;
 	width: 200px;
 	height: 40px;
-  	display: block;
-  	margin-left: auto;
- 	margin-right: auto;
- 	margin-top: auto;
- 	margin-bottom: auto;
- 	vertical-align: bottom;
+  	display: inline;
+  
 }
 
 .tabmenu li {
@@ -169,10 +138,10 @@ a button:hover {
 	list-style-image: none;
 	list-style-position: outside;
 	list-style-type: none;
-	padding-bottom: 3px;
-	padding-left: 6px;
-	padding-right: 6px;
-	padding-top: 2px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+	padding-top: 0px;
 	text-align: left;
 	text-decoration: none;
 	white-space: nowrap;
@@ -194,10 +163,10 @@ a button:hover {
 	list-style-image: none;
 	list-style-position: outside;
 	list-style-type: none;
-	padding-bottom: 3px;
-	padding-left: 6px;
-	padding-right: 6px;
-	padding-top: 2px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+	padding-top: 0px;
 	text-align: left;
 	text-decoration: none;
 	white-space: nowrap;
@@ -213,6 +182,25 @@ a button:hover {
 .submitbutton {
 	float:right;
 	margin-top: 75px;
+	background:#00A0D1;
+	background:-moz-linear-gradient(top,#00A0D1 0%,#008DB8 100%);
+	background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#00A0D1),color-stop(100%,#008DB8));
+	background:-webkit-linear-gradient(top,#00A0D1 0%,#008DB8 100%);
+	background:-o-linear-gradient(top,#00A0D1 0%,#008DB8 100%);
+	background:-ms-linear-gradient(top,#00A0D1 0%,#008DB8 100%);
+	background:linear-gradient(top,#00A0D1 0%,#008DB8 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#00A0D1',endColorstr='#008DB8',GradientType=0);
+	padding:8px 20px;
+	color:#cfebf3;
+	font-family:'Helvetica Neue',sans-serif;
+	font-size:13px;
+	border-radius:40px;
+	-moz-border-radius:40px;
+	-webkit-border-radius:40px;
+	border:1px solid #095B7E;
+	float: right;
+	margin-top:70px;
+	cursor: hand;
 }
 
 .roundfield {
@@ -271,10 +259,12 @@ a button:hover {
 	width: 520px;
 }
 
-textarea {
+#id_prayer {
 	margin-top: 5px;
 	border: 1px solid gray;
 	vertical-align: text-top;
+	width: 500px;
+	font-size: 14;
 }
 
 ul.errorlist {
@@ -289,3 +279,9 @@ ul.errorlist {
         margin: 0 0 3px;
         padding: 4px 5px;
     }
+
+#id_subject {
+	width: 500px;
+	height: 50px;
+	font-size: 24;
+}
