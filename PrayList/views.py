@@ -23,12 +23,10 @@ def submit(request):
 
 def new(request):
     obj_list = Prayer.objects.order_by("-id")
-    timedifflist = {}
+    timedifflist = calculate_time_diff(request, obj_list)
+    path = request.get_full_path
     dt = datetime.datetime.now()
     dtclean = dt.strftime('%Y-%m-%d %H:%M:%S') 
-    path = request.get_full_path
-    for index, obj in enumerate(obj_list):
-        timedifflist[index + 1] = humanizeTimeDiff(obj.timestamp)
     return render_to_response('new.html', {'prayers': obj_list, 'timestamps': timedifflist, 'current_time': dtclean, 'path': path})
 
 def post_page(request, postid):
@@ -39,8 +37,18 @@ def post_page(request, postid):
 	return render_to_response('post_page.html', {'subject': subject, 'timestamp': timestamp, 'prayer': prayer})
 
 # def top(request):
-#     timestamps = Prayer.objects.get(timestamp)
-#     obj_list = Prayer.objects.get(timestamp < )
+#     path = request.get_full_path
+#     obj_list = Prayer.objects.order_by("-id")
+#     timedifflist = calculate_time_diff(request, obj_list)
+#     timediff_today = []
+#     for item in timedifflist:
+#         if "day" not in item:
+#             timediff_today.append(item)
+#     item_length = len(timediff_today)
+#     new_obj_list = obj_list[:item_length]
+#     return render_to_response('top_page.html', {'prayers': new_obj_list})
+
+
 
 def humanizeTimeDiff(timestamp = None):
     """
@@ -83,3 +91,9 @@ def humanizeTimeDiff(timestamp = None):
         return str
     else:
         return None
+
+def calculate_time_diff(request, obj_list):
+    timedifflist = {}
+    for index, obj in enumerate(obj_list):
+        timedifflist[index + 1] = humanizeTimeDiff(obj.timestamp)
+    return timedifflist

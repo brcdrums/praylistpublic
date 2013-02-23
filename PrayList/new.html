@@ -11,7 +11,11 @@
 		<br>
 		{% for timestamp in timestamps %} 
 			{% if timestamp == forloop.parentloop.counter %}
-			<div id="timestamp"> Posted {{ prayer.timestamp|timesince }} ago </div>
+				{% if prayer.timestamp|timesince == "0 minutes" %}
+				<div id="timestamp"> Posted just now </div>
+				{% else %}
+				<div id="timestamp"> Posted {{ prayer.timestamp|timesince }} ago </div>
+				{% endif %}
 			{% endif %}
 		{% endfor %}
 		 
