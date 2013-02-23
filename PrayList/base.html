@@ -6,6 +6,13 @@
 <body>
 	<div id="topnav">
 		<!-- <h1 id="title">PrayList</h1> -->
+		{% if user.is_authenticated %}
+		<p>auth</p>
+		<a href="/accounts/logout/"><button class="logout">LogOut</button></a>
+		{% else %}
+		<p>not authed</p>
+		<a href="/accounts/login/"><button class="logout">LogIn</button></a>
+		{% endif %}
 		<a href="/"><img src="/static/PrayingHands.bmp"></a>
 		<a href="/submit/"><button class= "submitbutton">Submit New Prayer!</button></a>
 		<ul class="tabmenu">

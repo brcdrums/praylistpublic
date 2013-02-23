@@ -19,7 +19,7 @@ def submit(request):
 			return HttpResponseRedirect('/post/' + str(postid) +'/')
 	else:
 		form = PrayerForm()
-	return render_to_response('submit.html', {'form': form})
+	return render_to_response('submit.html', {'form': form, 'user': request.user})
 
 def new(request):
     obj_list = Prayer.objects.order_by("-id")
@@ -27,14 +27,14 @@ def new(request):
     path = request.get_full_path
     dt = datetime.datetime.now()
     dtclean = dt.strftime('%Y-%m-%d %H:%M:%S') 
-    return render_to_response('new.html', {'prayers': obj_list, 'timestamps': timedifflist, 'current_time': dtclean, 'path': path})
+    return render_to_response('new.html', {'prayers': obj_list, 'timestamps': timedifflist, 'current_time': dtclean, 'path': path, 'user': request.user})
 
 def post_page(request, postid):
 	prayer = Prayer.objects.get(id=postid)
 	subject = prayer.subject
 	timestamp = prayer.timestamp
 	prayer = prayer.prayer
-	return render_to_response('post_page.html', {'subject': subject, 'timestamp': timestamp, 'prayer': prayer})
+	return render_to_response('post_page.html', {'subject': subject, 'timestamp': timestamp, 'prayer': prayer, 'user': request.user})
 
 # def top(request):
 #     path = request.get_full_path
@@ -48,7 +48,10 @@ def post_page(request, postid):
 #     new_obj_list = obj_list[:item_length]
 #     return render_to_response('top_page.html', {'prayers': new_obj_list})
 
-
+def logout_view(request):
+    auth.logout(request)
+    # Redirect to a homepage.
+    return HttpResponseRedirect("/new/")
 
 def humanizeTimeDiff(timestamp = None):
     """
