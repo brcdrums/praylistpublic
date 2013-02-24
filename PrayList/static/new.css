@@ -289,3 +289,8 @@ ul.errorlist {
 	float: right;
 	display: inline;
 }
+
+.centerize {
+	display: block;
+    margin: 0 auto;
+    text-align: center;}
