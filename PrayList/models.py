@@ -9,7 +9,5 @@ class Prayer(models.Model):
     subject = models.CharField(max_length=50)
     prayer = models.CharField(max_length=2000)
     prayerscore = models.IntegerField(11)
-
-class Person(User):
-    prayed = models.ManyToManyField(Prayer)
-
+    prayed_users = models.ManyToManyField(User)
+    

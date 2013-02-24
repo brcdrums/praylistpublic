@@ -7,10 +7,11 @@
 		<h1 id="postsubject">{{ subject }}</h1>
 		<h5 id="poststamp">{{ timestamp }} </h5>
 		<p id="postprayer">{{ prayer }} <p>
-		{% if prayed == True %}
-		<p>You've voted on this!</p>
+		{% if userid in users.all %}
+			<p>You've voted on this!</p>
 		{% else %}
-		<a href="/voted/{{ id }}/"><button id="upvote">I prayed for this! </button>
+			<a href="/voted/{{ id }}/"><button id="upvote">I prayed for this! </button>
 		{% endif %}
+
 	</div>
 {% endblock %}

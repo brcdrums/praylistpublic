@@ -1,5 +1,5 @@
 from forms import PrayerForm
-from models import Prayer, UserExtended
+from models import Prayer
 from django.shortcuts import render_to_response
 from django.shortcuts import HttpResponseRedirect
 import datetime
@@ -30,13 +30,14 @@ def new(request):
     return render_to_response('new.html', {'prayers': obj_list, 'timestamps': timedifflist, 'current_time': dtclean, 'path': path, 'user': request.user})
 
 def post_page(request, postid):
-    prayed = False;
+    prayed = False
     prayer = Prayer.objects.get(id=postid)
+    users = prayer.prayed_users
     subject = prayer.subject
     timestamp = prayer.timestamp
     prayer = prayer.prayer
     pid = postid
-    return render_to_response('post_page.html', {'prayed': prayed, 'subject': subject, 'timestamp': timestamp, 'prayer': prayer, 'user': request.user, 'path': request.get_full_path, 'id': postid}, context_instance=RequestContext(request))
+    return render_to_response('post_page.html', {'users': users, 'subject': subject, 'timestamp': timestamp, 'prayer': prayer, 'userid': request.user, 'path': request.get_full_path, 'id': postid}, context_instance=RequestContext(request))
 
 # def top(request):
 #     path = request.get_full_path
@@ -58,14 +59,12 @@ def logout_view(request):
 def voted(request, postid):
     if request.user.is_authenticated():
         prayer = Prayer.objects.get(id=postid)
-        prayer.prayerscore = str(prayer.prayerscore)
+        prayer.prayerscore = int(prayer.prayerscore) + 1
+        prayer.prayed_users.add(request.user)
         prayer.save()
-        has_prayed = UserExtended()
-        has_prayed.save()
-        has_prayed.prayed.add(prayer)
-        return render_to_response('post_page.html', {'prayed': True, 'subject': subject, 'timestamp': timestamp, 'prayer': prayer, 'user': request.user, 'path': request.get_full_path, 'id': postid})
+        return HttpResponseRedirect("/post/" + str(postid) + "/")
     else:
-        HttpResponseRedirect("/accounts/login/")
+        HttpResponseRedirect("/account/login/")
 
 
 
