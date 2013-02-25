@@ -6,19 +6,28 @@
     <p class="error">Sorry, that's not a valid username or password</p>
   {% endif %}
 
+  <h2 style="text-align: center">Login</h2>
 
   <form action="" method="post"> {% csrf_token %}
-    <label for="username">User name:</label>
-    <input type="text" name="username" value="" id="username">
-    <label for="password">Password:</label>
-    <input type="password" name="password" value="" id="password">
-
-    <input type="submit" value="login" />
+    <div id="loginfield">    
+      <div id="usernamefield">
+        <label for="username">User name:</label>
+        <input type="text" name="username" value="" id="username">
+      </div>
+      <br>
+      <div>
+        <label for="password">Password:</label>
+        <input style="margin-left: 8px;" type="password" name="password" value="" id="password">
+      </div>     
+      <br>
+    <input style="text-align: center" type="submit" value="login" />
+    </div>   
     {% if next %}
     <input type="hidden" name="next" value={{ next|escape }} />
     {% else %}
     <input type="hidden" name="next" value="/new/" />
     {% endif %}
   </form>
+  <p style="text-align: center;">Don't have an account? <a href="/register/">Register Here!</a></p>
 
 {% endblock %}
