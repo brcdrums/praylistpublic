@@ -6,9 +6,11 @@
 	<br />
 	<div id="prayers">
 		<div id="number">{{ forloop.counter }}</div>
+		<div class="prayerscorehome">Prayerscore: {{ prayer.prayerscore }}</div>
 		<a href= "/post/{{ prayer.id }}/" ><div id="subject"> {{ prayer.subject }} {% csrf_token %}</div></a>
 		<br>
 		<br>
+		
 
 		{% for timestamp in timestamps %} 
 			{% if timestamp == forloop.parentloop.counter %}

@@ -17,6 +17,7 @@
 	padding-left: 10px;
 	font-size: 27;
 	color: rgb(0, 0, 255);
+	/*padding-top: 4px;*/
 }
 
 #prayer {
@@ -25,8 +26,9 @@
 
 #timestamp {
 	display: inline;
-	padding-left: 24px;
+	padding-left: 145px;
 	font-size: 14;
+	
 }
 
 #number {
@@ -131,6 +133,14 @@
 .prayerscore {
 	font-family: Verdana;
 
+}
+
+.prayerscorehome {
+	text-align: left;
+	padding-top: 10px;
+	font-family: Verdana;
+	float: left;
+	padding-left: 10px;
 }
 
 .tabmenu li a {

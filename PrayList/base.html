@@ -7,10 +7,10 @@
 	<div id="topnav">
 		<!-- <h1 id="title">PrayList</h1> -->
 		{% if user.is_authenticated %}
-		<p>auth</p>
+		<p>logged in as {{ user.username }}</p>
 		<a href="/accounts/logout/"><button class="logout">LogOut</button></a>
 		{% else %}
-		<p>not authed</p>
+		<p>not logged in</p>
 		<a href="/accounts/login/"><button class="logout">LogIn</button></a>
 		{% endif %}
 		<a href="/"><img class="headerimg" src="/static/PrayingHands.bmp"></a>
