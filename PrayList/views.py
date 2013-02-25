@@ -50,17 +50,12 @@ def post_page(request, postid):
                                context_instance=RequestContext(request)
                                )
 
-# def top(request):
-#     path = request.get_full_path
-#     obj_list = Prayer.objects.order_by("-id")
-#     timedifflist = calculate_time_diff(request, obj_list)
-#     timediff_today = []
-#     for item in timedifflist:
-#         if "day" not in item:
-#             timediff_today.append(item)
-#     item_length = len(timediff_today)
-#     new_obj_list = obj_list[:item_length]
-#     return render_to_response('top_page.html', {'prayers': new_obj_list})
+def top_today(request):
+    path = request.get_full_path
+    obj_list = Prayer.objects.order_by("-id")
+    dt = datetime.datetime.now()
+    today = dt.strftime('%Y-%m-%d') 
+    return render_to_response('top_page.html', {'prayers': obj_list, 'today': today})
 
 def logout_view(request):
     auth.logout(request)

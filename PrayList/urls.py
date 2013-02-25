@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from views import submit, new, post_page, voted, register
+from views import submit, new, post_page, voted, register, top_today
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 from django.contrib.auth.views import login, logout
@@ -17,7 +17,7 @@ urlpatterns = patterns('',
     (r'^accounts/logout/$', logout, {'next_page': '/new/'}),
     (r'^voted/(?P<postid>\d{1,3})/$', voted),
     (r'^register/$', register),
-    # url(r'^top/$', top),
+    url(r'^top/$', top_today),
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
