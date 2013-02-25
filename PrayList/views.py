@@ -5,6 +5,10 @@ from django.shortcuts import HttpResponseRedirect
 import datetime
 from django.utils.timezone import utc
 from django.template import RequestContext
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib import auth
+from django.contrib.auth import authenticate, login
+
 
 def submit(request):
 	if request.method == "POST":
@@ -38,7 +42,13 @@ def post_page(request, postid):
     prayer_post = prayer.prayer
     pid = postid
     prayer_score = prayer.prayerscore
-    return render_to_response('post_page.html', {'prayerscore': prayer_score, 'users': users, 'subject': subject, 'timestamp': timestamp, 'prayer': prayer_post, 'userid': request.user, 'path': request.get_full_path, 'id': postid}, context_instance=RequestContext(request))
+    return render_to_response('post_page.html', 
+                             {'prayerscore': prayer_score, 'users': users, 
+                              'subject': subject, 'timestamp': timestamp, 
+                              'prayer': prayer_post, 'userid': request.user, 
+                              'path': request.get_full_path, 'id': postid}, 
+                               context_instance=RequestContext(request)
+                               )
 
 # def top(request):
 #     path = request.get_full_path
@@ -67,7 +77,21 @@ def voted(request, postid):
     else:
         return HttpResponseRedirect("/accounts/login/?next=/post/" + postid + "/")
 
-
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            new_user = form.save()
+            username = request.POST['username']
+            password = request.POST['password1']
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            return HttpResponseRedirect("/new/")
+    else:
+        form = UserCreationForm()
+    return render_to_response("register.html", {
+        'form': form, 
+    }, context_instance=RequestContext(request))
 
 
 def humanizeTimeDiff(timestamp = None):
