@@ -10,7 +10,7 @@
 		<p id="postprayer">{{ prayer }} <p>
 		<br>
 		{% if userid in users.all %}
-			<p>√ You've prayed for this!</p>
+			<p id="youpray">√ You've prayed for this!</p>
 		{% else %}
 			<a href="/voted/{{ id }}/"><button id="upvote">I prayed for this! </button>
 		{% endif %}

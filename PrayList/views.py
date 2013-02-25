@@ -65,7 +65,7 @@ def voted(request, postid):
         prayer.save()
         return HttpResponseRedirect("/post/" + str(postid) + "/")
     else:
-        HttpResponseRedirect("/account/login/")
+        return HttpResponseRedirect("/accounts/login/?next=/post/" + postid + "/")
 
 
 

@@ -130,6 +130,7 @@
 
 .prayerscore {
 	font-family: Verdana;
+
 }
 
 .tabmenu li a {
@@ -302,3 +303,8 @@ ul.errorlist {
 	display: block;
     margin: 0 auto;
     text-align: center;}
+
+#youpray {
+	color: green;
+	font-weight: bold;
+}
