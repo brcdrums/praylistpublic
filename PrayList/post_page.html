@@ -3,12 +3,14 @@
 
 {% block content %}
 	<div class="centerize"> {% csrf_token %}
-		<p> id is {{ id }}</p>
+		<p id="poststamp">Posted {{ timestamp }} </p>
 		<h1 id="postsubject">{{ subject }}</h1>
-		<h5 id="poststamp">{{ timestamp }} </h5>
+		<p class="prayerscore">Prayerscore: {{ prayerscore }} </p>
+		<img class="seperator" src="/static/PrayingHands.bmp" />
 		<p id="postprayer">{{ prayer }} <p>
+		<br>
 		{% if userid in users.all %}
-			<p>You've voted on this!</p>
+			<p>√ You've prayed for this!</p>
 		{% else %}
 			<a href="/voted/{{ id }}/"><button id="upvote">I prayed for this! </button>
 		{% endif %}

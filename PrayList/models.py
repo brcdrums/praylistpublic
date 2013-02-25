@@ -8,6 +8,5 @@ class Prayer(models.Model):
     timestamp = models.DateTimeField()
     subject = models.CharField(max_length=50)
     prayer = models.CharField(max_length=2000)
-    prayerscore = models.IntegerField(11)
+    prayerscore = models.IntegerField()
     prayed_users = models.ManyToManyField(User)
-    

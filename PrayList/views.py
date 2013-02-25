@@ -35,9 +35,10 @@ def post_page(request, postid):
     users = prayer.prayed_users
     subject = prayer.subject
     timestamp = prayer.timestamp
-    prayer = prayer.prayer
+    prayer_post = prayer.prayer
     pid = postid
-    return render_to_response('post_page.html', {'users': users, 'subject': subject, 'timestamp': timestamp, 'prayer': prayer, 'userid': request.user, 'path': request.get_full_path, 'id': postid}, context_instance=RequestContext(request))
+    prayer_score = prayer.prayerscore
+    return render_to_response('post_page.html', {'prayerscore': prayer_score, 'users': users, 'subject': subject, 'timestamp': timestamp, 'prayer': prayer_post, 'userid': request.user, 'path': request.get_full_path, 'id': postid}, context_instance=RequestContext(request))
 
 # def top(request):
 #     path = request.get_full_path
