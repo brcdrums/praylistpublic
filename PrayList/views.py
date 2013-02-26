@@ -59,7 +59,7 @@ def top_today(request):
     for prayer in obj_list:
         if prayer.timestamp.strftime('%Y-%m-%d') == today:
             new_obj_list.append(prayer)
-    return render_to_response('top_page.html', {'prayers': new_obj_list, 'today': today})
+    return render_to_response('top_page.html', {'prayers': new_obj_list, 'today': today, 'user': request.user, 'path': path})
 
 def logout_view(request):
     auth.logout(request)

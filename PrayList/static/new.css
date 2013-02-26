@@ -188,10 +188,7 @@
 	list-style-image: none;
 	list-style-position: outside;
 	list-style-type: none;
-	padding-bottom: 0px;
-	padding-left: 0px;
-	padding-right: 0px;
-	padding-top: 0px;
+	padding: 1px;
 	text-align: left;
 	text-decoration: none;
 	white-space: nowrap;
