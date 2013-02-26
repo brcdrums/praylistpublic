@@ -5,7 +5,6 @@
 	<title>{% block title %}{% endblock %}</title>
 </head>
 <body>
-	<p>path is {{ path }}</p>
 	<div id="topnav">
 		<!-- <h1 id="title">PrayList</h1> -->
 		{% if user.is_authenticated %}
@@ -32,7 +31,7 @@
 			{% endif %}
 				<a href="/new/">New</a>
 			</li>
-			{% if path == "/top/" %}
+			{% if "top" in path %}
 			<li class="selected">
 			{% else %}
 			<li>

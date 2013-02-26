@@ -61,6 +61,13 @@ def top_today(request):
             new_obj_list.append(prayer)
     return render_to_response('top_page.html', {'prayers': new_obj_list, 'today': today, 'user': request.user, 'path': path})
 
+def top_alltime(request):
+    path = request.get_full_path
+    obj_list = Prayer.objects.order_by("-prayerscore")
+    dt = datetime.datetime.now()
+    today = dt.strftime('%Y-%m-%d') 
+    return render_to_response('top_page.html', {'prayers': obj_list, 'today': today, 'user': request.user, 'path': path})
+
 def logout_view(request):
     auth.logout(request)
     # Redirect to a homepage.
