@@ -2,9 +2,7 @@
 {% block title %}top{% endblock %}
 
 {% block content %}
-   
     {% for prayer in prayers %}
-        {% if prayer.timestamp|date:"Y-m-d" == today %}
         <br />
         <div id="prayers">
             <div id="number">{{ forloop.counter }}</div>
@@ -33,7 +31,6 @@
             {% else %}
             <div id="timestamp"> Posted {{ prayer.timestamp|timesince }} ago </div>
             {% endif %}
-        {% endif %}
     {% endfor %}
     </div>
 

@@ -52,10 +52,14 @@ def post_page(request, postid):
 
 def top_today(request):
     path = request.get_full_path
-    obj_list = Prayer.objects.order_by("-id")
+    obj_list = Prayer.objects.order_by("-prayerscore")
     dt = datetime.datetime.now()
     today = dt.strftime('%Y-%m-%d') 
-    return render_to_response('top_page.html', {'prayers': obj_list, 'today': today})
+    new_obj_list = []
+    for prayer in obj_list:
+        if prayer.timestamp.strftime('%Y-%m-%d') == today:
+            new_obj_list.append(prayer)
+    return render_to_response('top_page.html', {'prayers': new_obj_list, 'today': today})
 
 def logout_view(request):
     auth.logout(request)
