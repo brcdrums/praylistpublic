@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 {% block title %}Post Page{% endblock %}
-
+{% block script %}
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="/static/new.js"></script>
+{% endblock %}
 {% block content %}
 	<div class="centerize"> {% csrf_token %}
 		<p id="poststamp">Posted {{ timestamp }} </p>
