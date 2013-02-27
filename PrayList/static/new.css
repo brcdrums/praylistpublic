@@ -33,8 +33,10 @@
 	display: inline;
 	padding-left: 150px;
 	font-size: 14;
-	position: absolute;
 
+}
+#timestampshift1 {
+	padding-left: 160px;
 }
 
 #number {
