@@ -68,6 +68,17 @@ def top_alltime(request):
     today = dt.strftime('%Y-%m-%d') 
     return render_to_response('top_page.html', {'prayers': obj_list, 'today': today, 'user': request.user, 'path': path})
 
+def top_month(request):
+    path = request.get_full_path
+    obj_list = Prayer.objects.order_by("-prayerscore")
+    dt = datetime.datetime.now()
+    month = dt.strftime('%m') 
+    new_obj_list = []
+    for prayer in obj_list:
+        if prayer.timestamp.strftime('%m') == month:
+            new_obj_list.append(prayer)
+    return render_to_response('top_page.html', {'prayers': obj_list, 'user': request.user, 'path': path})
+
 def logout_view(request):
     auth.logout(request)
     # Redirect to a homepage.

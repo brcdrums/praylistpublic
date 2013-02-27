@@ -31,8 +31,9 @@
 
 #timestamp {
 	display: inline;
-	padding-left: 145px;
+	padding-left: 150px;
 	font-size: 14;
+	position: absolute;
 
 }
 
