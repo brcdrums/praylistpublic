@@ -6,5 +6,9 @@ $(document).ready(function(){
 
     });
 
-    
+    $('.timedropitem').hover(function(){
+        $(this).toggleClass('timedrophover');
+    });
+
+
   });
