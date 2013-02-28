@@ -12,19 +12,20 @@ from pytz import timezone
 from reddit_hotness import hot
 
 def submit(request):
-	if request.method == "POST":
-		form = PrayerForm(request.POST)
-		if form.is_valid():
-			dt = datetime.datetime.now()
-			dtclean = dt.strftime('%Y-%m-%d %H:%M:%S')
-			p= Prayer(subject = request.POST['subject'], prayer = request.POST['prayer'], timestamp=dtclean, prayerscore=0)
-			p.save()
-			post = Prayer.objects.get(timestamp=dtclean)
-			postid = post.id
-			return HttpResponseRedirect('/post/' + str(postid) +'/')
-	else:
-		form = PrayerForm()
-	return render_to_response('submit.html', {'form': form, 'user': request.user}, context_instance=RequestContext(request))
+    if request.method == "POST":
+        form = PrayerForm(request.POST)
+        if form.is_valid():
+            dt = datetime.datetime.now()
+            dtclean = dt.strftime('%Y-%m-%d %H:%M:%S')
+            hotness = hot(0, dt)
+            p= Prayer(subject = request.POST['subject'], prayer = request.POST['prayer'], timestamp=dtclean, prayerscore=0, hotness=hotness)
+            p.save()
+            post = Prayer.objects.get(timestamp=dtclean)
+            postid = post.id
+            return HttpResponseRedirect('/post/' + str(postid) +'/')
+    else:
+        form = PrayerForm()
+    return render_to_response('submit.html', {'form': form, 'user': request.user}, context_instance=RequestContext(request))
 
 def new(request):
     obj_list = Prayer.objects.order_by("-id")
