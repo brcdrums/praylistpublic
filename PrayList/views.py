@@ -138,6 +138,14 @@ def register(request):
         'form': form, 
     }, context_instance=RequestContext(request))
 
+def trending(request):
+    obj_list = Prayer.objects.order_by("-hotness")
+    timedifflist = calculate_time_diff(request, obj_list)
+    path = request.get_full_path
+    dt = datetime.datetime.now()
+    dtclean = dt.strftime('%Y-%m-%d %H:%M:%S') 
+    return render_to_response('new.html', {'prayers': obj_list, 'timestamps': timedifflist, 'current_time': dtclean, 'path': path, 'user': request.user})
+
 
 def humanizeTimeDiff(timestamp = None):
     """

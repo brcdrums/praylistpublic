@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from views import submit, new, post_page, voted, register, top_today, top_alltime, top_month, top_year, top_week
+from views import submit, new, post_page, voted, register, top_today, top_alltime, top_month, top_year, top_week, trending
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 from django.contrib.auth.views import login, logout
@@ -22,6 +22,7 @@ urlpatterns = patterns('',
     url(r'^top/month/$', top_month),
     url(r'^top/year/$', top_year),
     url(r'^top/week/$', top_week),
+    url(r'^$', trending),
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
