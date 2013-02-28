@@ -73,19 +73,43 @@
 #timedropdownul {
 	text-align: center;
 	list-style-type: none;
-		overflow: hidden;
-
+	overflow: hidden;
+	width: auto;
 
 }
+
 
 .timedropitem {
 	margin: 1px;
 	overflow: hidden;
 	text-decoration: none;
+	text-align: left;
+
 
 }
 
-.arrow-down {
+#timedropdownul a {
+	text-decoration: none;
+	background-color: #98D788;
+}
+
+#timedropdownul a:visited {
+	text-decoration: none;
+	color: #1B5022;
+}
+
+#timedropdownul a:hover {
+	cursor: pointer;
+
+}
+
+.timedropselected {
+	text-align: left;
+}
+
+
+
+/*.arrow-down {
 	width: 0; 
 	height: 0; 
 	border-left: 5px solid transparent;
@@ -94,8 +118,9 @@
 	border-top: 5px solid #f00;
 	position: absolute;
 	margin-top: 8px;
-	margin-left: 5px;
-}
+	margin-left: 45px;
+	display: inline
+}*/
 
 
 .submitbutton:hover {

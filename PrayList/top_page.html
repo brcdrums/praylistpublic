@@ -5,7 +5,7 @@
     {% if "week" in path %}
     <div id="timedropdown">
         <ul id="timedropdownul">
-            <li class="timedropitem">This Week</li>
+            <li class="timedropselected">This Week</li>
             <a href="/top/"><li class="timedropitem">Today</li></a>
             <a href="/top/month/"><li class="timedropitem">This Month</li></a>
             <a href="/top/year/"><li class="timedropitem">This Year</li></a>
@@ -15,7 +15,7 @@
     {% elif "month" in path %}
     <div id="timedropdown">
         <ul id="timedropdownul">
-            <li class="timedropitem">This Month</li>
+            <li class="timedropselected">This Month</li>
             <a href="/top/"><li class="timedropitem">Today</li></a>
             <a href="/top/week/"><li class="timedropitem">This Week</li></a>
             <a href="/top/year/"><li class="timedropitem">This Year</li></a>
@@ -25,7 +25,7 @@
     {% elif "year" in path %}
     <div id="timedropdown">
         <ul id="timedropdownul">
-            <li class="timedropitem">This Year</li>
+            <li class="timedropselected">This Year</li>
             <a href="/top/"><li class="timedropitem">Today</li></a>
             <a href="/top/week/"><li class="timedropitem">This Week</li></a>
             <a href="/top/month/"><li class="timedropitem">This Month</li></a>
@@ -35,7 +35,7 @@
     {% elif "all" in path %}
     <div id="timedropdown">
         <ul id="timedropdownul">
-            <li class="timedropitem">All Time</li>
+            <li class="timedropselected">All Time</li>
             <a href="/top/"><li class="timedropitem">Today</li></a>
             <a href="/top/week/"><li class="timedropitem">This Week</li></a>
             <a href="/top/month/"><li class="timedropitem">This Month</li></a>
@@ -45,7 +45,7 @@
     {% else %}
     <div id="timedropdown">
         <ul id="timedropdownul">
-            <div class="arrow-down"></div><li class="timedropitem">Today</li>
+            <li class="timedropselected">Today</li>
             <a href="/top/week/"><li class="timedropitem">This Week</li></a>
             <a href="/top/month/"><li class="timedropitem">This Month</li></a>
             <a href="/top/year/"><li class="timedropitem">This Year</li></a>
@@ -73,6 +73,7 @@
                 <div id="timestampshift1"> Posted {{ prayer.timestamp|timesince|slice:":6" }} ago </div>
                 {% else %}
                 <div id="timestamp"> Posted {{ prayer.timestamp|timesince|slice:":6" }} ago </div>
+                <br>
                 {% endif %}
             <!-- < 10 hours ago -->
             {% elif "hours" in prayer.timestamp|timesince and "," in prayer.timestamp|timesince|slice:":7" and "day" not in prayer.timestamp|timesince %}
@@ -80,6 +81,7 @@
                 <div id="timestampshift1"> blahPosted {{ prayer.timestamp|timesince|slice:":7" }} ago </div>
                 {% else %}
                 <div id="timestamp"> Posted {{ prayer.timestamp|timesince|slice:":7" }} ago </div>
+                <br>
             {% endif %}
             <!-- > 10 hours ago -->
             {% elif "hours" in prayer.timestamp|timesince and "day" not in prayer.timestamp|timesince and "," not in prayer.timestamp|timesince|slice:":8" %}
@@ -87,6 +89,7 @@
                 <div id="timestampshift1"> Posted {{ prayer.timestamp|timesince|slice:":8" }} ago </div>
                 {% else %}
                 <div id="timestamp"> Posted {{ prayer.timestamp|timesince|slice:":8" }} ago </div>
+                <br>
             {% endif %}
             <!-- 1 day ago -->
             {% elif "1 day" in prayer.timestamp|timesince %}
@@ -94,6 +97,7 @@
                 <div id="timestampshift1"> Posted {{ prayer.timestamp|timesince|slice:"5" }} ago </div>
                 {% else %}
                 <div id="timestamp"> Posted {{ prayer.timestamp|timesince|slice:"5" }} ago </div>
+                <br>
                 {% endif %}
             <!-- > 1 day ago -->
             {% elif "days" in prayer.timestamp|timesince %}
@@ -101,14 +105,22 @@
                 <div id="timestampshift1"> Posted {{ prayer.timestamp|timesince|slice:"6" }} ago </div>
                 {% else %}    
                 <div id="timestamp"> Posted {{ prayer.timestamp|timesince|slice:"6" }} ago </div>
+                <br>
                 {% endif %}
             {% else %}
+            {% if forloop.counter > 9 %}
+            <div id="timestampshift1"> Posted {{ prayer.timestamp|timesince }} ago </div>
+            {% else %}
             <div id="timestamp"> Posted {{ prayer.timestamp|timesince }} ago </div>
+            <br>
             {% endif %}
-            
-        </div>
+            {% endif %}
+    
+    <br>
+     </div>
+
     {% empty %}
     <p id="empty_prayers">There are no prayers matching this filter</p>
     {% endfor %}
-    
+ 
 {% endblock %}
