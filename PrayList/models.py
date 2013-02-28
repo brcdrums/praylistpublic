@@ -10,3 +10,4 @@ class Prayer(models.Model):
     prayer = models.CharField(max_length=2000)
     prayerscore = models.IntegerField()
     prayed_users = models.ManyToManyField(User)
+    hotness = models.IntegerField()

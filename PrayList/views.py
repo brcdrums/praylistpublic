@@ -9,6 +9,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import auth
 from django.contrib.auth import authenticate, login
 from pytz import timezone
+from reddit_hotness import hot
 
 def submit(request):
 	if request.method == "POST":
@@ -34,6 +35,7 @@ def new(request):
     return render_to_response('new.html', {'prayers': obj_list, 'timestamps': timedifflist, 'current_time': dtclean, 'path': path, 'user': request.user})
 
 def post_page(request, postid):
+    date = datetime.datetime.now()
     prayed = False
     prayer = Prayer.objects.get(id=postid)
     users = prayer.prayed_users
@@ -42,6 +44,8 @@ def post_page(request, postid):
     prayer_post = prayer.prayer
     pid = postid
     prayer_score = prayer.prayerscore
+    prayer.hotness = hot(prayer.prayerscore, date)
+    prayer.save()
     return render_to_response('post_page.html', 
                              {'prayerscore': prayer_score, 'users': users, 
                               'subject': subject, 'timestamp': timestamp, 
