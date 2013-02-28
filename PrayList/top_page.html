@@ -2,9 +2,62 @@
 {% block title %}top{% endblock %}
 
 {% block content %}
+    {% if "week" in path %}
+    <div id="timedropdown">
+        <ul id="timedropdownul">
+            <li class="timedropitem">This Week</li>
+            <a href="/top/"><li class="timedropitem">Today</li></a>
+            <a href="/top/month/"><li class="timedropitem">This Month</li></a>
+            <a href="/top/year/"><li class="timedropitem">This Year</li></a>
+            <a href="/top/all/"><li class="timedropitem">All Time</li></a>
+        </ul>   
+    </div>
+    {% elif "month" in path %}
+    <div id="timedropdown">
+        <ul id="timedropdownul">
+            <li class="timedropitem">This Month</li>
+            <a href="/top/"><li class="timedropitem">Today</li></a>
+            <a href="/top/week/"><li class="timedropitem">This Week</li></a>
+            <a href="/top/year/"><li class="timedropitem">This Year</li></a>
+            <a href="/top/all/"><li class="timedropitem">All Time</li></a>
+        </ul>   
+    </div>
+    {% elif "year" in path %}
+    <div id="timedropdown">
+        <ul id="timedropdownul">
+            <li class="timedropitem">This Year</li>
+            <a href="/top/"><li class="timedropitem">Today</li></a>
+            <a href="/top/week/"><li class="timedropitem">This Week</li></a>
+            <a href="/top/month/"><li class="timedropitem">This Month</li></a>
+            <a href="/top/all/"><li class="timedropitem">All Time</li></a>
+        </ul>   
+    </div>
+    {% elif "all" in path %}
+    <div id="timedropdown">
+        <ul id="timedropdownul">
+            <li class="timedropitem">All Time</li>
+            <a href="/top/"><li class="timedropitem">Today</li></a>
+            <a href="/top/week/"><li class="timedropitem">This Week</li></a>
+            <a href="/top/month/"><li class="timedropitem">This Month</li></a>
+            <a href="/top/year/"><li class="timedropitem">This Year</li></a>
+        </ul>   
+    </div>
+    {% else %}
+    <div id="timedropdown">
+        <ul id="timedropdownul">
+            <div class="arrow-down"></div><li class="timedropitem">Today</li>
+            <a href="/top/week/"><li class="timedropitem">This Week</li></a>
+            <a href="/top/month/"><li class="timedropitem">This Month</li></a>
+            <a href="/top/year/"><li class="timedropitem">This Year</li></a>
+            <a href="/top/all/"><li class="timedropitem">All Time</li></a>
+        </ul>   
+    </div>
+    {% endif %}
+
+    <br />
+    <div id="prayers">
     {% for prayer in prayers %}
-        <br />
-        <div id="prayers">
+    
             <div id="number">{{ forloop.counter }}</div>
             <div class="prayerscorehome">Prayerscore: {{ prayer.prayerscore }}</div>
             <a href= "/post/{{ prayer.id }}/" ><div id="subject"> {{ prayer.subject }} {% csrf_token %}</div></a>
@@ -52,6 +105,7 @@
             {% else %}
             <div id="timestamp"> Posted {{ prayer.timestamp|timesince }} ago </div>
             {% endif %}
+            
         </div>
     {% empty %}
     <p id="empty_prayers">There are no prayers matching this filter</p>

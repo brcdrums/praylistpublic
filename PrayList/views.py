@@ -8,7 +8,7 @@ from django.template import RequestContext
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import auth
 from django.contrib.auth import authenticate, login
-
+from pytz import timezone
 
 def submit(request):
 	if request.method == "POST":
@@ -53,11 +53,12 @@ def post_page(request, postid):
 def top_today(request):
     path = request.get_full_path
     obj_list = Prayer.objects.order_by("-prayerscore")
-    dt = datetime.datetime.now()
+    dt = datetime.datetime.now(timezone('UTC'))
     today = dt.strftime('%Y-%m-%d') 
     new_obj_list = []
     for prayer in obj_list:
-        if prayer.timestamp.strftime('%Y-%m-%d') == today:
+        newstamp = prayer.timestamp.astimezone(timezone('US/Central'))
+        if newstamp.strftime('%Y-%m-%d') == today:
             new_obj_list.append(prayer)
     return render_to_response('top_page.html', {'prayers': new_obj_list, 'today': today, 'user': request.user, 'path': path})
 
@@ -107,7 +108,7 @@ def logout_view(request):
     # Redirect to a homepage.
     return HttpResponseRedirect("/new/")
 
-def voted(request, postid):
+def voted(request, postid): 
     if request.user.is_authenticated():
         prayer = Prayer.objects.get(id=postid)
         prayer.prayerscore = int(prayer.prayerscore) + 1
