@@ -91,6 +91,17 @@ def top_year(request):
             new_obj_list.append(prayer)
     return render_to_response('top_page.html', {'prayers': new_obj_list, 'user': request.user, 'path': path})
 
+def top_week(request):
+    path = request.get_full_path
+    obj_list = Prayer.objects.order_by("-prayerscore")
+    dt = datetime.datetime.now()
+    week = dt.isocalendar()[1]
+    new_obj_list = []
+    for prayer in obj_list:
+        if prayer.timestamp.isocalendar()[1] == week:
+            new_obj_list.append(prayer)
+    return render_to_response('top_page.html', {'prayers': new_obj_list, 'user': request.user, 'path': path})    
+
 def logout_view(request):
     auth.logout(request)
     # Redirect to a homepage.
