@@ -42,10 +42,11 @@ def post_page(request, postid):
     users = prayer.prayed_users
     subject = prayer.subject
     timestamp = prayer.timestamp
+    timestampdt = datetime.datetime(timestamp.year, timestamp.month, timestamp.day, timestamp.hour, timestamp.minute, timestamp.second)
     prayer_post = prayer.prayer
     pid = postid
     prayer_score = prayer.prayerscore
-    prayer.hotness = hot(prayer.prayerscore, date)
+    prayer.hotness = hot(prayer_score, timestampdt)
     prayer.save()
     return render_to_response('post_page.html', 
                              {'prayerscore': prayer_score, 'users': users, 
