@@ -5,6 +5,9 @@
     {% else %}
     <div id="prayers">
     {% endif %}
+    {% if prayers|length == 0 %}
+        <p id="empty_prayers">There are no prayers matching this filter</p>
+    {% endif %}
     {% for prayer in prayers %}
         <div id="prayer">
             <div id="number">{{ forloop.counter }}</div>
@@ -63,11 +66,10 @@
                 {% endif %}
                 <br>
                 {% endif %}
-
-
-
-        {% empty %}
-        <p id="empty_prayers">There are no prayers matching this filter</p>
+        </div>
         {% endfor %}
     </div>
-     </div>
+
+    <div id="rightsidebar">
+        <p>test</p>
+    </div>

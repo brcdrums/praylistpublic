@@ -7,15 +7,22 @@
 }
 
 #prayers {
- 	overflow: hidden; 
  	background-position: top;
  	padding-top: 20px;
-}
+ 	display: inline-block;
+ 	clear: left;
+ 	border: solid;
+ 	width: 50%;
+
+ }
 
 #prayerstop {
  	overflow: hidden; 
  	background-position: top;
  	padding-top: 40px;
+ 	display: inline-block;
+ 	clear: left;
+ 	width: 50%;
 }
 
 #subject {
@@ -85,7 +92,7 @@
 	display: block;	
 	position: relative;
 	text-align: left;
-	
+
 }
 
 
@@ -281,6 +288,7 @@
 #topnav {
 	border-bottom: solid;
 	border-width: 1px;
+	background-image:url("http://openclipart.org/people/Clue/Clue_Simple_Clouds.svg")
 }
 
 .submitbutton {
@@ -391,6 +399,7 @@ ul.errorlist {
 	vertical-align: top;
 	float: right;
 	display: block;
+	text-decoration: none;
 }
 
 .centerize {
@@ -401,4 +410,12 @@ ul.errorlist {
 #youpray {
 	color: green;
 	font-weight: bold;
+}
+
+#rightsidebar {
+	float:right;
+	display: inline-block;
+	clear:right;
+	border:solid;
+	
 }

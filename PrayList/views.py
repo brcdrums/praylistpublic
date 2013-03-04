@@ -41,7 +41,7 @@ def post_page(request, postid):
     prayer = Prayer.objects.get(id=postid)
     users = prayer.prayed_users
     subject = prayer.subject
-    timestamp = prayer.timestamp
+    timestamp = prayer.timestamp.astimezone(timezone('US/Central'))
     timestampdt = datetime.datetime(timestamp.year, timestamp.month, timestamp.day, timestamp.hour, timestamp.minute, timestamp.second)
     prayer_post = prayer.prayer
     pid = postid
