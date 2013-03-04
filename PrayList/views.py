@@ -59,7 +59,7 @@ def post_page(request, postid):
 def top_today(request):
     path = request.get_full_path
     obj_list = Prayer.objects.order_by("-prayerscore")
-    dt = datetime.datetime.now(timezone('UTC'))
+    dt = datetime.datetime.now(timezone('US/Central'))
     today = dt.strftime('%Y-%m-%d') 
     new_obj_list = []
     for prayer in obj_list:
