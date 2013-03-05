@@ -9,14 +9,12 @@
 	<div id="topnav">
 		<!-- <h1 id="title">PrayList</h1> -->
 		{% if user.is_authenticated %}
-		<p>logged in as {{ user.username }}</p>
-		<a href="/accounts/logout/"><button class="logout">LogOut</button></a>
-		{% else %}
-		<p>not logged in</p>
-		<a href="/accounts/login/"><button class="logout">LogIn</button></a>
-		{% endif %}
+        <a href="/accounts/logout/"><button class="logout">LogOut</button></a>
+        <div class="logouttext" style="color: ">Logged in as <span style="font-weight: bold;">{{ user.username }}</span></div>
+        {% else %}
+        <a href="/accounts/login/"><button class="logout">LogIn</button></a>
+        {% endif %}
 		<a href="/"><img class="headerimg" src="/static/PrayingHands.bmp"></a>
-		<a href="/submit/"><button class= "submitbutton">Submit New Prayer!</button></a>
 		<ul class="tabmenu">
 			{% if path == "/" %}
 			<li class = "selected">
@@ -43,8 +41,7 @@
 		
 	</div>
 	{% block content %}{% endblock %}
-	{% block footer %}
-	<br>
+	{% block sidebar %}
 	{% endblock %}
 </body>
 </html>

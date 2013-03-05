@@ -20,7 +20,7 @@
                 <div id="timestamp"> Posted just now </div>
                 <br>
                 <!-- 1 hour ago -->
-                {% elif "hour " in prayer.timestamp|timesince and "day" not in prayer.timestamp|timesince %}
+                {% elif "hour," in prayer.timestamp|timesince and "day" not in prayer.timestamp|timesince %}
                     {% if forloop.counter > 9 %}
                     <div id="timestampshift1"> Posted {{ prayer.timestamp|timesince|slice:":6" }} ago </div>
                     {% else %}
@@ -69,7 +69,8 @@
         </div>
         {% endfor %}
     </div>
-
+    {% block sidebar %}
     <div id="rightsidebar">
-        <p>test</p>
+        <a href="/submit/"><button class= "submitbutton">Submit New Prayer!</button></a>
     </div>
+    {% endblock %}
