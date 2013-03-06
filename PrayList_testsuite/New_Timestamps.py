@@ -13,10 +13,10 @@ class NewTest(unittest.TestCase):
         self.driver.get(TestBase.newURL)
         self.assertTrue("new" in self.driver.title)
 
-    def suite(self):
-        suite = unittest.TestSuite()
-        suite.addTest(unittest.makeSuite(NewTest))
-        return suite
+def suite():
+    suite = unittest.TestSuite()
+    suite.addTest(unittest.makeSuite(NewTest))
+    return suite
 
 if __name__ == '__main__':
    unittest.main()
