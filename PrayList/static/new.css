@@ -43,14 +43,14 @@
 	padding-top: 40px;
 }
 
-#timestamp {
+.timestamp {
 	display: block;
 	padding-left: 150px;
 	font-size: 14;
 	text-align: left;
 
 }
-#timestampshift1 {
+.timestampshift1 {
 	padding-left: 160px;
 	font-size: 14;
 	display: block;
