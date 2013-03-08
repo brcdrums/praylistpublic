@@ -10,6 +10,7 @@ from django.contrib import auth
 from django.contrib.auth import authenticate, login
 from pytz import timezone
 from reddit_hotness import hot
+from tagging.models import Tag, TaggedItem
 
 def submit(request):
     if request.method == "POST":
@@ -148,6 +149,11 @@ def trending(request):
     dtclean = dt.strftime('%Y-%m-%d %H:%M:%S') 
     return render_to_response('new.html', {'prayers': obj_list, 'timestamps': timedifflist, 'current_time': dtclean, 'path': path, 'user': request.user})
 
+def tags(request, tags):
+    path = request.get_full_path
+    thetag = Tag.objects.get(name=tags)
+    obj_list = TaggedItem.objects.get_by_model(Prayer, thetag)
+    return render_to_response('new.html', {'prayers': obj_list, 'user': request.user, 'path': path, 'tagname': tags})      
 
 def humanizeTimeDiff(timestamp = None):
     """

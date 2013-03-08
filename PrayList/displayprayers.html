@@ -2,6 +2,9 @@
     <div id="prayers">
     {% elif "top" in path %}
     <div id="prayerstop">
+    {% elif "tag" in path %}
+    <div id="tagtitle"># {{ tagname }} </div>
+    <div id="prayerstop">
     {% else %}
     <div id="prayers">
     {% endif %}
