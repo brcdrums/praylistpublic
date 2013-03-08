@@ -18,7 +18,7 @@ def submit(request):
             dt = datetime.datetime.now()
             dtclean = dt.strftime('%Y-%m-%d %H:%M:%S')
             hotness = hot(0, dt)
-            p= Prayer(subject = request.POST['subject'], prayer = request.POST['prayer'], timestamp=dtclean, prayerscore=0, hotness=hotness)
+            p= Prayer(subject = request.POST['subject'], prayer = request.POST['prayer'], timestamp=dtclean, prayerscore=0, hotness=hotness, tags= request.POST['tags'])
             p.save()
             post = Prayer.objects.get(timestamp=dtclean)
             postid = post.id

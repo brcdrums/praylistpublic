@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Create a New Prayer Group!</h1>
+
+    {% if form.errors %}
+        <p style="color: red;">
+            Please correct the error{{ form.errors|pluralize }} below.
+        </p>
+    {% endif %}
+
+    <form action="" method="post"> {% csrf_token %}
+        <div class="field">
+            {{ form.name.errors }}
+            <label for="name">Prayer Group Name:</label>
+            {{ form.name }}
+        </div>
+        <div class="spacer"></div>
+        <div class="field">
+            {{ form.summary.errors }}
+            <label for="summary">Summary:</label>
+            {{ form.summary }}
+        </div>
+        <div class="spacer"></div>
+        <input type="submit" valdue="Submit">
+    </form>
+</body>
+</html>
+{% endblock %}

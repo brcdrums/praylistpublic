@@ -15,6 +15,12 @@ class NewTest(unittest.TestCase):
 
     def test_timestamp(self):
         self.driver.get(TestBase.newURL)
+        def timestampgen(timestamps):
+            timestamp_iter = iter(timestamps)
+            current = timestamp_iter.next()
+            for next in timestamp_iter:
+                yield current, next
+                current = next
         timestamps = self.driver.find_elements_by_class_name("timestamp")
         print "length of timestamps = " + str(len(timestamps))
         for stamp, next in timestampgen(timestamps):
@@ -30,13 +36,6 @@ def suite():
     suite = unittest.TestSuite()
     suite.addTest(unittest.makeSuite(NewTest))
     return suite
-
-def timestampgen(timestamps):
-    timestamp_iter = iter(timestamps)
-    current = timestamp_iter.next()
-    for next in timestamp_iter:
-        yield current, next
-        current = next
 
 if __name__ == '__main__':
    unittest.main()
