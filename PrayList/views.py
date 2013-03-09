@@ -159,7 +159,20 @@ def tags_new(request, tags):
     path = request.get_full_path
     thetag = Tag.objects.get(name=tags)
     obj_list = TaggedItem.objects.get_by_model(Prayer, thetag).order_by("-id")
-    return render_to_response('new.html', {'prayers': obj_list, 'user': request.user, 'path': path, 'tagname': tags})      
+    return render_to_response('new.html', {'prayers': obj_list, 'user': request.user, 'path': path, 'tagname': tags}) 
+
+def tags_top_today(request, tags):
+    path = request.get_full_path
+    thetag = Tag.objects.get(name=tags)
+    obj_list = TaggedItem.objects.get_by_model(Prayer, thetag).order_by("-prayerscore")
+    dt = datetime.datetime.now(timezone('US/Central'))
+    today = dt.strftime('%Y-%m-%d') 
+    new_obj_list = []
+    for prayer in obj_list:
+        newstamp = prayer.timestamp.astimezone(timezone('US/Central'))
+        if newstamp.strftime('%Y-%m-%d') == today:
+            new_obj_list.append(prayer)
+    return render_to_response('top_page.html', {'prayers': new_obj_list, 'today': today, 'user': request.user, 'path': path, 'tagname': tags}) 
 
 def humanizeTimeDiff(timestamp = None):
     """
