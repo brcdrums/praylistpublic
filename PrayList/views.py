@@ -152,7 +152,13 @@ def trending(request):
 def tags(request, tags):
     path = request.get_full_path
     thetag = Tag.objects.get(name=tags)
-    obj_list = TaggedItem.objects.get_by_model(Prayer, thetag)
+    obj_list = TaggedItem.objects.get_by_model(Prayer, thetag).order_by("-hotness")
+    return render_to_response('new.html', {'prayers': obj_list, 'user': request.user, 'path': path, 'tagname': tags})      
+
+def tags_new(request, tags):
+    path = request.get_full_path
+    thetag = Tag.objects.get(name=tags)
+    obj_list = TaggedItem.objects.get_by_model(Prayer, thetag).order_by("-id")
     return render_to_response('new.html', {'prayers': obj_list, 'user': request.user, 'path': path, 'tagname': tags})      
 
 def humanizeTimeDiff(timestamp = None):

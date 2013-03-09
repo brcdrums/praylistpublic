@@ -19,7 +19,7 @@
  	overflow: hidden; 
  	background-position: top;
  	padding-top: 40px;
- 	display: inline-block;
+ 	display:block;
  	clear: left;
  	width: 50%;
 }
@@ -466,3 +466,20 @@ ul.errorlist {
 	border:1px solid #095B7E;
 	cursor: hand;
 }
+
+#tagtitle {
+	font-size: 40px;
+	display: inline-block;
+	padding-top: 20px;
+	text-align: center;
+}
+
+#cleartag {
+	display: inline-block;
+	font-family: verdana;
+	font-size: 12;
+	vertical-align: top;
+	padding-top: 32px;
+	text-align: center;
+}
+

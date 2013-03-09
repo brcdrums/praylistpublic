@@ -1,9 +1,15 @@
-    {% if "new" in path %}
-    <div id="prayers">
-    {% elif "top" in path %}
-    <div id="prayerstop">
-    {% elif "tag" in path %}
+{% block sidebar %}
+    <div id="rightsidebar">
+        <a href="/submit/"><button class= "submitbutton">Submit New Prayer!</button></a>
+    </div>
+{% endblock %}
+    {% if "tag" in path %}
     <div id="tagtitle"># {{ tagname }} </div>
+    <a href="/"><div id="cleartag">clear tag</div></a>
+    <div id="prayerstop">
+    {% elif "new" in path and "tag" not in path%}
+    <div id="prayers">
+    {% elif "top" in path and "tag" not in path %}
     <div id="prayerstop">
     {% else %}
     <div id="prayers">
@@ -72,8 +78,4 @@
         </div>
         {% endfor %}
     </div>
-    {% block sidebar %}
-    <div id="rightsidebar">
-        <a href="/submit/"><button class= "submitbutton">Submit New Prayer!</button></a>
-    </div>
-    {% endblock %}
+    

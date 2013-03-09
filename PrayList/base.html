@@ -16,14 +16,14 @@
         {% endif %}
 		<a href="/"><img class="headerimg" src="/static/PrayingHands.bmp"></a>
 		<ul class="tabmenu">
-			{% if path == "/" %}
+			{% if path == "/" or "trending" in path %}
 			<li class = "selected">
 			{% else %}
 			<li>
 			{% endif %}
 				<a href="/">Trending</a>
 			</li>
-			{% if path == "/new/" %}
+			{% if "new" in path %}
 			<li class = "selected">
 			{% else %}
 			<li>
