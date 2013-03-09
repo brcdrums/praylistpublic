@@ -92,10 +92,10 @@ def top_year(request):
     path = request.get_full_path
     obj_list = Prayer.objects.order_by("-prayerscore")
     dt = datetime.datetime.now()
-    month = dt.strftime('%Y') 
+    year = dt.strftime('%Y') 
     new_obj_list = []
     for prayer in obj_list:
-        if prayer.timestamp.strftime('%Y') == month:
+        if prayer.timestamp.strftime('%Y') == year:
             new_obj_list.append(prayer)
     return render_to_response('top_page.html', {'prayers': new_obj_list, 'user': request.user, 'path': path})
 
@@ -173,6 +173,45 @@ def tags_top_today(request, tags):
         if newstamp.strftime('%Y-%m-%d') == today:
             new_obj_list.append(prayer)
     return render_to_response('top_page.html', {'prayers': new_obj_list, 'today': today, 'user': request.user, 'path': path, 'tagname': tags}) 
+
+def tags_top_week(request, tags):
+    path = request.get_full_path
+    thetag = Tag.objects.get(name=tags)
+    obj_list = TaggedItem.objects.get_by_model(Prayer, thetag).order_by("-prayerscore")
+    dt = datetime.datetime.now(timezone('US/Central'))
+    today = dt.strftime('%Y-%m-%d') 
+    week = dt.isocalendar()[1]
+    new_obj_list = []
+    for prayer in obj_list:
+        if prayer.timestamp.isocalendar()[1] == week:
+            new_obj_list.append(prayer)
+    return render_to_response('top_page.html', {'prayers': new_obj_list, 'today': today, 'user': request.user, 'path': path, 'tagname': tags}) 
+
+def tags_top_month(request, tags):
+    path = request.get_full_path
+    thetag = Tag.objects.get(name=tags)
+    obj_list = TaggedItem.objects.get_by_model(Prayer, thetag).order_by("-prayerscore")
+    dt = datetime.datetime.now(timezone('US/Central'))
+    today = dt.strftime('%Y-%m-%d') 
+    month = dt.strftime('%m') 
+    new_obj_list = []
+    for prayer in obj_list:
+        if prayer.timestamp.strftime('%m') == month:
+            new_obj_list.append(prayer)
+    return render_to_response('top_page.html', {'prayers': new_obj_list, 'today': today, 'user': request.user, 'path': path, 'tagname': tags})
+
+def tags_top_year(request, tags):
+    path = request.get_full_path
+    thetag = Tag.objects.get(name=tags)
+    obj_list = TaggedItem.objects.get_by_model(Prayer, thetag).order_by("-prayerscore")
+    dt = datetime.datetime.now(timezone('US/Central'))
+    today = dt.strftime('%Y-%m-%d') 
+    year = dt.strftime('%Y') 
+    new_obj_list = []
+    for prayer in obj_list:
+        if prayer.timestamp.strftime('%Y') == year:
+            new_obj_list.append(prayer)
+    return render_to_response('top_page.html', {'prayers': new_obj_list, 'today': today, 'user': request.user, 'path': path, 'tagname': tags})
 
 def humanizeTimeDiff(timestamp = None):
     """
