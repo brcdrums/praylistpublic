@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from views import submit, new, post_page, voted, register, top_today, top_alltime, top_month, top_year, top_week, trending, tags, tags_new, tags_top_today, tags_top_week, tags_top_month, tags_top_year
+from views import submit, new, post_page, voted, register, top_today, top_alltime, top_month, top_year, top_week, trending, tags, tags_new, tags_top_today, tags_top_week, tags_top_month, tags_top_year, tags_top_all
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 from django.contrib.auth.views import login, logout
@@ -17,7 +17,8 @@ urlpatterns = patterns('',
     url(r'^tag/(?P<tags>.+)/top/today/$', tags_top_today),
     url(r'^tag/(?P<tags>.+)/top/week/$', tags_top_week),
     url(r'^tag/(?P<tags>.+)/top/month/$', tags_top_month),
-    url(r'^tag/(?P<tags>.+)/top/year/$', tags_top_year),           
+    url(r'^tag/(?P<tags>.+)/top/year/$', tags_top_year),
+    url(r'^tag/(?P<tags>.+)/top/all/$', tags_top_all),           
     (r'^accounts/login/$',  login),
     (r'^/accounts/login/?next=/post/(?P<postid>\d{1,3})/$', login),
     (r'^accounts/logout/$', logout, {'next_page': '/new/'}),

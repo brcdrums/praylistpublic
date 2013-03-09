@@ -213,6 +213,14 @@ def tags_top_year(request, tags):
             new_obj_list.append(prayer)
     return render_to_response('top_page.html', {'prayers': new_obj_list, 'today': today, 'user': request.user, 'path': path, 'tagname': tags})
 
+def tags_top_all(request, tags):
+    path = request.get_full_path
+    thetag = Tag.objects.get(name=tags)
+    obj_list = TaggedItem.objects.get_by_model(Prayer, thetag).order_by("-prayerscore")
+    dt = datetime.datetime.now(timezone('US/Central'))
+    today = dt.strftime('%Y-%m-%d') 
+    return render_to_response('top_page.html', {'prayers': obj_list, 'today': today, 'user': request.user, 'path': path, 'tagname': tags})
+
 def humanizeTimeDiff(timestamp = None):
     """
     Returns a humanized string representing time difference
