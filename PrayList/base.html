@@ -21,21 +21,33 @@
 			{% else %}
 			<li>
 			{% endif %}
+				{% if "tag" in path %}
+				<a href="/tag/{{ tagname }}/trending/">Trending</a>
+				{% else %}
 				<a href="/">Trending</a>
+				{% endif %}
 			</li>
 			{% if "new" in path %}
 			<li class = "selected">
 			{% else %}
 			<li>
 			{% endif %}
+				{% if "tag" in path %}
+				<a href="/tag/{{ tagname }}/new/">New</a>
+				{% else %}
 				<a href="/new/">New</a>
+				{% endif %}
 			</li>
 			{% if "top" in path %}
 			<li class="selected">
 			{% else %}
 			<li>
 			{% endif %}
+				{% if "tag" in path %}
+				<a href="/tag/{{ tagname }}/top/today">Top</a>
+				{% else %}
 				<a href="/top/">Top</a>
+				{% endif %}
 			</li>
 		</ul>
 		
