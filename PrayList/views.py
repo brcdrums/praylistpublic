@@ -49,12 +49,14 @@ def post_page(request, postid):
     prayer_score = prayer.prayerscore
     prayer.hotness = hot(prayer_score, timestampdt)
     prayer.save()
+    tags = Tag.objects.get_for_object(prayer)
     return render_to_response('post_page.html', 
                              {'prayerscore': prayer_score, 'users': users, 
                               'subject': subject, 'timestamp': timestamp, 
-                              'prayer': prayer_post, 'userid': request.user, 
-                              'path': request.get_full_path, 'id': postid}, 
-                               context_instance=RequestContext(request)
+                                'prayer': prayer_post, 'userid': request.user, 
+                                'path': request.get_full_path, 'id': postid,
+                                'tags': tags}, 
+                                    context_instance=RequestContext(request)
                                )
 
 def top_today(request):

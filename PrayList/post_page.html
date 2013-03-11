@@ -8,6 +8,14 @@
 		<img class="seperator" src="/static/PrayingHands.bmp" />
 		<p id="postprayer">{{ prayer }} <p>
 		<br>
+		<div id="posttags">
+			Tags:
+			<br>
+    			{% for tag in tags %}
+				<a href="/tag/{{ tag }}/trending/">{{ tag }}{% if tags|length > 1 %},{% endif %}</a>
+				{% endfor %}
+		</div>
+		<br/>
 		{% if userid in users.all %}
 			<p id="youpray">√ You've prayed for this!</p>
 		{% else %}
