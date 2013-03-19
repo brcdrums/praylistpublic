@@ -49,6 +49,9 @@
 				<a href="/top/">Top</a>
 				{% endif %}
 			</li>
+			{% if "tag" in path %}
+        	<div id="tagtitle">#{{ tagname }} </div>
+        	{% endif %}
 		</ul>
 		
 	</div>

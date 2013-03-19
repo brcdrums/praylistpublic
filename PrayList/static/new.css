@@ -486,3 +486,8 @@ ul.errorlist {
 #regform {
 	text-align: center;
 }
+
+#tagtitlediv {
+	display: inline-block;
+
+}
