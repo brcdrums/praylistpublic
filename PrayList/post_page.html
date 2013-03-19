@@ -7,12 +7,11 @@
 		<p class="prayerscore">Prayerscore: {{ prayerscore }} </p>
 		<img class="seperator" src="/static/PrayingHands.bmp" />
 		<p id="postprayer">{{ prayer }} <p>
-		<br>
 		<div id="posttags">
 			Tags:
 			<br>
     			{% for tag in tags %}
-				<a href="/tag/{{ tag }}/trending/">{{ tag }}{% if tags|length > 1 %},{% endif %}</a>
+				<a href="/tag/{{ tag }}/trending/">#{{ tag }}{% if tags|length > 1 %},{% endif %}</a>
 				{% endfor %}
 		</div>
 		<br/>
