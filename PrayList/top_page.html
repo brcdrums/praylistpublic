@@ -6,11 +6,11 @@
         <ul id="timedropdownul">
             <li class="timedropselected">This Week</li>
             <!-- if tag in path, link to top with tags -->
-            {% if "tag" in path %}
-            <a href="/tag/{{ tagname }}/top/today/"><li class="timedropitem">Today</li></a>
-            <a href="/tag/{{ tagname }}/top/month/"><li class="timedropitem">This Month</li></a>
-            <a href="/tag/{{ tagname }}/top/year/"><li class="timedropitem">This Year</li></a>
-            <a href="/tag/{{ tagname }}/top/all/"><li class="timedropitem">All Time</li></a>
+            {% if "group" in path %}
+            <a href="/group/{{ tagname }}/top/today/"><li class="timedropitem">Today</li></a>
+            <a href="/group/{{ tagname }}/top/month/"><li class="timedropitem">This Month</li></a>
+            <a href="/group/{{ tagname }}/top/year/"><li class="timedropitem">This Year</li></a>
+            <a href="/group/{{ tagname }}/top/all/"><li class="timedropitem">All Time</li></a>
             {% else %}
             <a href="/top/"><li class="timedropitem">Today</li></a>
             <a href="/top/month/"><li class="timedropitem">This Month</li></a>
@@ -23,11 +23,11 @@
     <div id="timedropdown">
         <ul id="timedropdownul">
             <li class="timedropselected">This Month</li>
-            {% if "tag" in path %}
-            <a href="/tag/{{ tagname }}/top/today"><li class="timedropitem">Today</li></a>
-            <a href="/tag/{{ tagname }}/top/week/"><li class="timedropitem">This Week</li></a>
-            <a href="/tag/{{ tagname }}/top/year/"><li class="timedropitem">This Year</li></a>
-            <a href="/tag/{{ tagname }}/top/all/"><li class="timedropitem">All Time</li></a>
+            {% if "group" in path %}
+            <a href="/group/{{ tagname }}/top/today"><li class="timedropitem">Today</li></a>
+            <a href="/group/{{ tagname }}/top/week/"><li class="timedropitem">This Week</li></a>
+            <a href="/group/{{ tagname }}/top/year/"><li class="timedropitem">This Year</li></a>
+            <a href="/group/{{ tagname }}/top/all/"><li class="timedropitem">All Time</li></a>
             {% else %}
             <a href="/top/"><li class="timedropitem">Today</li></a>
             <a href="/top/week/"><li class="timedropitem">This Week</li></a>
@@ -40,11 +40,11 @@
     <div id="timedropdown">
         <ul id="timedropdownul">
             <li class="timedropselected">This Year</li>
-            {% if "tag" in path %}
-            <a href="/tag/{{ tagname }}/top/today"><li class="timedropitem">Today</li></a>
-            <a href="/tag/{{ tagname }}/top/week/"><li class="timedropitem">This Week</li></a>
-            <a href="/tag/{{ tagname }}/top/month/"><li class="timedropitem">This Month</li></a>
-            <a href="/tag/{{ tagname }}/top/all/"><li class="timedropitem">All Time</li></a>
+            {% if "group" in path %}
+            <a href="/group/{{ tagname }}/top/today"><li class="timedropitem">Today</li></a>
+            <a href="/group/{{ tagname }}/top/week/"><li class="timedropitem">This Week</li></a>
+            <a href="/group/{{ tagname }}/top/month/"><li class="timedropitem">This Month</li></a>
+            <a href="/group/{{ tagname }}/top/all/"><li class="timedropitem">All Time</li></a>
             {% else %}
             <a href="/top/"><li class="timedropitem">Today</li></a>
             <a href="/top/week/"><li class="timedropitem">This Week</li></a>
@@ -57,11 +57,11 @@
     <div id="timedropdown">
         <ul id="timedropdownul">
             <li class="timedropselected">All Time</li>
-            {% if "tag" in path %}
-            <a href="/tag/{{ tagname }}/top/today"><li class="timedropitem">Today</li></a>
-            <a href="/tag/{{ tagname }}/top/week/"><li class="timedropitem">This Week</li></a>
-            <a href="/tag/{{ tagname }}/top/month/"><li class="timedropitem">This Month</li></a>
-            <a href="/tag/{{ tagname }}/top/year/"><li class="timedropitem">This Year</li></a>
+            {% if "group" in path %}
+            <a href="/group/{{ tagname }}/top/today"><li class="timedropitem">Today</li></a>
+            <a href="/group/{{ tagname }}/top/week/"><li class="timedropitem">This Week</li></a>
+            <a href="/group/{{ tagname }}/top/month/"><li class="timedropitem">This Month</li></a>
+            <a href="/group/{{ tagname }}/top/year/"><li class="timedropitem">This Year</li></a>
             {% else %}
             <a href="/top/"><li class="timedropitem">Today</li></a>
             <a href="/top/week/"><li class="timedropitem">This Week</li></a>
@@ -74,11 +74,11 @@
     <div id="timedropdown">
         <ul id="timedropdownul">
             <li class="timedropselected">Today</li>
-            {% if "tag" in path %}
-            <a href="/tag/{{ tagname }}/top/week/"><li class="timedropitem">This Week</li></a>
-            <a href="/tag/{{ tagname }}/top/month/"><li class="timedropitem">This Month</li></a>
-            <a href="/tag/{{ tagname }}/top/year/"><li class="timedropitem">This Year</li></a>
-            <a href="/tag/{{ tagname }}/top/all/"><li class="timedropitem">All Time</li></a>
+            {% if "group" in path %}
+            <a href="/group/{{ tagname }}/top/week/"><li class="timedropitem">This Week</li></a>
+            <a href="/group/{{ tagname }}/top/month/"><li class="timedropitem">This Month</li></a>
+            <a href="/group/{{ tagname }}/top/year/"><li class="timedropitem">This Year</li></a>
+            <a href="/group/{{ tagname }}/top/all/"><li class="timedropitem">All Time</li></a>
             {% else %}
             <a href="/top/week/"><li class="timedropitem">This Week</li></a>
             <a href="/top/month/"><li class="timedropitem">This Month</li></a>

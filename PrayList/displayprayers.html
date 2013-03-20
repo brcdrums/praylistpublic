@@ -5,13 +5,13 @@
         <a href="/submitgroup/"><button class= "submitbutton">Submit New Group!</button></a>
     </div>
 {% endblock %}
-    {% if "tag" in path and "top" not in path %}    
+    {% if "group" in path and "top" not in path %}    
     <div id="prayerstop">
-    {% elif "tag" in path and "top" in path %}
+    {% elif "group" in path and "top" in path %}
     <div id="prayerstop">
-    {% elif "new" in path and "tag" not in path %}
+    {% elif "new" in path and "group" not in path %}
     <div id="prayers">
-    {% elif "top" in path and "tag" not in path %}
+    {% elif "top" in path and "group" not in path %}
     <div id="prayerstop">
     {% else %}
     <div id="prayers">

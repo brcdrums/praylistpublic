@@ -34,9 +34,15 @@ def submit_group(request):
         if form.is_valid():
             group= Group(groupname= request.POST['group'], privacy= request.POST['privacy'])
             group.save()
+            groupname = request.POST['group']
+            return HttpResponseRedirect('/submitgroup/' + str(groupname) + '/success/')
     else:
         form = GroupForm()
     return render_to_response('submitgroup.html', {'form': form, 'user': request.user}, context_instance=RequestContext(request))
+
+def submit_group_success(request, groupname):
+    group_name = groupname
+    return render_to_response('submitgroupsuccess.html', {'groupname': group_name, 'user': request.user}, context_instance=RequestContext(request))
 
 def new(request):
     obj_list = Prayer.objects.order_by("-id")

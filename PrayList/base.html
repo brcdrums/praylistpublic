@@ -21,8 +21,8 @@
 			{% else %}
 			<li>
 			{% endif %}
-				{% if "tag" in path %}
-				<a href="/tag/{{ tagname }}/trending/">Trending</a>
+				{% if "group" in path %}
+				<a href="/group/{{ tagname }}/trending/">Trending</a>
 				{% else %}
 				<a href="/">Trending</a>
 				{% endif %}
@@ -32,8 +32,8 @@
 			{% else %}
 			<li>
 			{% endif %}
-				{% if "tag" in path %}
-				<a href="/tag/{{ tagname }}/new/">New</a>
+				{% if "group" in path %}
+				<a href="/group/{{ tagname }}/new/">New</a>
 				{% else %}
 				<a href="/new/">New</a>
 				{% endif %}
@@ -43,13 +43,13 @@
 			{% else %}
 			<li>
 			{% endif %}
-				{% if "tag" in path %}
-				<a href="/tag/{{ tagname }}/top/today">Top</a>
+				{% if "group" in path %}
+				<a href="/group/{{ tagname }}/top/today">Top</a>
 				{% else %}
 				<a href="/top/">Top</a>
 				{% endif %}
 			</li>
-			{% if "tag" in path %}
+			{% if "group" in path %}
         	<div id="tagtitle">{{ tagname|capfirst }} </div>
         	{% endif %}
 		</ul>
