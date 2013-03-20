@@ -1,8 +1,11 @@
 from django.db import models
 import datetime
 from django.contrib.auth.models import User
-from tagging.fields import TagField
-from tagging.models import Tag
+
+class Group(models.Model):
+    groupname = models.CharField(max_length=30)
+    privacy = models.BooleanField()
+    users_favorited = models.ManyToManyField(User)
 
 class Prayer(models.Model):
     number = 1
@@ -13,9 +16,5 @@ class Prayer(models.Model):
     prayerscore = models.IntegerField()
     prayed_users = models.ManyToManyField(User)
     hotness = models.IntegerField()
-    tags = TagField()
-
-    def get_tags(self):
-        return Tag.objects.get_for_object(self) 
-
+    group = models.ManyToManyField(Group)
 

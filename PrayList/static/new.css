@@ -156,7 +156,7 @@
 	padding:8px 20px;
 	color:#cfebf3;
 	font-family:'Helvetica Neue',sans-serif;
-	font-size:13px;
+	font-size:15px;
 	border-radius:40px;
 	-moz-border-radius:40px;
 	-webkit-border-radius:40px;
@@ -187,7 +187,7 @@
 	font-family: verdana, arial, helvetica, sans-serif;
 	font-size: 12px;
 	padding-bottom: 0px;
-	padding-left: 0px;
+	padding-left: 30px;
 	padding-right: 0px;
 	padding-top: 0px;
 	width: 200px;
@@ -301,7 +301,8 @@
 	padding:8px 20px;
 	color:#cfebf3;
 	font-family:'Helvetica Neue',sans-serif;
-	font-size:13px;
+	font-size:15px;
+	font-weight: bold;
 	border-radius:40px;
 	-moz-border-radius:40px;
 	-webkit-border-radius:40px;
@@ -439,7 +440,8 @@ ul.errorlist {
 	padding:8px 20px;
 	color:#cfebf3;
 	font-family:'Helvetica Neue',sans-serif;
-	font-size:13px;
+	font-size:15px;
+	font-weight: bold;
 	border-radius:40px;
 	-moz-border-radius:40px;
 	-webkit-border-radius:40px;
@@ -459,7 +461,7 @@ ul.errorlist {
 	padding:8px 20px;
 	color:#cfebf3;
 	font-family:'Helvetica Neue',sans-serif;
-	font-size:13px;
+	font-size:15px;
 	border-radius:40px;
 	-moz-border-radius:40px;
 	-webkit-border-radius:40px;
@@ -470,8 +472,10 @@ ul.errorlist {
 #tagtitle {
 	font-size: 40px;
 	display: inline-block;
-	padding-top: 20px;
+	padding-top: 30px;
+	padding-left: 10px;
 	text-align: center;
+	font-family: sans-serif;
 }
 
 #cleartag {
