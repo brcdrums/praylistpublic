@@ -2,11 +2,6 @@ from django.db import models
 import datetime
 from django.contrib.auth.models import User
 
-class Group(models.Model):
-    groupname = models.CharField(max_length=30)
-    privacy = models.BooleanField()
-    users_favorited = models.ManyToManyField(User)
-
 class Prayer(models.Model):
     number = 1
     poster = models.CharField(max_length=30)
@@ -16,5 +11,9 @@ class Prayer(models.Model):
     prayerscore = models.IntegerField()
     prayed_users = models.ManyToManyField(User)
     hotness = models.IntegerField()
-    group = models.ManyToManyField(Group)
 
+class Group(models.Model):
+    groupname = models.CharField(max_length=30)
+    privacy = models.BooleanField()
+    users_favorited = models.ManyToManyField(User)
+    prayers = models.ManyToManyField(Prayer)
