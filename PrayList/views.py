@@ -12,7 +12,8 @@ from pytz import timezone
 from reddit_hotness import hot
 from tagging.models import Tag, TaggedItem
 
-def submit(request):
+def submit(request, groupname):
+    path = request.path
     if request.method == "POST":
         form = PrayerForm(request.POST)
         if form.is_valid():
@@ -25,7 +26,10 @@ def submit(request):
             postid = post.id
             return HttpResponseRedirect('/post/' + str(postid) +'/')
     else:
-        form = PrayerForm()
+        if "group" in path:
+            form = PrayerForm(initial={'group': groupname})
+        else: 
+            form = PrayerForm()
     return render_to_response('submit.html', {'form': form, 'user': request.user}, context_instance=RequestContext(request))
 
 def submit_group(request):
