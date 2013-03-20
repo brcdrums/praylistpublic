@@ -22,7 +22,8 @@
         </div>
         <div class="spacer"></div>
         <div class="field">
-            <label for="tags">Group:</label>
+            {{ form.group.errors }}
+            <label for="group">Group:</label>
             {{ form.group }}
         </div>
         <input type="submit" valdue="Submit">

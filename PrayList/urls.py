@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from views import submit, new, post_page, voted, register, top_today, top_alltime, top_month, top_year, top_week, trending, tags, tags_new, tags_top_today, tags_top_week, tags_top_month, tags_top_year, tags_top_all
+from views import submit, new, post_page, voted, register, top_today, top_alltime, top_month, top_year, top_week, trending, tags, tags_new, tags_top_today, tags_top_week, tags_top_month, tags_top_year, tags_top_all, submit_group
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 from django.contrib.auth.views import login, logout
@@ -10,6 +10,7 @@ urlpatterns = patterns('',
     # url(r'^$', 'PrayList.views.home', name='home'),
     # url(r'^PrayList/', include('PrayList.foo.urls')),
     url(r'^submit/$', submit),
+    url(r'^submitgroup/$', submit_group),
     url(r'^new/$', new),
     url(r'^post/(?P<postid>\d{1,3})/$', post_page),
     url(r'^tag/(?P<tags>.+)/trending/$', tags),

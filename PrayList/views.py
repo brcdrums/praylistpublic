@@ -1,5 +1,5 @@
-from forms import PrayerForm
-from models import Prayer
+from forms import PrayerForm, GroupForm
+from models import Prayer, Group
 from django.shortcuts import render_to_response
 from django.shortcuts import HttpResponseRedirect
 import datetime
@@ -19,7 +19,7 @@ def submit(request):
             dt = datetime.datetime.now()
             dtclean = dt.strftime('%Y-%m-%d %H:%M:%S')
             hotness = hot(0, dt)
-            p= Prayer(subject = request.POST['subject'], prayer = request.POST['prayer'], timestamp=dtclean, prayerscore=0, hotness=hotness, tags= request.POST['tags'])
+            p= Prayer(subject = request.POST['subject'], prayer = request.POST['prayer'], timestamp=dtclean, prayerscore=0, hotness=hotness, group= request.POST['group'])
             p.save()
             post = Prayer.objects.get(timestamp=dtclean)
             postid = post.id
@@ -27,6 +27,16 @@ def submit(request):
     else:
         form = PrayerForm()
     return render_to_response('submit.html', {'form': form, 'user': request.user}, context_instance=RequestContext(request))
+
+def submit_group(request):
+    if request.method == "POST":
+        form = GroupForm(request.POST)
+        if form.is_valid():
+            group= Group(groupname= request.POST['group'], privacy= request.POST['privacy'])
+            group.save()
+    else:
+        form = GroupForm()
+    return render_to_response('submitgroup.html', {'form': form, 'user': request.user}, context_instance=RequestContext(request))
 
 def new(request):
     obj_list = Prayer.objects.order_by("-id")

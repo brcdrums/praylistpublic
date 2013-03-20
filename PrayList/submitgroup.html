@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1 class = >Submit a Group</h1>
+
+    {% if form.errors %}
+        <p style="color: red;">
+            Please correct the error{{ form.errors|pluralize }} below.
+        </p>
+    {% endif %}
+
+    <form action="" method="post"> {% csrf_token %}
+        <div class="field">
+            {{ form.group.errors }}
+            <label for="subject">Group Name:</label>
+            {{ form.group }}
+        </div>
+        <div class="spacer"></div>
+        <div class="field">
+            {{ form.privacy.errors }}
+            <label for="prayer">Prayer:</label>
+            {{ form.privacy }}
+        </div>
+        <div class="spacer"></div>
+        <input type="submit" valdue="Submit">
+
+    </form>
+</body>
+</html>
+{% endblock %}
