@@ -22,7 +22,7 @@
 			<li>
 			{% endif %}
 				{% if "group" in path %}
-				<a href="/group/{{ tagname }}/trending/">Trending</a>
+				<a href="/group/{{ groupname }}/trending/">Trending</a>
 				{% else %}
 				<a href="/">Trending</a>
 				{% endif %}
@@ -33,7 +33,7 @@
 			<li>
 			{% endif %}
 				{% if "group" in path %}
-				<a href="/group/{{ tagname }}/new/">New</a>
+				<a href="/group/{{ groupname }}/new/">New</a>
 				{% else %}
 				<a href="/new/">New</a>
 				{% endif %}
@@ -44,7 +44,7 @@
 			<li>
 			{% endif %}
 				{% if "group" in path %}
-				<a href="/group/{{ tagname }}/top/today">Top</a>
+				<a href="/group/{{ groupname }}/top/today">Top</a>
 				{% else %}
 				<a href="/top/">Top</a>
 				{% endif %}

@@ -175,19 +175,19 @@ def trending(request):
 def groups(request, group):
     path = request.get_full_path
     thegroup = Groups.objects.get(groupname=group)
-    obj_list = Prayer.objects.filter()
-    return render_to_response('new.html', {'prayers': obj_list, 'user': request.user, 'path': path})      
+    obj_list = Prayer.objects.filter(group = thegroup)
+    return render_to_response('new.html', {'prayers': obj_list, 'user': request.user, 'path': path, 'groupname': group})      
 
-def tags_new(request, tags):
+def groups_new(request, group):
     path = request.get_full_path
-    thetag = Tag.objects.get(name=tags)
-    obj_list = TaggedItem.objects.get_by_model(Prayer, thetag).order_by("-id")
-    return render_to_response('new.html', {'prayers': obj_list, 'user': request.user, 'path': path, 'tagname': tags}) 
+    thegroup = Groups.objects.get(groupname=group)
+    obj_list = Prayer.objects.filter(group = thegroup).order_by("-id")
+    return render_to_response('new.html', {'prayers': obj_list, 'user': request.user, 'path': path, 'groupname': group}) 
 
-def tags_top_today(request, tags):
+def groups_top_today(request, group):
     path = request.get_full_path
-    thetag = Tag.objects.get(name=tags)
-    obj_list = TaggedItem.objects.get_by_model(Prayer, thetag).order_by("-prayerscore")
+    thegroup = Groups.objects.get(groupname=group)
+    obj_list = Prayer.objects.filter(group = thegroup).order_by("-prayerscore")
     dt = datetime.datetime.now(timezone('US/Central'))
     today = dt.strftime('%Y-%m-%d') 
     new_obj_list = []
@@ -195,12 +195,12 @@ def tags_top_today(request, tags):
         newstamp = prayer.timestamp.astimezone(timezone('US/Central'))
         if newstamp.strftime('%Y-%m-%d') == today:
             new_obj_list.append(prayer)
-    return render_to_response('top_page.html', {'prayers': new_obj_list, 'today': today, 'user': request.user, 'path': path, 'tagname': tags}) 
+    return render_to_response('top_page.html', {'prayers': new_obj_list, 'today': today, 'user': request.user, 'path': path, 'groupname': group}) 
 
-def tags_top_week(request, tags):
+def groups_top_week(request, group):
     path = request.get_full_path
-    thetag = Tag.objects.get(name=tags)
-    obj_list = TaggedItem.objects.get_by_model(Prayer, thetag).order_by("-prayerscore")
+    thegroup = Groups.objects.get(groupname=group)
+    obj_list = Prayer.objects.filter(group = thegroup).order_by("-prayerscore")
     dt = datetime.datetime.now(timezone('US/Central'))
     today = dt.strftime('%Y-%m-%d') 
     week = dt.isocalendar()[1]
@@ -208,12 +208,12 @@ def tags_top_week(request, tags):
     for prayer in obj_list:
         if prayer.timestamp.isocalendar()[1] == week:
             new_obj_list.append(prayer)
-    return render_to_response('top_page.html', {'prayers': new_obj_list, 'today': today, 'user': request.user, 'path': path, 'tagname': tags}) 
+    return render_to_response('top_page.html', {'prayers': new_obj_list, 'today': today, 'user': request.user, 'path': path, 'groupname': group}) 
 
-def tags_top_month(request, tags):
+def groups_top_month(request, group):
     path = request.get_full_path
-    thetag = Tag.objects.get(name=tags)
-    obj_list = TaggedItem.objects.get_by_model(Prayer, thetag).order_by("-prayerscore")
+    thegroup = Groups.objects.get(groupname=group)
+    obj_list = Prayer.objects.filter(group = thegroup).order_by("-prayerscore")
     dt = datetime.datetime.now(timezone('US/Central'))
     today = dt.strftime('%Y-%m-%d') 
     month = dt.strftime('%m') 
@@ -221,12 +221,12 @@ def tags_top_month(request, tags):
     for prayer in obj_list:
         if prayer.timestamp.strftime('%m') == month:
             new_obj_list.append(prayer)
-    return render_to_response('top_page.html', {'prayers': new_obj_list, 'today': today, 'user': request.user, 'path': path, 'tagname': tags})
+    return render_to_response('top_page.html', {'prayers': new_obj_list, 'today': today, 'user': request.user, 'path': path, 'groupname': group})
 
-def tags_top_year(request, tags):
+def groups_top_year(request, group):
     path = request.get_full_path
-    thetag = Tag.objects.get(name=tags)
-    obj_list = TaggedItem.objects.get_by_model(Prayer, thetag).order_by("-prayerscore")
+    thegroup = Groups.objects.get(groupname=group)    
+    obj_list = Prayer.objects.filter(group = thegroup).order_by("-prayerscore")
     dt = datetime.datetime.now(timezone('US/Central'))
     today = dt.strftime('%Y-%m-%d') 
     year = dt.strftime('%Y') 
@@ -234,15 +234,15 @@ def tags_top_year(request, tags):
     for prayer in obj_list:
         if prayer.timestamp.strftime('%Y') == year:
             new_obj_list.append(prayer)
-    return render_to_response('top_page.html', {'prayers': new_obj_list, 'today': today, 'user': request.user, 'path': path, 'tagname': tags})
+    return render_to_response('top_page.html', {'prayers': new_obj_list, 'today': today, 'user': request.user, 'path': path, 'groupname': group})
 
-def tags_top_all(request, tags):
+def groups_top_all(request, group):
     path = request.get_full_path
-    thetag = Tag.objects.get(name=tags)
-    obj_list = TaggedItem.objects.get_by_model(Prayer, thetag).order_by("-prayerscore")
+    thegroup = Groups.objects.get(groupname=group)    
+    obj_list = Prayer.objects.filter(group = thegroup).order_by("-prayerscore")
     dt = datetime.datetime.now(timezone('US/Central'))
     today = dt.strftime('%Y-%m-%d') 
-    return render_to_response('top_page.html', {'prayers': obj_list, 'today': today, 'user': request.user, 'path': path, 'tagname': tags})
+    return render_to_response('top_page.html', {'prayers': obj_list, 'today': today, 'user': request.user, 'path': path, 'groupname': group})
 
 def humanizeTimeDiff(timestamp = None):
     """
