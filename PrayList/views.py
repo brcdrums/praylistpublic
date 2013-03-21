@@ -1,5 +1,5 @@
 from forms import PrayerForm, GroupForm
-from models import Prayer, Group
+from models import Prayer, Groups
 from django.shortcuts import render_to_response
 from django.shortcuts import HttpResponseRedirect
 import datetime
@@ -20,12 +20,11 @@ def submit(request, group_name="none"):
             dt = datetime.datetime.now()
             dtclean = dt.strftime('%Y-%m-%d %H:%M:%S')
             hotness = hot(0, dt)
-            p= Prayer(subject = request.POST['subject'], prayer = request.POST['prayer'], timestamp=dtclean, prayerscore=0, hotness=hotness)
+            group = Groups.objects.get(groupname=group_name)           
+            p= Prayer(subject = request.POST['subject'], prayer = request.POST['prayer'], timestamp=dtclean, prayerscore=0, hotness=hotness, group=group)
             p.save()
             post = Prayer.objects.get(timestamp=dtclean)
-            group = Group.objects.get(groupname=group_name)
-            group.prayers.add(post)
-            group.save()
+
             postid = post.id
             return HttpResponseRedirect('/post/' + str(postid) +'/')
     else:
@@ -39,7 +38,7 @@ def submit_group(request):
     if request.method == "POST":
         form = GroupForm(request.POST)
         if form.is_valid():
-            group= Group(groupname= request.POST['group'], privacy= request.POST['privacy'])
+            group= Groups(groupname= request.POST['group'], privacy= request.POST['privacy'])
             group.save()
             groupname = request.POST['group']
             return HttpResponseRedirect('/submitgroup/' + str(groupname) + '/success/')
@@ -72,13 +71,12 @@ def post_page(request, postid):
     prayer_score = prayer.prayerscore
     prayer.hotness = hot(prayer_score, timestampdt)
     prayer.save()
-    tags = Tag.objects.get_for_object(prayer)
     return render_to_response('post_page.html', 
                              {'prayerscore': prayer_score, 'users': users, 
                               'subject': subject, 'timestamp': timestamp, 
                                 'prayer': prayer_post, 'userid': request.user, 
                                 'path': request.get_full_path, 'id': postid,
-                                'tags': tags}, 
+                                }, 
                                     context_instance=RequestContext(request)
                                )
 
@@ -174,11 +172,11 @@ def trending(request):
     dtclean = dt.strftime('%Y-%m-%d %H:%M:%S') 
     return render_to_response('new.html', {'prayers': obj_list, 'timestamps': timedifflist, 'current_time': dtclean, 'path': path, 'user': request.user})
 
-def tags(request, tags):
+def groups(request, group):
     path = request.get_full_path
-    thetag = Tag.objects.get(name=tags)
-    obj_list = TaggedItem.objects.get_by_model(Prayer, thetag).order_by("-hotness")
-    return render_to_response('new.html', {'prayers': obj_list, 'user': request.user, 'path': path, 'tagname': tags})      
+    thegroup = Groups.objects.get(groupname=group)
+    obj_list = Prayer.objects.filter()
+    return render_to_response('new.html', {'prayers': obj_list, 'user': request.user, 'path': path})      
 
 def tags_new(request, tags):
     path = request.get_full_path

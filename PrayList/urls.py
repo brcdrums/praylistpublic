@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from views import submit, new, post_page, voted, register, top_today, top_alltime, top_month, top_year, top_week, trending, tags, tags_new, tags_top_today, tags_top_week, tags_top_month, tags_top_year, tags_top_all, submit_group, submit_group_success
+from views import submit, new, post_page, voted, register, top_today, top_alltime, top_month, top_year, top_week, trending, groups, tags_new, tags_top_today, tags_top_week, tags_top_month, tags_top_year, tags_top_all, submit_group, submit_group_success
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 from django.contrib.auth.views import login, logout
@@ -15,7 +15,7 @@ urlpatterns = patterns('',
     url(r'^submitgroup/(?P<groupname>.+)/success/$', submit_group_success),
     url(r'^new/$', new),
     url(r'^post/(?P<postid>\d{1,3})/$', post_page),
-    url(r'^group/(?P<tags>.+)/trending/$', tags),
+    url(r'^group/(?P<group>.+)/trending/$', groups),
     url(r'^group/(?P<tags>.+)/new/$', tags_new),
     url(r'^group/(?P<tags>.+)/top/today/$', tags_top_today),
     url(r'^group/(?P<tags>.+)/top/week/$', tags_top_week),
