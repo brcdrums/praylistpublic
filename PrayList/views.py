@@ -11,6 +11,8 @@ from django.contrib.auth import authenticate, login
 from pytz import timezone
 from reddit_hotness import hot
 from tagging.models import Tag, TaggedItem
+from django.forms.util import ErrorList
+
 
 def submit(request, group_name="none"):
     path = request.path
@@ -20,11 +22,14 @@ def submit(request, group_name="none"):
             dt = datetime.datetime.now()
             dtclean = dt.strftime('%Y-%m-%d %H:%M:%S')
             hotness = hot(0, dt)
-            group = Groups.objects.get(groupname=group_name)           
+            try:
+                group = Groups.objects.get(groupname=request.POST['group'])
+            except Groups.DoesNotExist:
+                form._errors["group"] = ErrorList([request.POST['group'] + u" does not exist"])
+                return render_to_response('submit.html', {'form': form, 'user': request.user}, context_instance=RequestContext(request))
             p= Prayer(subject = request.POST['subject'], prayer = request.POST['prayer'], timestamp=dtclean, prayerscore=0, hotness=hotness, group=group)
             p.save()
             post = Prayer.objects.get(timestamp=dtclean)
-
             postid = post.id
             return HttpResponseRedirect('/post/' + str(postid) +'/')
     else:
