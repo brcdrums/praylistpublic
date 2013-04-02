@@ -8,8 +8,18 @@
 <body>
 	<div id="populargroups">
 		<ul>
+			{% if "group" not in path %}
+			<li class="populargroupitemselected"><a href="/">All Prayers</a></li>
+			{% else %}
+			<li class="populargroupitem"><a href="/">All Prayers</a></li>
+			{% endif %}
+
 			{% for group in top_groups %}
-			<li id="populargroupitem"><a href="/group/{{ group.groupname }}/trending/">{{ group.groupname }}</a></li>
+			{% if group.groupname in path %}
+			<li class="populargroupitemselected"> // <a href="/group/{{ group.groupname }}/trending/">{{ group.groupname }}</a></li>
+			{% else %}
+			<li class="populargroupitem"> // <a href="/group/{{ group.groupname }}/trending/">{{ group.groupname }}</a></li>
+			{% endif %}
 			{% endfor %}
 		</ul>
 	</div>

@@ -502,7 +502,7 @@ ul.errorlist {
 
 }
 
-#populargroupitem {
+.populargroupitem {
 	list-style-type: none;
 	white-space: nowrap;
 	display: inline;
@@ -510,14 +510,38 @@ ul.errorlist {
 
 }
 
-#populargroupitem a {
+.populargroupitem a {
 	text-decoration: none;
 
 
 }
 
-#populargroupitem a:visited{
+.populargroupitem a:visited{
 	text-decoration: none;
 	color: rgb(0, 0, 238);
+
+}
+
+.populargroupitemselected {
+	padding: 1px;
+	display: inline;
+	text-decoration: none;
+
+}
+
+.populargroupitemselected a {
+
+	text-decoration: none;
+	color: red;
+	font-weight: bold;
+
+}
+
+.populargroupitemselected a:visited {
+	
+	text-decoration: none;
+	color: red;
+	font-weight: bold;
+
 
 }
