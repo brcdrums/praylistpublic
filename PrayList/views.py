@@ -12,6 +12,7 @@ from pytz import timezone
 from reddit_hotness import hot
 from tagging.models import Tag, TaggedItem
 from django.forms.util import ErrorList
+from django.utils.safestring import mark_safe
 
 
 def submit(request, group_name="none"):
@@ -26,7 +27,7 @@ def submit(request, group_name="none"):
                 group = Groups.objects.get(groupname=request.POST['group'])
             except Groups.DoesNotExist:
                 form._errors["group"] = ErrorList([request.POST['group'] + u" does not exist"])
-                return render_to_response('submit.html', {'form': form, 'user': request.user}, context_instance=RequestContext(request))
+                return render_to_response('submit.html', {'form': form, 'user': request.user, 'doesnotexist': True}, context_instance=RequestContext(request))
             p= Prayer(subject = request.POST['subject'], prayer = request.POST['prayer'], timestamp=dtclean, prayerscore=0, hotness=hotness, group=group)
             p.save()
             post = Prayer.objects.get(timestamp=dtclean)

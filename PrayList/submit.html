@@ -23,6 +23,10 @@
         <div class="spacer"></div>
         <div class="field">
             {{ form.group.errors }}
+            {% if doesnotexist %}
+            <a href="/submitgroup/">Click here to create it!</a>
+            <br>
+            {% endif %}
             <label for="group">Group:</label>
             {{ form.group }}
         </div>
