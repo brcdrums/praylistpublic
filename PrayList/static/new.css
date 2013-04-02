@@ -545,3 +545,17 @@ ul.errorlist {
 
 
 }
+
+.suggestedgroupitem {
+	list-style-type: none;
+	white-space: nowrap;
+	display: inline;
+
+
+}
+
+.suggestedgroupitem a {
+	text-decoration: none;
+
+
+}

@@ -29,6 +29,14 @@
             {% endif %}
             <label for="group">Group:</label>
             {{ form.group }}
+            <br>
+            <br>
+            <div>Popular Groups:</div>
+            <ul class="suggestedgroup">
+            {% for group in top_groups %}
+                <li class="suggestedgroupitem"><a href="/group/{{ group.groupname }}/trending/">{{ group.groupname }}</a></li>
+            {% endfor %}
+            </ul>
         </div>
         <input type="submit" valdue="Submit">
 
