@@ -440,7 +440,6 @@ ul.errorlist {
 	color:#cfebf3;
 	font-family:'Helvetica Neue',sans-serif;
 	font-size:15px;
-	font-weight: bold;
 	border-radius:40px;
 	-moz-border-radius:40px;
 	-webkit-border-radius:40px;
@@ -492,5 +491,33 @@ ul.errorlist {
 
 #tagtitlediv {
 	display: inline-block;
+
+}
+
+#populargroups {
+	background-color: white;
+	height: 20px;
+	border-bottom: 1px solid gray;
+	padding-left: 0px;
+
+}
+
+#populargroupitem {
+	list-style-type: none;
+	white-space: nowrap;
+	display: inline;
+
+
+}
+
+#populargroupitem a {
+	text-decoration: none;
+
+
+}
+
+#populargroupitem a:visited{
+	text-decoration: none;
+	color: rgb(0, 0, 238);
 
 }
