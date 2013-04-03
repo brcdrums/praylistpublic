@@ -37,7 +37,14 @@
 	font-size: large;
 	padding: 5px 10px 10px 10px;
 	width: 500px;
+	list-style-type: none;
 }
+
+.field ul {
+	list-style-type: none;
+	margin-left: -40px;
+}
+
 
 .headerimg {
 	display: inline-block;
@@ -46,6 +53,13 @@
 	padding-bottom: 0px;
 	width: 100px;
 
+}
+
+
+#id_group {
+	height: 50px;
+	font-size: 24;
+	width: 500px;
 }
 
 #id_prayer {
