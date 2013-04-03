@@ -1,60 +1,97 @@
-#title {
+.bigtext {
+	border: 1px solid gray;
+	font-size: 100%;
+	height: 300px;
+	margin: 0;
+	padding: 3px;
+	width: 492px;
+}
+
+.centerize {
+	display: block;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#cleartag {
 	display: inline-block;
-	font-family: Garamond;
-	font-size: 30;
-	vertical-align: text-bottom;
-
-}
-
-#prayers {
- 	background-position: top;
- 	padding-top: 20px;
- 	display: inline-block;
- 	clear: left;
- 	width: 50%;
-
- }
-
-#prayerstop {
- 	overflow: hidden; 
- 	background-position: top;
- 	padding-top: 40px;
- 	display:block;
- 	clear: left;
- 	width: 50%;
-}
-
-#subject {
-	text-align: left;
-	font-family: Verdana;
-	float: left;
-	padding-left: 10px;
-	font-size: 27;
-	color: rgb(0, 0, 255);
-	/*padding-top: 4px;*/
-}
-
-#prayer {
+	font-family: verdana;
+	font-size: 12;
+	padding-top: 32px;
 	text-align: center;
+	vertical-align: top;	
+}
+
+.errorlist li {
+    background-color: red;
+    color: white;
+    display: block;
+    font-size: 10px;
+    margin: 0 0 3px;
+    padding: 4px 5px;
+}
+
+.field {
+	background-color: #D5F3D3;
+	border-radius: 4px;
+	font-size: large;
+	padding: 5px 10px 10px 10px;
+	width: 500px;
+}
+
+.headerimg {
+	display: inline-block;
+	height: 100px;
+	margin-bottom: 0px;
+	padding-bottom: 0px;
+	width: 100px;
+
+}
+
+#id_prayer {
+	border: 1px solid gray;
+	font-size: 14;
+	margin-top: 5px;
+	vertical-align: text-top;
+	width: 500px;
+}
+
+#id_subject {
+	height: 50px;
+	font-size: 24;
+	width: 500px;
+}
+
+.littletext {
+	border: 1px solid gray;
+	font-size: 100%;
+	margin: 0;
+	padding: 3px;
+	width: 492px;
+
 }
 
 #loginfield {
-	text-align: center;
 	padding-top: 40px;
+	text-align: center;
 }
 
-.timestamp {
-	display: block;
-	padding-left: 150px;
-	font-size: 14;
-	text-align: left;
-
+.logout {
+	background-color: white;
+	float: right;
+	text-decoration: none;
+	vertical-align: top;
 }
-.timestampshift1 {
-	padding-left: 160px;
-	font-size: 14;
-	display: block;
-	text-align: left;
+
+.logouttext {
+	background: transparent;
+	background-color: white;
+	float: right;
+	margin-right: 35px;
+	margin-top: 2px;
+	padding: 0px;
+	text-decoration: none;
+	vertical-align: top;
 }
 
 #number {
@@ -63,13 +100,106 @@
 	padding-top: 8px;
 }
 
-.headerimg {
-	height: 100px;
-	width: 100px;
-	display: inline-block;
-	padding-bottom: 0px;
-	margin-bottom: 0px;
+#populargroups {
+	border-bottom: 1px solid gray;
+	background-color: white;
+	height: 20px;
+	padding-left: 0px;
+}
 
+.populargroupitem {
+	display: inline;
+	list-style-type: none;
+	white-space: nowrap;
+}
+
+.populargroupitem a {
+	text-decoration: none;
+}
+
+.populargroupitem a:visited{
+	color: rgb(0, 0, 238);
+	text-decoration: none;
+}
+
+.populargroupitemselected {
+	display: inline;
+	padding: 1px;
+	text-decoration: none;
+}
+
+.populargroupitemselected a {
+	color: red;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.populargroupitemselected a:visited {
+	color: red;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+#postsubject {
+	font-family: cursive;
+	font-size: 40;
+	text-align: center;
+}
+
+#poststamp {
+	display: block;
+	font-size: 14;
+	text-align: right;
+}
+
+#postprayer {
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-size: 20;
+	text-align: center;
+}
+
+#prayer {
+	text-align: center;
+}
+
+#prayers {
+ 	background-position: top;
+ 	clear: left;
+ 	display: inline-block;
+ 	padding-top: 20px;
+ 	width: 50%;
+ }
+
+ .prayerscore {
+	font-family: Verdana;
+
+}
+
+.prayerscorehome {
+	float: left;
+	font-family: Verdana;
+	padding-left: 10px;
+	padding-top: 10px;
+	text-align: left;
+}
+
+ #prayerstop {
+ 	background-position: top;
+ 	clear: left;
+	display:block;
+ 	overflow: hidden; 	
+ 	padding-top: 40px;
+ 	width: 50%;
+}
+
+#regform {
+	text-align: center;
+}
+
+#rightsidebar {
+	clear:right;
+	display: inline-block;
+	float:right;
 }
 
 .seperator {
@@ -77,72 +207,55 @@
 	width: 50px;
 }
 
-#timedropdown {
-	text-align: center;
+.spacer {
 	display: block;
-	position: absolute;
-	background-color: rgb(255, 255, 255);
-	margin: 0;
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-size: 5px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: normal;
+	height: 2px;
+	line-height: normal;
+	margin-bottom: 5px;
+	margin-left: 0px;
+	margin-right: 0px;
+	margin-top: 15px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+	padding-top: 0px;
+	width: 520px;
+}
+
+#subject {
+	color: rgb(0, 0, 255);
+	float: left;
+	font-family: verdana;	
+	font-size: 27;
+	padding-left: 10px;
 	text-align: left;
 }
 
-#timedropdownul {
-	list-style-type: none;
-	display: block;	
-	position: relative;
-	text-align: left;
-
+.submitbutton {
+	background:#00A0D1;
+	background:-moz-linear-gradient(top,#00A0D1 0%,#008DB8 100%);
+	background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#00A0D1),color-stop(100%,#008DB8));
+	background:-webkit-linear-gradient(top,#00A0D1 0%,#008DB8 100%);
+	background:-o-linear-gradient(top,#00A0D1 0%,#008DB8 100%);
+	background:-ms-linear-gradient(top,#00A0D1 0%,#008DB8 100%);
+	background:linear-gradient(top,#00A0D1 0%,#008DB8 100%);
+	border:1px solid #095B7E;
+	border-radius:40px;
+	cursor: hand;
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#00A0D1',endColorstr='#008DB8',GradientType=0);
+	float: right;
+	padding:8px 20px;
+	color:#cfebf3;
+	font-family:'Helvetica Neue',sans-serif;
+	font-size:15px;
+	-moz-border-radius:40px;
+	-webkit-border-radius:40px;	
 }
-
-
-.timedropitem {
-	margin: 1px;
-	overflow: hidden;
-	text-decoration: none;
-	text-align: left;
-
-
-}
-
-#timedropdownul a {
-	text-decoration: none;
-	color: #297A2C;
-}
-
-#timedropdownul a:visited {
-	text-decoration: none;
-
-}
-
-.timedrophover {
-	background-color: #D5F3D3;
-	text-decoration: none;
-}
-
-.timedropselected {
-	text-align: left;
-	padding: 2px;
-	margin: 0;
-	text-decoration: underline;
-	font-weight: bold;
-	color:  #424242;
-}
-
-
-
-/*.arrow-down {
-	width: 0; 
-	height: 0; 
-	border-left: 5px solid transparent;
-	border-right: 5px solid transparent;
-	margin-right: 5px;
-	border-top: 5px solid #f00;
-	position: absolute;
-	margin-top: 8px;
-	margin-left: 45px;
-	display: inline
-}*/
-
 
 .submitbutton:hover {
 	background:#2F2060;
@@ -152,48 +265,110 @@
 	background:-o-linear-gradient(top,#2F2060 0%,#008DB8 100%);
 	background:-ms-linear-gradient(top,#2F2060 0%,#008DB8 100%);
 	background:linear-gradient(top,#2F2060 0%,#008DB8 100%);
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#00A0D1',endColorstr='#008DB8',GradientType=0);
-	padding:8px 20px;
+	border:1px solid #095B7E;
+	border-radius:40px;
 	color:#cfebf3;
+	cursor: hand;
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#00A0D1',endColorstr='#008DB8',GradientType=0);
+	float: right;
 	font-family:'Helvetica Neue',sans-serif;
 	font-size:15px;
-	border-radius:40px;
 	-moz-border-radius:40px;
+	padding:8px 20px;
 	-webkit-border-radius:40px;
-	border:1px solid #095B7E;
-	float: right;
-	cursor: hand;
 }
 
-#postsubject {
-	text-align: center;
-	font-family: cursive;
-	font-size: 40;
+.suggestedgroupitem {
+	display: inline;
+	list-style-type: none;
+	white-space: nowrap;
 }
 
-#poststamp {
-	text-align: right;
+.suggestedgroupitem a {
+	text-decoration: none;
+}
+
+.suggestedgroupitem a:visited {
+	color: rgb(0, 0, 238);
+	text-decoration: none;
+}
+
+.timestamp {
 	display: block;
 	font-size: 14;
+	padding-left: 150px;
+	text-align: left;
 }
 
-#postprayer {
+.timestampshift1 {
+	display: block;
+	font-size: 14;
+	padding-left: 160px;	
+	text-align: left;
+}
+
+#title {
+	display: inline-block;
+	font-family: Garamond;
+	font-size: 30;
+	vertical-align: text-bottom;
+}
+
+#timedropdown {
+	background-color: rgb(255, 255, 255);
+	display: block;
+	margin: 0;
+	position: absolute;
 	text-align: center;
-	font-size: 20;
-	font-family: verdana, arial, helvetica, sans-serif;
+}
+
+#timedropdownul {
+	display: block;	
+	list-style-type: none;
+	position: relative;
+	text-align: left;
+}
+
+.timedropitem {
+	margin: 1px;
+	overflow: hidden;
+	text-decoration: none;
+	text-align: left;
+}
+
+#timedropdownul a {
+	color: #297A2C;
+	text-decoration: none;
+}
+
+#timedropdownul a:visited {
+	text-decoration: none;
+}
+
+.timedrophover {
+	background-color: #D5F3D3;
+	text-decoration: none;
+}
+
+.timedropselected {
+	color:  #424242;
+	font-weight: bold;
+	padding: 2px;
+	margin: 0;
+	text-align: left;
+	text-decoration: underline;
 }
 
 .tabmenu {
+	display: inline;
 	font-family: verdana, arial, helvetica, sans-serif;
 	font-size: 12px;
+	height: 40px;
 	padding-bottom: 0px;
 	padding-left: 30px;
 	padding-right: 0px;
 	padding-top: 0px;
 	width: 200px;
-	height: 40px;
-  	display: inline;
-  
 }
 
 .tabmenu li {
@@ -220,19 +395,6 @@
 	white-space: nowrap;
 	width: auto;
 
-}
-
-.prayerscore {
-	font-family: Verdana;
-
-}
-
-.prayerscorehome {
-	text-align: left;
-	padding-top: 10px;
-	font-family: Verdana;
-	float: left;
-	padding-left: 10px;
 }
 
 .tabmenu li a {
@@ -262,6 +424,7 @@
 
 .tabmenu .selected a {
 	background-color:#FAFAFA;
+	border: groove;
 	color: #1B5022;
 	cursor: auto;
 	display: inline;
@@ -280,152 +443,31 @@
 	text-decoration: none;
 	white-space: nowrap;
 	width: auto;
-	border: groove;
+	
+}
+
+#tagtitle {
+	display: inline-block;
+	font-family: sans-serif;
+	font-size: 40px;
+	padding-top: 30px;
+	padding-left: 10px;
+	text-align: center;
+}
+
+#tagtitlediv {
+	display: inline-block;
 }
 
 #topnav {
+	background-image:url("http://openclipart.org/people/Clue/Clue_Simple_Clouds.svg");
 	border-bottom: solid;
-	border-width: 1px;
-	background-image:url("http://openclipart.org/people/Clue/Clue_Simple_Clouds.svg")
-}
-
-.submitbutton {
-	background:#00A0D1;
-	background:-moz-linear-gradient(top,#00A0D1 0%,#008DB8 100%);
-	background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#00A0D1),color-stop(100%,#008DB8));
-	background:-webkit-linear-gradient(top,#00A0D1 0%,#008DB8 100%);
-	background:-o-linear-gradient(top,#00A0D1 0%,#008DB8 100%);
-	background:-ms-linear-gradient(top,#00A0D1 0%,#008DB8 100%);
-	background:linear-gradient(top,#00A0D1 0%,#008DB8 100%);
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#00A0D1',endColorstr='#008DB8',GradientType=0);
-	padding:8px 20px;
-	color:#cfebf3;
-	font-family:'Helvetica Neue',sans-serif;
-	font-size:15px;
-	border-radius:40px;
-	-moz-border-radius:40px;
-	-webkit-border-radius:40px;
-	border:1px solid #095B7E;
-	float: right;
-	cursor: hand;
-}
-
-.roundfield {
-	width: 500px;
-	background-color: #D5F3D3;
-	border-radius: 4px;
-	padding: 5px 10px 10px 10px;
-	font-size: large;
-}
-.roundfield-content {
-	margin-top: 5px;
-	border: none;
-	vertical-align: text-top;
-}
-.field{
-	width: 500px;
-	background-color: #D5F3D3;
-	border-radius: 4px;
-	padding: 5px 10px 10px 10px;
-	font-size: large;
-}
-.littletext {
-	font-size: 100%;
-	width: 492px;
-	padding: 3px;
-	margin: 0;
-	border: 1px solid gray;
-
-}
-.bigtext {
-	font-size: 100%;
-	width: 492px;
-	height: 300px;
-	padding: 3px;
-	margin: 0;
-	border: 1px solid gray;
-
-}
-.spacer {
-	display: block;
-	font-family: verdana, arial, helvetica, sans-serif;
-	font-size: 5px;
-	font-style: normal;
-	font-variant: normal;
-	font-weight: normal;
-	height: 2px;
-	line-height: normal;
-	margin-bottom: 5px;
-	margin-left: 0px;
-	margin-right: 0px;
-	margin-top: 15px;
-	padding-bottom: 0px;
-	padding-left: 0px;
-	padding-right: 0px;
-	padding-top: 0px;
-	width: 520px;
-}
-
-#id_prayer {
-	margin-top: 5px;
-	border: 1px solid gray;
-	vertical-align: text-top;
-	width: 500px;
-	font-size: 14;
+	border-width: 1px;	
 }
 
 ul.errorlist {
-        margin: 0;
-        padding: 0;
-    }
-.errorlist li {
-        background-color: red;
-        color: white;
-        display: block;
-        font-size: 10px;
-        margin: 0 0 3px;
-        padding: 4px 5px;
-    }
-
-#id_subject {
-	width: 500px;
-	height: 50px;
-	font-size: 24;
-}
-
-.logout {
-	vertical-align: top;
-	float: right;
-	text-decoration: none;
-	background-color: white;
-}
-
-.logouttext {
-	vertical-align: top;
-	float: right;
-	text-decoration: none;
-	background-color: white;
-	margin-top: 2px;
-	padding: 0px;
-	margin-right: 35px;
-	background: transparent;
-}
-
-.centerize {
-	display: block;
-    margin: 0 auto;
-    text-align: center;}
-
-#youpray {
-	color: green;
-	font-weight: bold;
-}
-
-#rightsidebar {
-	float:right;
-	display: inline-block;
-	clear:right;
-	
+    margin: 0;
+    padding: 0;
 }
 
 #upvote {
@@ -436,16 +478,16 @@ ul.errorlist {
 	background:-o-linear-gradient(top,#00A0D1 0%,#008DB8 100%);
 	background:-ms-linear-gradient(top,#00A0D1 0%,#008DB8 100%);
 	background:linear-gradient(top,#00A0D1 0%,#008DB8 100%);
+	border:1px solid #095B7E;
+	border-radius:40px;
+	color:#cfebf3;
+	cursor: hand;
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#00A0D1',endColorstr='#008DB8',GradientType=0);
 	padding:8px 20px;
-	color:#cfebf3;
 	font-family:'Helvetica Neue',sans-serif;
 	font-size:15px;
-	border-radius:40px;
 	-moz-border-radius:40px;
 	-webkit-border-radius:40px;
-	border:1px solid #095B7E;
-	cursor: hand;
 }
 
 #upvote:hover {
@@ -456,114 +498,19 @@ ul.errorlist {
 	background:-o-linear-gradient(top,#2F2060 0%,#008DB8 100%);
 	background:-ms-linear-gradient(top,#2F2060 0%,#008DB8 100%);
 	background:linear-gradient(top,#2F2060 0%,#008DB8 100%);
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#00A0D1',endColorstr='#008DB8',GradientType=0);
-	padding:8px 20px;
+	border:1px solid #095B7E;
+	border-radius:40px;
 	color:#cfebf3;
+	cursor: hand;
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#00A0D1',endColorstr='#008DB8',GradientType=0);
 	font-family:'Helvetica Neue',sans-serif;
 	font-size:15px;
-	border-radius:40px;
+	padding:8px 20px;
 	-moz-border-radius:40px;
-	-webkit-border-radius:40px;
-	border:1px solid #095B7E;
-	cursor: hand;
+	-webkit-border-radius:40px;	
 }
 
-#tagtitle {
-	font-size: 40px;
-	display: inline-block;
-	padding-top: 30px;
-	padding-left: 10px;
-	text-align: center;
-	font-family: sans-serif;
-}
-
-#cleartag {
-	display: inline-block;
-	font-family: verdana;
-	font-size: 12;
-	vertical-align: top;
-	padding-top: 32px;
-	text-align: center;
-}
-
-#regform {
-	text-align: center;
-}
-
-#tagtitlediv {
-	display: inline-block;
-
-}
-
-#populargroups {
-	background-color: white;
-	height: 20px;
-	border-bottom: 1px solid gray;
-	padding-left: 0px;
-
-}
-
-.populargroupitem {
-	list-style-type: none;
-	white-space: nowrap;
-	display: inline;
-
-
-}
-
-.populargroupitem a {
-	text-decoration: none;
-
-
-}
-
-.populargroupitem a:visited{
-	text-decoration: none;
-	color: rgb(0, 0, 238);
-
-}
-
-.populargroupitemselected {
-	padding: 1px;
-	display: inline;
-	text-decoration: none;
-
-}
-
-.populargroupitemselected a {
-
-	text-decoration: none;
-	color: red;
+#youpray {
+	color: green;
 	font-weight: bold;
-
-}
-
-.populargroupitemselected a:visited {
-	
-	text-decoration: none;
-	color: red;
-	font-weight: bold;
-
-
-}
-
-.suggestedgroupitem {
-	list-style-type: none;
-	white-space: nowrap;
-	display: inline;
-
-
-}
-
-.suggestedgroupitem a {
-	text-decoration: none;
-
-
-}
-
-.suggestedgroupitem a:visited {
-	text-decoration: none;
-	color: rgb(0, 0, 238);
-
-
-}
+}    
