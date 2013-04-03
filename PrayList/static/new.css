@@ -408,6 +408,7 @@ ul.errorlist {
 	margin-top: 2px;
 	padding: 0px;
 	margin-right: 35px;
+	background: transparent;
 }
 
 .centerize {
@@ -556,6 +557,13 @@ ul.errorlist {
 
 .suggestedgroupitem a {
 	text-decoration: none;
+
+
+}
+
+.suggestedgroupitem a:visited {
+	text-decoration: none;
+	color: rgb(0, 0, 238);
 
 
 }
