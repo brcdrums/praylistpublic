@@ -80,6 +80,8 @@ def post_page(request, postid):
     timestamp = prayer.timestamp.astimezone(timezone('US/Central'))
     timestampdt = datetime.datetime(timestamp.year, timestamp.month, timestamp.day, timestamp.hour, timestamp.minute, timestamp.second)
     prayer_post = prayer.prayer
+    this_group = Groups.objects.get(groupname=prayer.group.groupname)
+    this_group_name = this_group.groupname
     pid = postid
     prayer_score = prayer.prayerscore
     prayer.hotness = hot(prayer_score, timestampdt)
@@ -89,7 +91,7 @@ def post_page(request, postid):
                               'subject': subject, 'timestamp': timestamp, 
                                 'prayer': prayer_post, 'userid': request.user, 
                                 'path': request.get_full_path, 'id': postid,
-                                'top_groups': top_groups
+                                'top_groups': top_groups, 'this_group': this_group_name
                                 }, 
                                     context_instance=RequestContext(request)
                                )

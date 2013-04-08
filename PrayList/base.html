@@ -16,17 +16,24 @@
 	}(document, 'script', 'facebook-jssdk'));</script>
 	<div id="populargroups">
 		<ul>
-			{% if "group" not in path %}
+			{% if "group" not in path and "post" not in path %}
 			<li class="populargroupitemselected"><a href="/">All Prayers</a></li>
 			{% else %}
 			<li class="populargroupitem"><a href="/">All Prayers</a></li>
 			{% endif %}
-
 			{% for group in top_groups %}
-			{% if group.groupname in path %}
-			<li class="populargroupitemselected"> // <a href="/group/{{ group.groupname }}/trending/">{{ group.groupname }}</a></li>
+			{% if "post" in path %}
+				{% if this_group == group.groupname %}
+				<li class="populargroupitemselected"> // <a href="/group/{{ group.groupname }}/trending/">{{ group.groupname }}</a></li>
+				{% else %}
+				<li class="populargroupitem"> // <a href="/group/{{ group.groupname }}/trending/">{{ group.groupname }}</a></li>
+				{% endif %}
 			{% else %}
-			<li class="populargroupitem"> // <a href="/group/{{ group.groupname }}/trending/">{{ group.groupname }}</a></li>
+				{% if group.groupname in path %}
+				<li class="populargroupitemselected"> // <a href="/group/{{ group.groupname }}/trending/">{{ group.groupname }}</a></li>
+				{% else %}
+				<li class="populargroupitem"> // <a href="/group/{{ group.groupname }}/trending/">{{ group.groupname }}</a></li>
+				{% endif %}
 			{% endif %}
 			{% endfor %}
 		</ul>
