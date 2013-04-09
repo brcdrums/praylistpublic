@@ -3,20 +3,19 @@ from models import Prayer, Groups
 from django.shortcuts import render_to_response
 from django.shortcuts import HttpResponseRedirect
 import datetime
-from django.utils.timezone import utc
 from django.template import RequestContext
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib import auth
+from django.contrib.auth.views import logout
 from django.contrib.auth import authenticate, login
 from pytz import timezone
 from reddit_hotness import hot
 from tagging.models import Tag, TaggedItem
 from django.forms.util import ErrorList
 from django.utils.safestring import mark_safe
-
+import helper_func
 
 def submit(request, group_name="none"):
-    top_groups = calc_top_groups()
+    top_groups = helper_func.calc_top_groups()
     path = request.path
     if request.method == "POST":
         form = PrayerForm(request.POST)
@@ -44,7 +43,7 @@ def submit(request, group_name="none"):
     return render_to_response('submit.html', {'form': form, 'user': request.user, 'top_groups': top_groups}, context_instance=RequestContext(request))
 
 def submit_group(request):
-    top_groups = calc_top_groups()
+    top_groups = helper_func.calc_top_groups()
     if request.method == "POST":
         form = GroupForm(request.POST)
         if form.is_valid():
@@ -57,21 +56,21 @@ def submit_group(request):
     return render_to_response('submitgroup.html', {'form': form, 'user': request.user, 'top_groups': top_groups}, context_instance=RequestContext(request))
 
 def submit_group_success(request, groupname):
-    top_groups = calc_top_groups()
+    top_groups = helper_func.calc_top_groups()
     group_name = groupname
     return render_to_response('submitgroupsuccess.html', {'groupname': group_name, 'user': request.user, 'top_groups': top_groups}, context_instance=RequestContext(request))
 
 def new(request):
-    top_groups = calc_top_groups()
+    top_groups = helper_func.calc_top_groups()
     obj_list = Prayer.objects.order_by("-id")
-    timedifflist = calculate_time_diff(request, obj_list)
+    timedifflist = helper_func.calculate_time_diff(request, obj_list)
     path = request.get_full_path
     dt = datetime.datetime.now()
     dtclean = dt.strftime('%Y-%m-%d %H:%M:%S') 
     return render_to_response('new.html', {'prayers': obj_list, 'timestamps': timedifflist, 'current_time': dtclean, 'path': path, 'user': request.user, 'top_groups': top_groups})
 
 def post_page(request, postid):
-    top_groups = calc_top_groups()
+    top_groups = helper_func.calc_top_groups()
     date = datetime.datetime.now()
     prayed = False
     prayer = Prayer.objects.get(id=postid)
@@ -97,7 +96,7 @@ def post_page(request, postid):
                                )
 
 def top_today(request):
-    top_groups = calc_top_groups()
+    top_groups = helper_func.calc_top_groups()
     path = request.get_full_path
     obj_list = Prayer.objects.order_by("-prayerscore")
     dt = datetime.datetime.now(timezone('US/Central'))
@@ -110,7 +109,7 @@ def top_today(request):
     return render_to_response('top_page.html', {'prayers': new_obj_list, 'today': today, 'user': request.user, 'path': path, 'top_groups': top_groups})
 
 def top_alltime(request):
-    top_groups = calc_top_groups()
+    top_groups = helper_func.calc_top_groups()
     path = request.get_full_path
     obj_list = Prayer.objects.order_by("-prayerscore")
     dt = datetime.datetime.now()
@@ -118,7 +117,7 @@ def top_alltime(request):
     return render_to_response('top_page.html', {'prayers': obj_list, 'today': today, 'user': request.user, 'path': path, 'top_groups': top_groups})
 
 def top_month(request):
-    top_groups = calc_top_groups()
+    top_groups = helper_func.calc_top_groups()
     path = request.get_full_path
     obj_list = Prayer.objects.order_by("-prayerscore")
     dt = datetime.datetime.now()
@@ -131,7 +130,7 @@ def top_month(request):
 
 
 def top_year(request):
-    top_groups = calc_top_groups()
+    top_groups = helper_func.calc_top_groups()
     path = request.get_full_path
     obj_list = Prayer.objects.order_by("-prayerscore")
     dt = datetime.datetime.now()
@@ -143,7 +142,7 @@ def top_year(request):
     return render_to_response('top_page.html', {'prayers': new_obj_list, 'user': request.user, 'path': path, 'top_groups': top_groups})
 
 def top_week(request):
-    top_groups = calc_top_groups()
+    top_groups = helper_func.calc_top_groups()
     path = request.get_full_path
     obj_list = Prayer.objects.order_by("-prayerscore")
     dt = datetime.datetime.now()
@@ -155,7 +154,7 @@ def top_week(request):
     return render_to_response('top_page.html', {'prayers': new_obj_list, 'user': request.user, 'path': path, 'top_groups': top_groups})    
 
 def logout_view(request):
-    auth.logout(request)
+    logout(request)
     # Redirect to a homepage.
     return HttpResponseRedirect("/new/")
 
@@ -170,7 +169,7 @@ def voted(request, postid):
         return HttpResponseRedirect("/accounts/login/?next=/post/" + postid + "/")
 
 def register(request):
-    top_groups = calc_top_groups()
+    top_groups = helper_func.calc_top_groups()
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
@@ -187,30 +186,30 @@ def register(request):
     }, context_instance=RequestContext(request))
 
 def trending(request):
-    top_groups = calc_top_groups()
+    top_groups = helper_func.calc_top_groups()
     obj_list = Prayer.objects.order_by("-hotness")
-    timedifflist = calculate_time_diff(request, obj_list)
+    timedifflist = helper_func.calculate_time_diff(request, obj_list)
     path = request.get_full_path
     dt = datetime.datetime.now()
     dtclean = dt.strftime('%Y-%m-%d %H:%M:%S') 
     return render_to_response('new.html', {'prayers': obj_list, 'timestamps': timedifflist, 'current_time': dtclean, 'path': path, 'user': request.user, 'top_groups': top_groups})
 
 def groups(request, group):
-    top_groups = calc_top_groups()
+    top_groups = helper_func.calc_top_groups()
     path = request.get_full_path
     thegroup = Groups.objects.get(groupname=group)
     obj_list = Prayer.objects.filter(group = thegroup)
     return render_to_response('new.html', {'prayers': obj_list, 'user': request.user, 'path': path, 'groupname': group, 'top_groups': top_groups})      
 
 def groups_new(request, group):
-    top_groups = calc_top_groups()
+    top_groups = helper_func.calc_top_groups()
     path = request.get_full_path
     thegroup = Groups.objects.get(groupname=group)
     obj_list = Prayer.objects.filter(group = thegroup).order_by("-id")
     return render_to_response('new.html', {'prayers': obj_list, 'user': request.user, 'path': path, 'groupname': group, 'top_groups': top_groups}) 
 
 def groups_top_today(request, group):
-    top_groups = calc_top_groups()
+    top_groups = helper_func.calc_top_groups()
     path = request.get_full_path
     thegroup = Groups.objects.get(groupname=group)
     obj_list = Prayer.objects.filter(group = thegroup).order_by("-prayerscore")
@@ -224,7 +223,7 @@ def groups_top_today(request, group):
     return render_to_response('top_page.html', {'prayers': new_obj_list, 'today': today, 'user': request.user, 'path': path, 'groupname': group, 'top_groups': top_groups}) 
 
 def groups_top_week(request, group):
-    top_groups = calc_top_groups()
+    top_groups = helper_func.calc_top_groups()
     path = request.get_full_path
     thegroup = Groups.objects.get(groupname=group)
     obj_list = Prayer.objects.filter(group = thegroup).order_by("-prayerscore")
@@ -238,7 +237,7 @@ def groups_top_week(request, group):
     return render_to_response('top_page.html', {'prayers': new_obj_list, 'today': today, 'user': request.user, 'path': path, 'groupname': group, 'top_groups': top_groups}) 
 
 def groups_top_month(request, group):
-    top_groups = calc_top_groups()
+    top_groups = helper_func.calc_top_groups()
     path = request.get_full_path
     thegroup = Groups.objects.get(groupname=group)
     obj_list = Prayer.objects.filter(group = thegroup).order_by("-prayerscore")
@@ -252,7 +251,7 @@ def groups_top_month(request, group):
     return render_to_response('top_page.html', {'prayers': new_obj_list, 'today': today, 'user': request.user, 'path': path, 'groupname': group, 'top_groups': top_groups})
 
 def groups_top_year(request, group):
-    top_groups = calc_top_groups()
+    top_groups = helper_func.calc_top_groups()
     path = request.get_full_path
     thegroup = Groups.objects.get(groupname=group)    
     obj_list = Prayer.objects.filter(group = thegroup).order_by("-prayerscore")
@@ -266,62 +265,10 @@ def groups_top_year(request, group):
     return render_to_response('top_page.html', {'prayers': new_obj_list, 'today': today, 'user': request.user, 'path': path, 'groupname': group, 'top_groups': top_groups})
 
 def groups_top_all(request, group):
-    top_groups = calc_top_groups()
+    top_groups = helper_func.calc_top_groups()
     path = request.get_full_path
     thegroup = Groups.objects.get(groupname=group)    
     obj_list = Prayer.objects.filter(group = thegroup).order_by("-prayerscore")
     dt = datetime.datetime.now(timezone('US/Central'))
     today = dt.strftime('%Y-%m-%d') 
     return render_to_response('top_page.html', {'prayers': obj_list, 'today': today, 'user': request.user, 'path': path, 'groupname': group, 'top_groups': top_groups})
-
-def humanizeTimeDiff(timestamp = None):
-    """
-    Returns a humanized string representing time difference
-    between now() and the input timestamp.
-    
-    The output rounds up to days, hours, minutes, or seconds.
-    4 days 5 hours returns '4 days'
-    0 days 4 hours 3 minutes returns '4 hours', etc...
-    """
-    import datetime
-    
-    timeDiff = datetime.datetime.utcnow().replace(tzinfo=utc) - timestamp
-    days = timeDiff.days
-    hours = timeDiff.seconds/3600
-    minutes = timeDiff.seconds%3600/60
-    seconds = timeDiff.seconds%3600%60
-    
-    str = ""
-    tStr = ""
-    if days > 0:
-        if days == 1:   tStr = "day"
-        else:           tStr = "days"
-        str = str + "%s %s" %(days, tStr)
-        return str
-    elif hours > 0:
-        if hours == 1:  tStr = "hour"
-        else:           tStr = "hours"
-        str = str + "%s %s" %(hours, tStr)
-        return str
-    elif minutes > 0:
-        if minutes == 1:tStr = "min"
-        else:           tStr = "mins"           
-        str = str + "%s %s" %(minutes, tStr)
-        return str
-    elif seconds > 0:
-        if seconds == 1:tStr = "sec"
-        else:           tStr = "secs"
-        str = str + "%s %s" %(seconds, tStr)
-        return str
-    else:
-        return None
-
-def calculate_time_diff(request, obj_list):
-    timedifflist = {}
-    for index, obj in enumerate(obj_list):
-        timedifflist[index + 1] = humanizeTimeDiff(obj.timestamp)
-    return timedifflist
-
-def calc_top_groups():
-    grouplist = Groups.objects.order_by("-prayer_count")
-    return grouplist

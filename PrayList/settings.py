@@ -117,6 +117,7 @@ TEMPLATE_DIRS = (
 INSTALLED_APPS = (
     'PrayList',
     'django.contrib.auth',
+    'django.contrib.auth.views',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
