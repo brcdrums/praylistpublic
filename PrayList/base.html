@@ -29,11 +29,13 @@
 				<li class="populargroupitem"> // <a href="/group/{{ group.groupname }}/trending/">{{ group.groupname }}</a></li>
 				{% endif %}
 			{% else %}
-				{% if group.groupname in path %}
+				{% with "/group/"|add:group.groupname|add:"/" as parturl %}
+				{% if parturl in path %}
 				<li class="populargroupitemselected"> // <a href="/group/{{ group.groupname }}/trending/">{{ group.groupname }}</a></li>
 				{% else %}
 				<li class="populargroupitem"> // <a href="/group/{{ group.groupname }}/trending/">{{ group.groupname }}</a></li>
 				{% endif %}
+				{% endwith %}
 			{% endif %}
 			{% endfor %}
 		</ul>
