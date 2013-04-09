@@ -34,7 +34,7 @@
             <div>Popular Groups:</div>
             <ul class="suggestedgroup">
             {% for group in top_groups %}
-                <li class="suggestedgroupitem"><a href="/submit/group/{{ group.groupname }}/">{{ group.groupname }}</a></li>
+                <li class="suggestedgroupitem"><a href="/submit/group/{{ group.groupname }}/">{{ group.groupname }},</a></li>
             {% endfor %}
             </ul>
         </div>

@@ -22,7 +22,7 @@
     {% for prayer in prayers %}
         <div id="prayer">
             <div id="number">{{ forloop.counter }}</div>
-            <div class="prayerscorehome">Prayerscore: {{ prayer.prayerscore }}</div>
+            <div class="prayerscorehome">Prayers: {{ prayer.prayerscore }}</div>
             <a href= "/post/{{ prayer.id }}/" ><div id="subject"> {{ prayer.subject }} {% csrf_token %}</div></a>
             <br>
             <br>
@@ -32,49 +32,25 @@
                 <br>
                 <!-- 1 hour ago -->
                 {% elif "hour," in prayer.timestamp|timesince and "day" not in prayer.timestamp|timesince %}
-                    {% if forloop.counter > 9 %}
-                    <div class="timestampshift1"> Posted {{ prayer.timestamp|timesince|slice:":6" }} ago </div>
-                    {% else %}
                     <div class="timestamp"> Posted {{ prayer.timestamp|timesince|slice:":6" }} ago </div>                   
-                    {% endif %}
                      <br>
                 <!-- < 10 hours ago -->
                 {% elif "hours" in prayer.timestamp|timesince and "," in prayer.timestamp|timesince|slice:":7" and "day" not in prayer.timestamp|timesince %}
-                    {% if forloop.counter > 9 %}
-                    <div class="timestampshift1"> Posted {{ prayer.timestamp|timesince|slice:":7" }} ago </div>
-                    {% else %}
                     <div class="timestamp"> Posted {{ prayer.timestamp|timesince|slice:":7" }} ago </div>                   
-                {% endif %}
                 <!-- > 10 hours ago -->
                 {% elif "hours" in prayer.timestamp|timesince and "day" not in prayer.timestamp|timesince %}
-                    {% if forloop.counter > 9 %}
-                    <div class="timestampshift1"> Posted {{ prayer.timestamp|timesince|slice:":8" }} ago </div>
-                    {% else %}
                     <div class="timestamp"> Posted {{ prayer.timestamp|timesince|slice:":8" }} ago </div>
-                {% endif %}
                  <br>
                 <!-- 1 day ago -->
                 {% elif "1 day" in prayer.timestamp|timesince %}
-                    {% if forloop.counter > 9 %}
-                    <div class="timestampshift1"> Posted {{ prayer.timestamp|timesince|slice:"5" }} ago </div>
-                    {% else %}
-                    <div class="timestamp"> Posted {{ prayer.timestamp|timesince|slice:"5" }} ago </div>
-                    {% endif %}
+                    <div class="timestamp"> Postedd {{ prayer.timestamp|timesince|slice:"5" }} ago </div>
                     <br>
                 <!-- > 1 day ago -->
                 {% elif "days" in prayer.timestamp|timesince %}
-                    {% if forloop.counter > 9 %}
-                    <div class="timestampshift1"> Posted {{ prayer.timestamp|timesince|slice:"6" }} ago </div>
-                    {% else %}    
                     <div class="timestamp"> Posted {{ prayer.timestamp|timesince|slice:"6" }} ago </div>
-                    {% endif %}
                     <br>
                 {% else %}
-                {% if forloop.counter > 9 %}
-                <div class="timestampshift1"> Posted {{ prayer.timestamp|timesince }} ago </div>
-                {% else %}
                 <div class="timestamp"> Posted {{ prayer.timestamp|timesince }} ago </div>
-                {% endif %}
                 <br>
                 {% endif %}
         </div>
