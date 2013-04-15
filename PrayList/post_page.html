@@ -4,7 +4,7 @@
 	<div class="centerize"> {% csrf_token %}
 		<p id="poststamp">Posted {{ timestamp }} </p>
 		<h1 id="postsubject">{{ subject }}</h1>
-		<p class="prayerscore">Prayerscore: {{ prayerscore }} </p>
+		<p id="prayerscore">Prayers: {{ prayerscore }} </p>
 		<img class="seperator" src="/static/PrayingHands.bmp" />
 		<p id="postprayer">{{ prayer }} <p>
 		{% if userid in users.all %}

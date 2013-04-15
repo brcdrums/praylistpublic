@@ -22,6 +22,13 @@ function voteitem(postid) {
                 var div = $("<p id=\"youpray\">√ You've prayed for this!</p>").hide();
                 $(this).replaceWith(div);
                 $('#youpray').fadeIn('slow');
+            var scorenum = parseInt(document.getElementById("prayerscore").innerHTML.slice(9));
+            console.log(scorenum);
+            $('#prayerscore').fadeOut('slow', function(){
+                var newscore = scorenum + 1;
+                $('#prayerscore').replaceWith("<p id=\"prayerscore\">Prayers: " + newscore + "</p>");
+                $('#prayerscore').fadeIn('slow');
+            });
         });
         }
  });
