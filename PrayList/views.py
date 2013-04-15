@@ -1,7 +1,7 @@
 from forms import PrayerForm, GroupForm
 from models import Prayer, Groups
 from django.shortcuts import render_to_response
-from django.shortcuts import HttpResponseRedirect
+from django.shortcuts import HttpResponseRedirect, HttpResponse
 import datetime
 from django.template import RequestContext
 from django.contrib.auth.forms import UserCreationForm
@@ -70,6 +70,13 @@ def new(request):
     return render_to_response('new.html', {'prayers': obj_list, 'timestamps': timedifflist, 'current_time': dtclean, 'path': path, 'user': request.user, 'top_groups': top_groups})
 
 def post_page(request, postid):
+    if request.is_ajax():
+        if request.user.is_authenticated():
+            prayer = Prayer.objects.get(id=postid)
+            prayer.prayerscore = int(prayer.prayerscore) + 1
+            prayer.prayed_users.add(request.user)
+            prayer.save()
+            return HttpResponse(status=200)
     top_groups = helper_func.calc_top_groups()
     date = datetime.datetime.now()
     prayed = False
@@ -164,7 +171,7 @@ def voted(request, postid):
         prayer.prayerscore = int(prayer.prayerscore) + 1
         prayer.prayed_users.add(request.user)
         prayer.save()
-        return HttpResponseRedirect("/post/" + str(postid) + "/")
+        return HttpResponse(status=200)
     else:
         return HttpResponseRedirect("/accounts/login/?next=/post/" + postid + "/")
 

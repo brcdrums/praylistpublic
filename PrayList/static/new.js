@@ -13,3 +13,17 @@ $(document).ready(function(){
 
 
   });
+
+function voteitem(postid) {
+     $.ajax({
+        url: "/post/" + postid + "/",
+        success: function(html) {
+            $('#upvote').fadeOut('slow', function() {
+                var div = $("<p id=\"youpray\">√ You've prayed for this!</p>").hide();
+                $(this).replaceWith(div);
+                $('#youpray').fadeIn('slow');
+        });
+        }
+ });
+};
+
