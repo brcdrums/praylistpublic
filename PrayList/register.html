@@ -4,15 +4,19 @@
 
 {% block content %}
   <h1 style="text-align: center;">Create an account</h1>
-
-  <form id="regform" action="" method="post">{% csrf_token %}
+  <p>{{ errors }}</p>
+  <form id="regform" action="" method="POST">{% csrf_token %}
     <p>
       <label for="username">Username:</label>
       <input id="id_username" type="text" name="username" maxlength="30">
     </p>
     <p>
-      <label for="password">Password:</label>
-      <input id="id_password" type="text" name="password" maxlength="30">
+      <label for="password1">Password:</label>
+      <input id="id_password" type="password" name="password1" maxlength="30">
+    </p>
+    <p>
+      <label for="password2">Confirm Password:</label>
+      <input id="id_password" type="password" name="password2" maxlength="30">
     </p>
       <input type="submit" value="Create the account">
   </form>

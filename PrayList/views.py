@@ -190,11 +190,15 @@ def register(request):
             user = authenticate(username=username, password=password)
             login(request, user)
             return HttpResponseRedirect("/new/")
+        else:
+            return render_to_response("register.html", {
+            'form': form, 'top_groups': top_groups, 'errors': form.errors
+        }, context_instance=RequestContext(request))
     else:
         form = UserCreationForm()
-    return render_to_response("register.html", {
-        'form': form, 'top_groups': top_groups
-    }, context_instance=RequestContext(request))
+        return render_to_response("register.html", {
+            'form': form, 'top_groups': top_groups
+        }, context_instance=RequestContext(request))
 
 def trending(request):
     top_groups = helper_func.calc_top_groups()
