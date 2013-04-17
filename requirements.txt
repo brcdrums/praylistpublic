@@ -3,4 +3,5 @@ MySQL-python==1.2.4
 distribute==0.6.34
 django-tagging==0.3.1
 pytz==2013b
+tagging==0.2.1
 wsgiref==0.1.2
