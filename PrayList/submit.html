@@ -34,13 +34,21 @@
             <div>Popular Groups:</div>
             <ul class="suggestedgroup">
             {% for group in top_groups %}
-                <li class="suggestedgroupitem"><a href="/submit/group/{{ group.groupname }}/">{{ group.groupname }},</a></li>
+                <li class="suggestedgroupitem"><a href="/submit/group/{{ group.groupname }}/">{{ group.groupname }}</a>,</li>
             {% endfor %}
             </ul>
         </div>
         <input type="submit" value="Submit">
 
     </form>
+    <script type="text/javascript">
+        $('.suggestedgroupitem a').click(function(event) {
+            event.preventDefault();
+            var grouptext = $(event.currentTarget).text();
+            $('#id_group').val(grouptext);
+        });
+
+    </script>
 </body>
 </html>
 {% endblock %}
