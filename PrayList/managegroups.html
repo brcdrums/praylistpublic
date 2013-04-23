@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}managegroups{% endblock %}
+{% block content %}
+<h2>Popular Groups</h2>
+{% for group in top_groups %}
+<div class="manage_group_sub">
+    {% if user in group.users_favorited.all %}
+    <button class="subscribe {{ group.id }}" onclick="unsubscribe({{ group.id }}, '{{ group.groupname }}')">Saved!</button>
+    {% else %}
+    <button class="subscribe {{ group.id }}" onclick="subscribe({{ group.id }}, '{{ group.groupname }}')">Save</button>
+    {% endif %}
+    <p class="sub_groupname"><a href="/group/{{ group.groupname }}/trending">{{ group.groupname }}</a></p>
+</div>
+{% endfor %}
+{% endblock %}

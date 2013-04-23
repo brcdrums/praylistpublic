@@ -56,3 +56,11 @@ def calculate_time_diff(request, obj_list):
 def calc_top_groups():
     grouplist = Groups.objects.order_by("-prayer_count")
     return grouplist
+
+def find_saved_groups(user):
+    groups = Groups.objects.all()
+    saved_groups = []
+    for group in groups:
+        if user in group.users_favorited.all():
+            saved_groups.append(group)
+    return saved_groups

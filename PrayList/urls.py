@@ -33,6 +33,9 @@ urlpatterns = patterns('',
     url(r'^top/year/$', views.top_year),
     url(r'^top/week/$', views.top_week),
     url(r'^$', views.trending),
+    url(r'^managegroups/$', views.managegroups),
+    url(r'^managegroups/(?P<groupid>\d{1,3})/$', views.managegroups),
+    url(r'^managegroups/(?P<groupid>\d{1,3})/unsubscribe/$', views.managegroups),
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 

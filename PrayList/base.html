@@ -15,7 +15,7 @@
   	fjs.parentNode.insertBefore(js, fjs);
 	}(document, 'script', 'facebook-jssdk'));</script>
 	<div id="populargroups">
-		<ul>
+		<ul id="populargroupslist">
 			{% if "group" not in path and "post" not in path %}
 			<li class="populargroupitemselected"><a href="/">All Prayers</a></li>
 			{% else %}
@@ -39,7 +39,20 @@
 			{% endif %}
 			{% endfor %}
 		</ul>
+		{% if user.is_authenticated %}
+		<ul id='mygroups'>
+		<li id="mygroupsfirst">My Groups</li>
+		{% for group in saved_groups %}
+		<li class="savedgroup"><a href="/group/{{ group.groupname }}/trending/">{{ group.groupname }}</a></li>
+		{% endfor %}
+		<li id="managegroups"><a href="/managegroups/">Manage Groups</a></li>
+		</ul>
+		{% endif %}
+
+		
+
 	</div>
+
 	<div id="topnav">
 		{% if user.is_authenticated %}
         <a href="/accounts/logout/"><button class="logout">LogOut</button></a>
