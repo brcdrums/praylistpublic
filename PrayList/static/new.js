@@ -22,38 +22,38 @@ $(document).ready(function(){
         $("#managegroups").toggle();
         $('.savedgroup').toggle();
     });
-
-
-function getCookie(name) {
-    var cookieValue = null;
-    if (document.cookie && document.cookie != '') {
-        var cookies = document.cookie.split(';');
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = jQuery.trim(cookies[i]);
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) == (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
-var csrftoken = getCookie('csrftoken');
-function csrfSafeMethod(method) {
-    // these HTTP methods do not require CSRF protection
-    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-}
-$.ajaxSetup({
-    crossDomain: false, // obviates need for sameOrigin test
-    beforeSend: function(xhr, settings) {
-        if (!csrfSafeMethod(settings.type)) {
-            xhr.setRequestHeader("X-CSRFToken", csrftoken);
-        }
-    }
 });
 
-  });
+// function getCookie(name) {
+//     var cookieValue = null;
+//     if (document.cookie && document.cookie != '') {
+//         var cookies = document.cookie.split(';');
+//         for (var i = 0; i < cookies.length; i++) {
+//             var cookie = jQuery.trim(cookies[i]);
+//             // Does this cookie string begin with the name we want?
+//             if (cookie.substring(0, name.length + 1) == (name + '=')) {
+//                 cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+//                 break;
+//             }
+//         }
+//     }
+//     return cookieValue;
+// }
+// var csrftoken = getCookie('csrftoken');
+// function csrfSafeMethod(method) {
+//     // these HTTP methods do not require CSRF protection
+//     return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+// }
+// $.ajaxSetup({
+//     crossDomain: false, // obviates need for sameOrigin test
+//     beforeSend: function(xhr, settings) {
+//         if (!csrfSafeMethod(settings.type)) {
+//             xhr.setRequestHeader("X-CSRFToken", csrftoken);
+//         }
+//     }
+// });
+
+//   });
 
 
 
@@ -82,7 +82,7 @@ function subscribe(groupid, groupname) {
     $.ajax({
         url: "/managegroups/" + groupid + "/",
         success: function(html) {
-            $("button[class*=" + groupid + "]").replaceWith("<button class=\"subscribe {{ group.id }}\" onclick=\"unsubscribe({{ group.id }})\">Saved!</button>");
+            $("button[class*=" + groupid + "]").replaceWith("<button class=\"subscribe " + groupid + "\" onclick=\"unsubscribe(" + groupid + ", \'" + groupname + "\')\">Saved!</button>");
             $("<li class=\"savedgroup\" style=\"display: list-item;\"><a href=\"/group/Cancer/trending/\">" + groupname + "</a></li>").insertAfter($('.savedgroup').last());
             $('#mygroups > li:contains(' + groupname + ')').hide();
     }
@@ -93,7 +93,7 @@ function unsubscribe(groupid, groupname) {
     $.ajax({
         url: "/managegroups/" + groupid + "/unsubscribe/",
         success: function(html) {
-            $("button[class*=" + groupid + "]").replaceWith("<button class=\"subscribe {{ group.id }}\" onclick=\"subscribe({{ group.id }})\">Save</button>");
+            $("button[class*=" + groupid + "]").replaceWith("<button class=\"subscribe "+ groupid + "\" onclick=\"subscribe(" + groupid + ", \'" + groupname + "\')\">Save</button>");
             $("#mygroups > li > a:contains(" + groupname + ")").remove();
 
     }
