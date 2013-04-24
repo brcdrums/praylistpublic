@@ -13,7 +13,7 @@ MANAGERS = ADMINS
 db_url = os.environ.get('CLEARDB_DATABASE_URL')
 db_url_parts = urlparse.urlparse(db_url)
 
-db_name = db_url_parts[2].replace('/', '')
+db_name = db_url_parts[2].replace('/', '').split('?')[0]
 db_netloc_parts = db_url_parts[1].split('@')
 db_auth_parts = db_netloc_parts[0].split(':')
 db_user = db_auth_parts[0]
