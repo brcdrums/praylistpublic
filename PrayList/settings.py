@@ -1,4 +1,5 @@
 import os
+import urlparse
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -9,13 +10,23 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+db_url = os.environ.get('CLEARDB_DATABASE_URL')
+db_url_parts = urlparse.urlparse(db_url)
+
+db_name = db_url_parts[2].replace('/', '')
+db_netloc_parts = db_url_parts[1].split('@')
+db_auth_parts = db_netloc_parts[0].split(':')
+db_user = db_auth_parts[0]
+db_pass = db_auth_parts[1]
+db_host = db_netloc_parts[1]
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'praylist',                      # Or path to database file if using sqlite3.
-        'USER': 'root',                      # Not used with sqlite3.
-        'PASSWORD': 'bcan4374!',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+        'NAME': db_name,                      # Or path to database file if using sqlite3.
+        'USER': db_user,                      # Not used with sqlite3.
+        'PASSWORD': db_pass,                  # Not used with sqlite3.
+        'HOST': db_host,                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
