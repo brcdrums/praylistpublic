@@ -43,13 +43,19 @@
                     <div class="timestamp"> Posted {{ prayer.timestamp|timesince|slice:":8" }} ago </div>
                  <br>
                 <!-- 1 day ago -->
-                {% elif "1 day" in prayer.timestamp|timesince %}
-                    <div class="timestamp"> Posted {{ prayer.timestamp|timesince|slice:"5" }} ago </div>
+                {% elif "1 day" in prayer.timestamp|timesince|slice:":5" %}
+                    <div class="timestamp"> Posted {{ prayer.timestamp|timesince|slice:":5" }} ago </div>
                     <br>
                 <!-- > 1 day ago -->
-                {% elif "days" in prayer.timestamp|timesince %}
-                    <div class="timestamp"> Posted {{ prayer.timestamp|timesince|slice:"6" }} ago </div>
+                {% elif "days" in prayer.timestamp|timesince|slice:":6" %}
+                    <div class="timestamp"> Posted {{ prayer.timestamp|timesince|slice:":6" }} ago </div>
                     <br>
+                {% elif "1 week" in prayer.timestamp|timesince %}
+                <div class="timestamp"> Posted {{ prayer.timestamp|timesince|slice:":6" }} ago </div>
+                <br>
+                {% elif "weeks" in prayer.timestamp|timesince %}
+                <div class="timestamp"> Posted {{ prayer.timestamp|timesince|slice:":7" }} ago </div>
+                <br>
                 {% else %}
                 <div class="timestamp"> Posted {{ prayer.timestamp|timesince }} ago </div>
                 <br>
