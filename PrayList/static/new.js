@@ -3,6 +3,7 @@ $(document).ready(function(){
     $("#timedropdownul a").hide();
     $('.savedgroup').hide();
     $('#managegroups').hide();
+
     $('.timedropselected').click(function(){
         $('#timedropdownul a').toggle();
 
@@ -22,6 +23,8 @@ $(document).ready(function(){
         $("#managegroups").toggle();
         $('.savedgroup').toggle();
     });
+
+
 });
 
 // function getCookie(name) {
@@ -82,9 +85,10 @@ function subscribe(groupid, groupname) {
     $.ajax({
         url: "/managegroups/" + groupid + "/",
         success: function(html) {
-            $("button[class*=" + groupid + "]").replaceWith("<button class=\"subscribe " + groupid + "\" onclick=\"unsubscribe(" + groupid + ", \'" + groupname + "\')\">Saved!</button>");
+            $(".subscribe[class*=" + groupid + "]").replaceWith("<button class=\"subscribe " + groupid + "\" onclick=\"unsubscribe(" + groupid + ", \'" + groupname + "\')\">Saved!</button>");
             $("<li class=\"savedgroup\" style=\"display: list-item;\"><a href=\"/group/Cancer/trending/\">" + groupname + "</a></li>").insertAfter($('.savedgroup').last());
             $('#mygroups > li:contains(' + groupname + ')').hide();
+            $(".topsavebutton[class*=" + groupid + "]").replaceWith("<button class=\"topsavebutton " + groupid + "\" onclick=\"unsubscribe(" + groupid + ", \'" + groupname + "\')\">unsave</button>");
     }
     });
 }; 
@@ -93,10 +97,12 @@ function unsubscribe(groupid, groupname) {
     $.ajax({
         url: "/managegroups/" + groupid + "/unsubscribe/",
         success: function(html) {
-            $("button[class*=" + groupid + "]").replaceWith("<button class=\"subscribe "+ groupid + "\" onclick=\"subscribe(" + groupid + ", \'" + groupname + "\')\">Save</button>");
+            $(".subscribe[class*=" + groupid + "]").replaceWith("<button class=\"subscribe "+ groupid + "\" onclick=\"subscribe(" + groupid + ", \'" + groupname + "\')\">Save</button>");
             $("#mygroups > li > a:contains(" + groupname + ")").remove();
-
+            $(".topsavebutton[class*=" + groupid + "]").replaceWith("<button class=\"topsavebutton " + groupid + "\" onclick=\"subscribe(" + groupid + ", \'" + groupname + "\')\">save</button>");
     }
     });
 }; 
+
+
 

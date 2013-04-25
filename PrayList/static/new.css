@@ -175,7 +175,7 @@
 }
 
 .populargroupitemselected {
-	display: inline;
+	display: inline-block;
 	padding: 1px;
 	text-decoration: none;
 }
@@ -573,6 +573,11 @@
 	background-image:url("http://openclipart.org/people/Clue/Clue_Simple_Clouds.svg");
 	border-bottom: solid;
 	border-width: 1px;	
+}
+
+.topsavebutton {
+	display: block; 
+	text-align: center;
 }
 
 ul.errorlist {
