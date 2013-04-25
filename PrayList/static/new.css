@@ -176,20 +176,25 @@
 
 .populargroupitemselected {
 	display: inline-block;
-	padding: 1px;
+	/*padding: 1px;*/
 	text-decoration: none;
+	border: solid;
 }
 
 .populargroupitemselected a {
 	color: red;
 	font-weight: bold;
 	text-decoration: none;
+	display: inline-block;
+
 }
 
 .populargroupitemselected a:visited {
 	color: red;
 	font-weight: bold;
 	text-decoration: none;
+	display: inline-block;
+
 }
 
 #postsubject {

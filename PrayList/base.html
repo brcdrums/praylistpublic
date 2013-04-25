@@ -19,24 +19,25 @@
 			{% if "group" not in path and "post" not in path %}
 			<li class="populargroupitemselected"><a href="/">All Prayers</a><a style="display: block; text-align: center; opacity:0; cursor: default;">save</a></li>
 			{% else %}
-			<li class="populargroupitem"><a href="/">All Prayers</a></li>
+			<li class="populargroupitem"><a href="/">All Prayers</a><a style="display: block; text-align: center; opacity:0; cursor: default;">save</a></li>
+
 			{% endif %}
 			{% for group in top_groups %}
 			{% if "post" in path %}
 				{% if this_group == group.groupname %}
-				<li class="populargroupitemselected"> // <a href="/group/{{ group.groupname }}/trending/">{{ group.groupname }}</a></li>
-
+				<li class="populargroupitemselected"> // <a href="/group/{{ group.groupname }}/trending/">{{ group.groupname }}</a>
+				<button class="topsavebuttonplaceholder" style="display: block; opacity: 0;">unsave</button>
+				</li>
 				{% else %}
-				<li class="populargroupitem"> // <a href="/group/{{ group.groupname }}/trending/">{{ group.groupname }}</a></li>
+				<li class="populargroupitem"> // <a href="/group/{{ group.groupname }}/trending/">{{ group.groupname }}</a>
+				<button class="topsavebuttonplaceholder" style="display: block; opacity: 0;">unsave</button>
+				</li>
 				{% endif %}
 			{% else %}
 				{% with "/group/"|add:group.groupname|add:"/" as parturl %}
 				{% if parturl in path %}
-				<li class="populargroupitemselected"> // <a href="/group/{{ group.groupname }}/trending/">{{ group.groupname }}</a></li>
-				{% else %}
-				{% if user in group.users_favorited.all %}
-				<li class="populargroupitem"> // 
-					<a href="/group/{{ group.groupname }}/trending/">{{ group.groupname }}</a>
+				<li class="populargroupitemselected"> //
+				<a href="/group/{{ group.groupname }}/trending/">{{ group.groupname }}</a>
 					{% if user.is_authenticated %}
 					<button class="topsavebutton {{ group.id }}" onclick="unsubscribe({{ group.id }}, '{{ group.groupname }}')">unsave</button>
 					{% else %}
@@ -44,15 +45,25 @@
 					{% endif %}
 				</li>
 				{% else %}
-				<li class="populargroupitem"> // 
+					{% if user in group.users_favorited.all %}
+					<li class="populargroupitem"> // 
 					<a href="/group/{{ group.groupname }}/trending/">{{ group.groupname }}</a>
-					{% if user.is_authenticated %}
-					<button class="topsavebutton {{ group.id }}" onclick="subscribe({{ group.id }}, '{{ group.groupname }}')">save</button>
+						{% if user.is_authenticated %}
+						<button class="topsavebutton {{ group.id }}" onclick="unsubscribe({{ group.id }}, '{{ group.groupname }}')">unsave</button>
+						{% else %}
+						<button class="topsavebuttonplaceholder" style="display: block; opacity: 0;">unsave</button>
+						{% endif %}
+					</li>
 					{% else %}
-					<button class="topsavebuttonplaceholder" style="display: block; opacity: 0;">unsave</button>
+					<li class="populargroupitem"> // 
+					<a href="/group/{{ group.groupname }}/trending/">{{ group.groupname }}</a>
+						{% if user.is_authenticated %}
+						<button class="topsavebutton {{ group.id }}" onclick="subscribe({{ group.id }}, '{{ group.groupname }}')">save</button>
+						{% else %}
+						<button class="topsavebuttonplaceholder" style="display: block; opacity: 0;">unsave</button>
+						{% endif %}
+					</li>
 					{% endif %}
-				</li>
-				{% endif %}
 				{% endif %}
 				{% endwith %}
 			{% endif %}
