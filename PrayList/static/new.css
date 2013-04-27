@@ -580,10 +580,22 @@
 	border-width: 1px;	
 }
 
+
 .topsavebutton {
 	display: block; 
 	text-align: center;
+	margin: 0 auto;
+	opacity: 0;
+
 }
+
+.topsavebuttonhover {
+	display: block; 
+	text-align: center;
+	margin: 0 auto;
+
+}
+
 
 ul.errorlist {
     margin: 0;

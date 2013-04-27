@@ -3,7 +3,7 @@ $(document).ready(function(){
     $("#timedropdownul a").hide();
     $('.savedgroup').hide();
     $('#managegroups').hide();
-
+    $('.topsavebutton').css("opacity", 0);
     $('.timedropselected').click(function(){
         $('#timedropdownul a').toggle();
 
@@ -22,6 +22,12 @@ $(document).ready(function(){
     $('#mygroupsfirst').click(function() {
         $("#managegroups").toggle();
         $('.savedgroup').toggle();
+    });
+
+    $('.populargroupitem').hover(function() {
+        $(this).children("button").css('opacity', 100);
+        }, function() {
+            $(this).children("button").css('opacity', 0);
     });
 
 

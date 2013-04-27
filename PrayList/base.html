@@ -26,11 +26,19 @@
 			{% if "post" in path %}
 				{% if this_group == group.groupname %}
 				<li class="populargroupitemselected"> // <a href="/group/{{ group.groupname }}/trending/">{{ group.groupname }}</a>
-				<button class="topsavebuttonplaceholder" style="display: block; opacity: 0;">unsave</button>
+				{% if user in group.users_favorited.all %}
+						<button class="topsavebutton {{ group.id }}" onclick="unsubscribe({{ group.id }}, '{{ group.groupname }}')">unsave</button>
+						{% else %}
+						<button class="topsavebutton {{ group.id }}" onclick="subscribe({{ group.id }}, '{{ group.groupname }}')">save</button>
+				{% endif %}
 				</li>
 				{% else %}
 				<li class="populargroupitem"> // <a href="/group/{{ group.groupname }}/trending/">{{ group.groupname }}</a>
-				<button class="topsavebuttonplaceholder" style="display: block; opacity: 0;">unsave</button>
+				{% if user in group.users_favorited.all %}
+						<button class="topsavebutton {{ group.id }}" onclick="unsubscribe({{ group.id }}, '{{ group.groupname }}')">unsave</button>
+						{% else %}
+						<button class="topsavebutton {{ group.id }}" onclick="subscribe({{ group.id }}, '{{ group.groupname }}')">save</button>
+				{% endif %}
 				</li>
 				{% endif %}
 			{% else %}
@@ -39,7 +47,11 @@
 				<li class="populargroupitemselected"> //
 				<a href="/group/{{ group.groupname }}/trending/">{{ group.groupname }}</a>
 					{% if user.is_authenticated %}
-					<button class="topsavebutton {{ group.id }}" onclick="unsubscribe({{ group.id }}, '{{ group.groupname }}')">unsave</button>
+						{% if user in group.users_favorited.all %}
+						<button class="topsavebutton {{ group.id }}" onclick="unsubscribe({{ group.id }}, '{{ group.groupname }}')">unsave</button>
+						{% else %}
+						<button class="topsavebutton {{ group.id }}" onclick="subscribe({{ group.id }}, '{{ group.groupname }}')">save</button>
+						{% endif %}
 					{% else %}
 					<button class="topsavebuttonplaceholder" style="display: block; opacity: 0;">unsave</button>
 					{% endif %}
