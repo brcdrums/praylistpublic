@@ -30,6 +30,11 @@ $(document).ready(function(){
             $(this).children("button").css('opacity', 0);
     });
 
+    $('.populargroupitemselected').hover(function() {
+        $(this).children("button").css('opacity', 100);
+        }, function() {
+            $(this).children("button").css('opacity', 0);
+    });
 
 });
 
@@ -94,7 +99,7 @@ function subscribe(groupid, groupname) {
             $(".subscribe[class*=" + groupid + "]").replaceWith("<button class=\"subscribe " + groupid + "\" onclick=\"unsubscribe(" + groupid + ", \'" + groupname + "\')\">Saved!</button>");
             $("<li class=\"savedgroup\" style=\"display: list-item;\"><a href=\"/group/Cancer/trending/\">" + groupname + "</a></li>").insertAfter($('.savedgroup').last());
             $('#mygroups > li:contains(' + groupname + ')').hide();
-            $(".topsavebutton[class*=" + groupid + "]").replaceWith("<button class=\"topsavebutton " + groupid + "\" onclick=\"unsubscribe(" + groupid + ", \'" + groupname + "\')\">unsave</button>");
+            $(".topsavebutton[class*=" + groupid + "]").replaceWith("<button class=\"topsavebutton " + groupid + "\" onclick=\"unsubscribe(" + groupid + ", \'" + groupname + "\')\" style=\"opacity:100;\">unsave</button>");
     }
     });
 }; 
@@ -105,7 +110,7 @@ function unsubscribe(groupid, groupname) {
         success: function(html) {
             $(".subscribe[class*=" + groupid + "]").replaceWith("<button class=\"subscribe "+ groupid + "\" onclick=\"subscribe(" + groupid + ", \'" + groupname + "\')\">Save</button>");
             $("#mygroups > li > a:contains(" + groupname + ")").remove();
-            $(".topsavebutton[class*=" + groupid + "]").replaceWith("<button class=\"topsavebutton " + groupid + "\" onclick=\"subscribe(" + groupid + ", \'" + groupname + "\')\">save</button>");
+            $(".topsavebutton[class*=" + groupid + "]").replaceWith("<button class=\"topsavebutton " + groupid + "\" onclick=\"subscribe(" + groupid + ", \'" + groupname + "\')\" style=\"opacity:100;\">save</button>");
     }
     });
 }; 

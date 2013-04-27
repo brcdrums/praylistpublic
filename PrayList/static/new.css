@@ -178,7 +178,6 @@
 	display: inline-block;
 	/*padding: 1px;*/
 	text-decoration: none;
-	border: solid;
 }
 
 .populargroupitemselected a {
@@ -575,7 +574,7 @@
 }
 
 #topnav {
-	background-image:url("http://openclipart.org/people/Clue/Clue_Simple_Clouds.svg");
+	background-image: url("/static/Clouds.svg");
 	border-bottom: solid;
 	border-width: 1px;	
 }
