@@ -91,7 +91,7 @@ function voteitem(postid) {
 };
 
 
-function subscribe(groupid, groupname) {
+function subscribe(groupid, groupname, isTop) {
     var clickedclass = ".subscribe " + groupid;
     $.ajax({
         url: "/managegroups/" + groupid + "/",
@@ -99,18 +99,26 @@ function subscribe(groupid, groupname) {
             $(".subscribe[class*=" + groupid + "]").replaceWith("<button class=\"subscribe " + groupid + "\" onclick=\"unsubscribe(" + groupid + ", \'" + groupname + "\')\">Saved!</button>");
             $("<li class=\"savedgroup\" style=\"display: list-item;\"><a href=\"/group/Cancer/trending/\">" + groupname + "</a></li>").insertAfter($('.savedgroup').last());
             $('#mygroups > li:contains(' + groupname + ')').hide();
-            $(".topsavebutton[class*=" + groupid + "]").replaceWith("<button class=\"topsavebutton " + groupid + "\" onclick=\"unsubscribe(" + groupid + ", \'" + groupname + "\')\" style=\"opacity:100;\">unsave</button>");
+            if(isTop==="True") {
+                $(".topsavebutton[class*=" + groupid + "]").replaceWith("<button class=\"topsavebutton " + groupid + "\" onclick=\"unsubscribe(" + groupid + ", \'" + groupname + "\', \'True\')\" style=\"opacity:100;\">unsave</button>");
+            } else {
+                $(".topsavebutton[class*=" + groupid + "]").replaceWith("<button class=\"topsavebutton " + groupid + "\" onclick=\"unsubscribe(" + groupid + ", \'" + groupname + "\', \'True\')\" style=\"opacity:0;\">unsave</button>");
+            }
     }
     });
 }; 
 
-function unsubscribe(groupid, groupname) {
+function unsubscribe(groupid, groupname, isTop) {
     $.ajax({
         url: "/managegroups/" + groupid + "/unsubscribe/",
         success: function(html) {
             $(".subscribe[class*=" + groupid + "]").replaceWith("<button class=\"subscribe "+ groupid + "\" onclick=\"subscribe(" + groupid + ", \'" + groupname + "\')\">Save</button>");
             $("#mygroups > li > a:contains(" + groupname + ")").remove();
-            $(".topsavebutton[class*=" + groupid + "]").replaceWith("<button class=\"topsavebutton " + groupid + "\" onclick=\"subscribe(" + groupid + ", \'" + groupname + "\')\" style=\"opacity:100;\">save</button>");
+            if(isTop==="True") {
+                $(".topsavebutton[class*=" + groupid + "]").replaceWith("<button class=\"topsavebutton " + groupid + "\" onclick=\"subscribe(" + groupid + ", \'" + groupname + "\', \'True\')\" style=\"opacity:100;\">save</button>");
+            } else {
+                $(".topsavebutton[class*=" + groupid + "]").replaceWith("<button class=\"topsavebutton " + groupid + "\" onclick=\"subscribe(" + groupid + ", \'" + groupname + "\', \'True\')\" style=\"opacity:0;\">save</button>");          
+            }
     }
     });
 }; 

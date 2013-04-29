@@ -126,11 +126,11 @@
 	color: blue;
 	text-decoration: underline;
 	background-color: white;
-	position: fixed;
 	right:5px;
 	padding-left: 10px;
 	padding-right: 5px;
 	padding-bottom: 5px;
+	position: absolute;
 
 }
 
