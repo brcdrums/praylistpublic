@@ -128,6 +128,9 @@
 	background-color: white;
 	position: fixed;
 	right:5px;
+	padding-left: 10px;
+	padding-right: 5px;
+	padding-bottom: 5px;
 
 }
 
@@ -156,6 +159,8 @@
 #populargroupslist {
 	width: auto;
 	display: inline-block;
+	padding: 0;
+	margin-bottom: 2px;
 
 }
 
@@ -441,6 +446,8 @@
 	list-style-type: none;
 	position: relative;
 	text-align: left;
+	padding-left: 15px;
+	padding-right: 10px;
 }
 
 .timedropitem {
