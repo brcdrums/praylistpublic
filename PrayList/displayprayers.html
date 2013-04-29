@@ -22,45 +22,38 @@
     {% for prayer in prayers %}
         <div id="prayer">
             <div id="number">{{ forloop.counter }}</div>
-            <div class="prayerscorehome">Prayers: {{ prayer.prayerscore }}</div>
             <a href= "/post/{{ prayer.id }}/" ><div id="subject"> {{ prayer.subject }} {% csrf_token %}</div></a>
             <br>
             <br>
                 <!-- just now -->
                 {% if prayer.timestamp|timesince == "0 minutes" %}
                 <div class="timestamp"> Posted just now </div>
-                <br>
                 <!-- 1 hour ago -->
                 {% elif "hour," in prayer.timestamp|timesince and "day" not in prayer.timestamp|timesince %}
-                    <div class="timestamp"> Posted {{ prayer.timestamp|timesince|slice:":6" }} ago </div>                   
-                     <br>
-                <!-- < 10 hours ago -->
+                    <div class="timestamp"> Posted {{ prayer.timestamp|timesince|slice:":6" }} ago // </div>                   
+                <!-- < 10 hours ago // -->
                 {% elif "hours" in prayer.timestamp|timesince and "," in prayer.timestamp|timesince|slice:":8" and "day" not in prayer.timestamp|timesince %}
-                    <div class="timestamp"> Posted {{ prayer.timestamp|timesince|slice:":7" }} ago </div>     
-                    <br>              
-                <!-- > 10 hours ago -->
+                    <div class="timestamp"> Posted {{ prayer.timestamp|timesince|slice:":7" }} ago // </div>     
+                <!-- > 10 hours ago // -->
                 {% elif "hours" in prayer.timestamp|timesince and "day" not in prayer.timestamp|timesince %}
-                    <div class="timestamp"> Posted {{ prayer.timestamp|timesince|slice:":8" }} ago </div>
-                 <br>
-                <!-- 1 day ago -->
+                    <div class="timestamp"> Posted {{ prayer.timestamp|timesince|slice:":8" }} ago // </div>
+                <!-- 1 day ago // -->
                 {% elif "1 day" in prayer.timestamp|timesince|slice:":5" %}
-                    <div class="timestamp"> Posted {{ prayer.timestamp|timesince|slice:":5" }} ago </div>
-                    <br>
-                <!-- > 1 day ago -->
+                    <div class="timestamp"> Posted {{ prayer.timestamp|timesince|slice:":5" }} ago // </div>
+                <!-- > 1 day ago // -->
                 {% elif "days" in prayer.timestamp|timesince|slice:":6" %}
-                    <div class="timestamp"> Posted {{ prayer.timestamp|timesince|slice:":6" }} ago </div>
-                    <br>
+                    <div class="timestamp"> Posted {{ prayer.timestamp|timesince|slice:":6" }} ago // </div>
                 {% elif "1 week" in prayer.timestamp|timesince %}
-                <div class="timestamp"> Posted {{ prayer.timestamp|timesince|slice:":6" }} ago </div>
-                <br>
+                <div class="timestamp"> Posted {{ prayer.timestamp|timesince|slice:":6" }} ago // </div>
                 {% elif "weeks" in prayer.timestamp|timesince %}
-                <div class="timestamp"> Posted {{ prayer.timestamp|timesince|slice:":7" }} ago </div>
-                <br>
+                <div class="timestamp"> Posted {{ prayer.timestamp|timesince|slice:":7" }} ago // </div>
                 {% else %}
-                <div class="timestamp"> Posted {{ prayer.timestamp|timesince }} ago </div>
-                <br>
+                <div class="timestamp"> Posted {{ prayer.timestamp|timesince }} ago // </div>
                 {% endif %}
+            <div class="prayerscorehome">Prayers: {{ prayer.prayerscore }}</div>
+
         </div>
+        <br />
         {% endfor %}
     </div>
     

@@ -15,7 +15,7 @@ $(document).ready(function(){
     });
 
         $('.savedgroup').hover(function(){
-        $(this).toggleClass('savedgrouphover');
+        $(this).children("a").toggleClass('savedgrouphover');
     });
 
 

@@ -97,10 +97,10 @@
 
 	<div id="topnav">
 		{% if user.is_authenticated %}
-        <a href="/accounts/logout/"><button class="logout">LogOut</button></a>
+        <a href="/accounts/logout/"><button class="logout">Logout</button></a>
         <div class="logouttext" style="color: ">Logged in as <span style="font-weight: bold;">{{ user.username }}</span></div>
         {% else %}
-        <a href="/accounts/login/"><button class="logout">LogIn</button></a>
+        <a href="/accounts/login/"><button class="logout">Login</button></a>
         {% endif %}
 		<a href="/"><img class="headerimg" src="/static/PrayingHands.bmp"></a>
 		<ul class="tabmenu">

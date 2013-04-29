@@ -136,6 +136,7 @@
 
 #mygroupsfirst {
 	font-weight: bold;
+	cursor: default;
 }
 
 
@@ -239,12 +240,9 @@
 }
 
 .prayerscorehome {
-	float: left;
-	font-family: Verdana;
-	padding-left: 10px;
-	padding-top: 10px;
 	text-align: left;
-	width: 100px;
+	display: block;
+	font-size: 14;
 }
 
  #prayerstop {
@@ -287,7 +285,8 @@
 
 .savedgrouphover {
 	background-color: #BACDE8;
-	text-decoration: none;
+	text-decoration: none;	
+
 }
 
 
@@ -422,8 +421,10 @@
 .timestamp {
 	display: block;
 	font-size: 14;
-	padding-left: 142px;
+	padding-left: 31px;
 	text-align: left;
+	width: 128px;
+	float: left;
 }
 
 #title {
@@ -478,6 +479,7 @@
 	margin: 0;
 	text-align: left;
 	text-decoration: underline;
+	cursor: default;
 }
 
 .tabmenu {
