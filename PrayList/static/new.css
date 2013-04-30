@@ -110,6 +110,7 @@
 #managegroups {
 	text-decoration: none;
 	cursor: hand;
+	position: relative;
 }
 
 #managegroups a:visited {
@@ -120,8 +121,8 @@
 
 #mygroups {
 	text-align: right;
-	display: inline-block;
 	float: right;
+	display: inline-block;
 	list-style: none;
 	color: blue;
 	text-decoration: underline;
@@ -131,6 +132,7 @@
 	padding-right: 5px;
 	padding-bottom: 5px;
 	position: absolute;
+	z-index: 1;
 
 }
 
@@ -161,7 +163,7 @@
 	width: auto;
 	display: inline-block;
 	padding: 0;
-	margin-bottom: 2px;
+	margin-bottom: 5px;
 
 }
 
@@ -169,6 +171,7 @@
 	display: inline-block;
 	list-style-type: none;
 	white-space: nowrap;
+	padding-bottom: 5px;
 }
 
 .populargroupitem a {
@@ -290,7 +293,7 @@
 
 .savedgrouphover {
 	background-color: #BACDE8;
-	text-decoration: none;	
+	text-decoration: none;
 
 }
 
@@ -589,6 +592,9 @@
 	background-image: url("/static/Clouds.svg");
 	border-bottom: solid;
 	border-width: 1px;	
+	position: relative;
+	margin-top: -6px;
+
 }
 
 

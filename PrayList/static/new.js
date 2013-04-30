@@ -32,9 +32,9 @@ $(document).ready(function(){
     });
 
     $('.populargroupitemselected').hover(function() {
-        $(this).children("button").css('opacity', 100);
+        $(this > '.topsavebutton').css('opacity', 100);
         }, function() {
-            $(this).children("button").css('opacity', 0);
+            $(this > '.topsavebutton').css('opacity', 0);
     });
 
 });
@@ -102,10 +102,10 @@ function subscribe(groupid, groupname, isTop) {
     $.ajax({
         url: "/managegroups/" + groupid + "/",
         success: function(html) {
-            if($('.savedgroup')) {
+            if($('.savedgroup').is('*')) {
                 $("<li class=\"savedgroup\" style=\"display: list-item;\"><a href=\"/group/Cancer/trending/\">" + groupname + "</a></li>").insertAfter($('.savedgroup').last());
             } else {
-                $("<li class=\"savedgroup\" style=\"display: list-item;\"><a href=\"/group/Cancer/trending/\">" + groupname + "</a></li>").insertAfter($('.savedgroupplaceholder').last());
+                $("<li class=\"savedgroup\" style=\"display: list-item;\"><a href=\"/group/Cancer/trending/\">" + groupname + "</a></li>").insertAfter($('.savedgroupplaceholder'));
             }
             $('#mygroups > li:contains(' + groupname + ')').hide();
         }
