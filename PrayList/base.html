@@ -86,6 +86,8 @@
 		<li id="mygroupsfirst">My Groups</li>
 		{% for group in saved_groups %}
 		<li class="savedgroup"><a href="/group/{{ group.groupname }}/trending/">{{ group.groupname }}</a></li>
+		{% empty %}
+		<li class="savedgroupplaceholder"><a href="#">/</a></li>
 		{% endfor %}
 		<li id="managegroups"><a href="/managegroups/">Manage Groups</a></li>
 		</ul>

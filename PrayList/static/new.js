@@ -4,6 +4,7 @@ $(document).ready(function(){
     $('.savedgroup').hide();
     $('#managegroups').hide();
     $('.topsavebutton').css("opacity", 0);
+    $('.savedgroupplaceholder').hide();
     $('.timedropselected').click(function(){
         $('#timedropdownul a').toggle();
 
@@ -92,33 +93,37 @@ function voteitem(postid) {
 
 
 function subscribe(groupid, groupname, isTop) {
-    var clickedclass = ".subscribe " + groupid;
+    if(isTop==="True") {
+        $(".topsavebutton[class*=" + groupid + "]").replaceWith("<button class=\"topsavebutton " + groupid + "\" onclick=\"unsubscribe(" + groupid + ", \'" + groupname + "\', \'True\')\" style=\"opacity:100;\">unsave</button>");
+    } else {
+        $(".topsavebutton[class*=" + groupid + "]").replaceWith("<button class=\"topsavebutton " + groupid + "\" onclick=\"unsubscribe(" + groupid + ", \'" + groupname + "\', \'True\')\" style=\"opacity:0;\">unsave</button>");
+    }
     $.ajax({
         url: "/managegroups/" + groupid + "/",
         success: function(html) {
             $(".subscribe[class*=" + groupid + "]").replaceWith("<button class=\"subscribe " + groupid + "\" onclick=\"unsubscribe(" + groupid + ", \'" + groupname + "\')\">Saved!</button>");
-            $("<li class=\"savedgroup\" style=\"display: list-item;\"><a href=\"/group/Cancer/trending/\">" + groupname + "</a></li>").insertAfter($('.savedgroup').last());
-            $('#mygroups > li:contains(' + groupname + ')').hide();
-            if(isTop==="True") {
-                $(".topsavebutton[class*=" + groupid + "]").replaceWith("<button class=\"topsavebutton " + groupid + "\" onclick=\"unsubscribe(" + groupid + ", \'" + groupname + "\', \'True\')\" style=\"opacity:100;\">unsave</button>");
+            if($('.savedgroup')) {
+                $("<li class=\"savedgroup\" style=\"display: list-item;\"><a href=\"/group/Cancer/trending/\">" + groupname + "</a></li>").insertAfter($('.savedgroup').last());
             } else {
-                $(".topsavebutton[class*=" + groupid + "]").replaceWith("<button class=\"topsavebutton " + groupid + "\" onclick=\"unsubscribe(" + groupid + ", \'" + groupname + "\', \'True\')\" style=\"opacity:0;\">unsave</button>");
+                $("<li class=\"savedgroup\" style=\"display: list-item;\"><a href=\"/group/Cancer/trending/\">" + groupname + "</a></li>").insertAfter($('.savedgroupplaceholder').last());
             }
-    }
+            $('#mygroups > li:contains(' + groupname + ')').hide();
+        }
     });
 }; 
 
 function unsubscribe(groupid, groupname, isTop) {
+     if(isTop==="True") {
+        $(".topsavebutton[class*=" + groupid + "]").replaceWith("<button class=\"topsavebutton " + groupid + "\" onclick=\"subscribe(" + groupid + ", \'" + groupname + "\', \'True\')\" style=\"opacity:100;\">save</button>");
+    } else {
+        $(".topsavebutton[class*=" + groupid + "]").replaceWith("<button class=\"topsavebutton " + groupid + "\" onclick=\"subscribe(" + groupid + ", \'" + groupname + "\', \'True\')\" style=\"opacity:0;\">save</button>");          
+    }
     $.ajax({
         url: "/managegroups/" + groupid + "/unsubscribe/",
         success: function(html) {
             $(".subscribe[class*=" + groupid + "]").replaceWith("<button class=\"subscribe "+ groupid + "\" onclick=\"subscribe(" + groupid + ", \'" + groupname + "\')\">Save</button>");
             $("#mygroups > li > a:contains(" + groupname + ")").remove();
-            if(isTop==="True") {
-                $(".topsavebutton[class*=" + groupid + "]").replaceWith("<button class=\"topsavebutton " + groupid + "\" onclick=\"subscribe(" + groupid + ", \'" + groupname + "\', \'True\')\" style=\"opacity:100;\">save</button>");
-            } else {
-                $(".topsavebutton[class*=" + groupid + "]").replaceWith("<button class=\"topsavebutton " + groupid + "\" onclick=\"subscribe(" + groupid + ", \'" + groupname + "\', \'True\')\" style=\"opacity:0;\">save</button>");          
-            }
+           
     }
     });
 }; 
