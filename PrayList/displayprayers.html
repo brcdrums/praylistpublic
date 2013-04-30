@@ -1,6 +1,10 @@
 {% block sidebar %}
     <div id="rightsidebar">
-        <a href="/submit/"><button class= "submitbutton">Submit New Prayer!</button></a>
+        {% if groupname %}
+        <a href="/submit/group/{{ groupname }}"><button class= "submitbutton">Submit New Prayer!</button></a>
+        {% else %}
+        <a href="/submit/"><button class= "submitbutton">Submit New Prayer!</button></a>        
+        {% endif %}
         <br>
         <a href="/submitgroup/"><button class= "submitbutton">Submit New Group!</button></a>
     </div>
