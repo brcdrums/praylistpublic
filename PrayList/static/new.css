@@ -242,7 +242,12 @@
 .prayerscorehome {
 	text-align: left;
 	display: block;
-	font-size: 14;
+	font-size: 16;
+	padding-left: 31px;
+	width: auto;
+	float: left;
+	font-weight: bold;
+
 }
 
  #prayerstop {
@@ -419,12 +424,10 @@
 }
 
 .timestamp {
-	display: block;
-	font-size: 14;
-	padding-left: 31px;
-	text-align: left;
-	width: 128px;
+	display: inline-block;
+	font-size: 16;
 	float: left;
+	margin-left: 5px;
 }
 
 #title {
