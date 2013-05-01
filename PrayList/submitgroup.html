@@ -9,19 +9,19 @@
     {% endif %}
 
     <form action="" method="post"> {% csrf_token %}
-        <div class="field">
+        <div class="fieldgrouptitle">
             {{ form.group.errors }}
             <label for="subject">Group Name:</label>
             {{ form.group }}
         </div>
         <div class="spacer"></div>
-        <div class="field">
+        <div class="fieldprivacy">
             {{ form.privacy.errors }}
-            <label for="prayer">Prayer:</label>
+            <label for="prayer">Privacy:</label>
             {{ form.privacy }}
         </div>
         <div class="spacer"></div>
-        <input type="submit" valdue="Submit">
+        <input type="submit" value="Submit">
 
     </form>
 </body>

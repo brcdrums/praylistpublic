@@ -69,15 +69,18 @@ def submit_group_success(request, groupname):
     group_name = groupname
     return render_to_response('submitgroupsuccess.html', {'groupname': group_name, 'user': request.user, 'top_groups': top_groups, 'saved_groups': saved_groups}, context_instance=RequestContext(request))
 
-def new(request):
+def new(request, count=0):
     top_groups = helper_func.calc_top_groups()
     saved_groups = helper_func.find_saved_groups(request.user)
-    obj_list = Prayer.objects.order_by("-id")
+    count_int = int(count)
+    count_next = count_int+10
+    obj_list = Prayer.objects.order_by("-id")[count_int:count_next]
     timedifflist = helper_func.calculate_time_diff(request, obj_list)
     path = request.get_full_path
+    root_path = "/new"
     dt = datetime.datetime.now()
     dtclean = dt.strftime('%Y-%m-%d %H:%M:%S') 
-    return render_to_response('new.html', {'prayers': obj_list, 'timestamps': timedifflist, 'current_time': dtclean, 'path': path, 'user': request.user, 'top_groups': top_groups, 'saved_groups': saved_groups})
+    return render_to_response('new.html', {'prayers': obj_list, 'timestamps': timedifflist, 'current_time': dtclean, 'path': path, 'user': request.user, 'top_groups': top_groups, 'saved_groups': saved_groups, 'count': count_int, 'count_next': count_next, 'root_path': root_path})
 
 def post_page(request, postid):
     if request.is_ajax():
@@ -115,11 +118,14 @@ def post_page(request, postid):
     
 
 
-def top_today(request):
+def top_today(request, count=0):
     top_groups = helper_func.calc_top_groups()
     saved_groups = helper_func.find_saved_groups(request.user)
+    count_int = int(count)
+    count_next = count_int+10
     path = request.get_full_path
-    obj_list = Prayer.objects.order_by("-prayerscore")
+    root_path = "/top/today"
+    obj_list = Prayer.objects.order_by("-prayerscore")[count_int:count_next]
     dt = datetime.datetime.now(timezone('US/Central'))
     today = dt.strftime('%Y-%m-%d') 
     new_obj_list = []
@@ -127,56 +133,66 @@ def top_today(request):
         newstamp = prayer.timestamp.astimezone(timezone('US/Central'))
         if newstamp.strftime('%Y-%m-%d') == today:
             new_obj_list.append(prayer)
-    return render_to_response('top_page.html', {'prayers': new_obj_list, 'today': today, 'user': request.user, 'path': path, 'top_groups': top_groups, 'saved_groups': saved_groups})
+    return render_to_response('top_page.html', {'prayers': new_obj_list, 'today': today, 'user': request.user, 'path': path, 'top_groups': top_groups, 'saved_groups': saved_groups, 'count': count_int, 'count_next': count_next, 'root_path': root_path})
 
-def top_alltime(request):
+def top_alltime(request, count=0):
     top_groups = helper_func.calc_top_groups()
     saved_groups = helper_func.find_saved_groups(request.user)
+    count_int = int(count)
+    count_next = count_int+10
     path = request.get_full_path
-    obj_list = Prayer.objects.order_by("-prayerscore")
+    root_path = "/top/all"
+    obj_list = Prayer.objects.order_by("-prayerscore")[count_int:count_next]
     dt = datetime.datetime.now()
     today = dt.strftime('%Y-%m-%d') 
-    return render_to_response('top_page.html', {'prayers': obj_list, 'today': today, 'user': request.user, 'path': path, 'top_groups': top_groups, 'saved_groups': saved_groups})
+    return render_to_response('top_page.html', {'prayers': obj_list, 'today': today, 'user': request.user, 'path': path, 'top_groups': top_groups, 'saved_groups': saved_groups, 'count': count_int, 'count_next': count_next, 'root_path': root_path})
 
-def top_month(request):
+def top_month(request, count=0):
     top_groups = helper_func.calc_top_groups()
     saved_groups = helper_func.find_saved_groups(request.user)
+    count_int = int(count)
+    count_next = count_int+10
     path = request.get_full_path
-    obj_list = Prayer.objects.order_by("-prayerscore")
+    root_path = "/top/month"
+    obj_list = Prayer.objects.order_by("-prayerscore")[count_int:count_next]
     dt = datetime.datetime.now()
     month = dt.strftime('%m') 
     new_obj_list = []
     for prayer in obj_list:
         if prayer.timestamp.strftime('%m') == month:
             new_obj_list.append(prayer)
-    return render_to_response('top_page.html', {'prayers': new_obj_list, 'user': request.user, 'path': path, 'top_groups': top_groups, 'saved_groups': saved_groups})
+    return render_to_response('top_page.html', {'prayers': new_obj_list, 'user': request.user, 'path': path, 'top_groups': top_groups, 'saved_groups': saved_groups, 'count': count_int, 'count_next': count_next, 'root_path': root_path})
 
 
-def top_year(request):
+def top_year(request, count=0):
     top_groups = helper_func.calc_top_groups()
     saved_groups = helper_func.find_saved_groups(request.user)
+    count_int = int(count)
+    count_next = count_int+10
     path = request.get_full_path
-    obj_list = Prayer.objects.order_by("-prayerscore")
+    root_path = "/top/year"
+    obj_list = Prayer.objects.order_by("-prayerscore")[count_int:count_next]
     dt = datetime.datetime.now()
     year = dt.strftime('%Y') 
     new_obj_list = []
     for prayer in obj_list:
         if prayer.timestamp.strftime('%Y') == year:
             new_obj_list.append(prayer)
-    return render_to_response('top_page.html', {'prayers': new_obj_list, 'user': request.user, 'path': path, 'top_groups': top_groups, 'saved_groups': saved_groups})
+    return render_to_response('top_page.html', {'prayers': new_obj_list, 'user': request.user, 'path': path, 'top_groups': top_groups, 'saved_groups': saved_groups, 'count': count_int, 'count_next': count_next, 'root_path': root_path})
 
-def top_week(request):
+def top_week(request, count=0):
     top_groups = helper_func.calc_top_groups()
     saved_groups = helper_func.find_saved_groups(request.user)
     path = request.get_full_path
-    obj_list = Prayer.objects.order_by("-prayerscore")
+    root_path = "/top/week"
+    obj_list = Prayer.objects.order_by("-prayerscore")[count_int:count_next]
     dt = datetime.datetime.now()
     week = dt.isocalendar()[1]
     new_obj_list = []
     for prayer in obj_list:
         if prayer.timestamp.isocalendar()[1] == week:
             new_obj_list.append(prayer)
-    return render_to_response('top_page.html', {'prayers': new_obj_list, 'user': request.user, 'path': path, 'top_groups': top_groups, 'saved_groups': saved_groups})    
+    return render_to_response('top_page.html', {'prayers': new_obj_list, 'user': request.user, 'path': path, 'top_groups': top_groups, 'saved_groups': saved_groups, 'count': count_int, 'count_next': count_next, 'root_path': root_path})    
 
 def logout_view(request):
     logout(request)
@@ -215,15 +231,18 @@ def register(request):
             'form': form, 'top_groups': top_groups, 'saved_groups': saved_groups
         }, context_instance=RequestContext(request))
 
-def trending(request):
+def trending(request, count=0):
     top_groups = helper_func.calc_top_groups()
     saved_groups = helper_func.find_saved_groups(request.user)
-    obj_list = Prayer.objects.order_by("-hotness")
+    count_int = int(count)
+    count_next = count_int+10
+    obj_list = Prayer.objects.order_by("-hotness")[count_int:count_next]
     timedifflist = helper_func.calculate_time_diff(request, obj_list)
     path = request.get_full_path
+    root_path = ""
     dt = datetime.datetime.now()
     dtclean = dt.strftime('%Y-%m-%d %H:%M:%S') 
-    return render_to_response('new.html', {'prayers': obj_list, 'timestamps': timedifflist, 'current_time': dtclean, 'path': path, 'user': request.user, 'top_groups': top_groups, 'saved_groups': saved_groups})
+    return render_to_response('new.html', {'prayers': obj_list, 'timestamps': timedifflist, 'current_time': dtclean, 'path': path, 'user': request.user, 'top_groups': top_groups, 'saved_groups': saved_groups, 'count': count_int, 'count_next': count_next, 'root_path': root_path})
 
 def groups(request, group):
     top_groups = helper_func.calc_top_groups()

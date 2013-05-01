@@ -45,6 +45,29 @@
 	margin-left: -40px;
 }
 
+.fieldgrouptitle {
+	background-color: #D5F3D3;
+	border-radius: 4px;
+	font-size: large;
+	padding: 5px 10px 10px 10px;
+	width: 250px;
+	list-style-type: none;
+}
+
+.fieldprivacy {
+	background-color: #D5F3D3;
+	border-radius: 4px;
+	font-size: large;
+	padding: 5px 10px 10px 10px;
+	width: 80px;
+	list-style-type: none;
+}
+
+.fieldprivacy ul {
+	list-style-type: none;
+	margin-left: -40px;
+}
+
 
 .headerimg {
 	display: inline-block;
@@ -59,7 +82,7 @@
 #id_group {
 	height: 50px;
 	font-size: 24;
-	width: 500px;
+	width: 250px;
 }
 
 #id_prayer {
@@ -258,7 +281,7 @@
  	clear: left;
 	display:block;
  	overflow: hidden; 	
- 	padding-top: 40px;
+ 	padding-top: 50px;
  	width: 85%;
 }
 
@@ -446,6 +469,7 @@
 	margin: 0;
 	position: absolute;
 	text-align: center;
+	padding: 0;
 }
 
 #timedropdownul {
