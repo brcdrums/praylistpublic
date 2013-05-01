@@ -32,9 +32,9 @@ $(document).ready(function(){
     });
 
     $('.populargroupitemselected').hover(function() {
-        $(this > '.topsavebutton').css('opacity', 100);
+        $(this).children("button").css('opacity', 100);
         }, function() {
-            $(this > '.topsavebutton').css('opacity', 0);
+            $(this).children("button").css('opacity', 0);
     });
 
 });

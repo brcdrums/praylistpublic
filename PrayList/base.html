@@ -114,6 +114,8 @@
 			{% endif %}
 				{% if "group" in path %}
 				<a href="/group/{{ groupname }}/trending/">Trending</a>
+				{% elif "post" in path %}
+				<a href="/group/{{ this_group }}/trending/">Trending</a>
 				{% else %}
 				<a href="/">Trending</a>
 				{% endif %}
@@ -126,6 +128,8 @@
 			{% endif %}
 				{% if "group" in path %}
 				<a href="/group/{{ groupname }}/new/">New</a>
+				{% elif "post" in path %}
+				<a href="/group/{{ this_group }}/new/">New</a>
 				{% else %}
 				<a href="/new/">New</a>
 				{% endif %}
@@ -138,6 +142,8 @@
 			{% endif %}
 				{% if "group" in path %}
 				<a href="/group/{{ groupname }}/top/today">Top</a>
+				{% elif "post" in path %}
+				<a href="/group/{{ this_group }}/top/today">Top</a>
 				{% else %}
 				<a href="/top/">Top</a>
 				{% endif %}
