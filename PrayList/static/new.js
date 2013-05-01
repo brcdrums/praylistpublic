@@ -26,9 +26,9 @@ $(document).ready(function(){
     });
 
     $('.populargroupitem').hover(function() {
-        $(this).children("button").css('opacity', 100);
+        $(this).children(".topsavebutton").css('opacity', 100);
         }, function() {
-            $(this).children("button").css('opacity', 0);
+            $(this).children(".topsavebutton").css('opacity', 0);
     });
 
     $('.populargroupitemselected').hover(function() {

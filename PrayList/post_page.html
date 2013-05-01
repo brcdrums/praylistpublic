@@ -4,17 +4,25 @@
 	<div class="centerize"> {% csrf_token %}
 		<p id="poststamp">Posted {{ timestamp }} </p>
 		<h1 id="postsubject">{{ subject }}</h1>
-		{% if userid in users.all %}
-		<p id="prayerscore" style="color: red;">Prayers: {{ prayerscore }}</p>
+		{% if user.is_authenticated %}
+			{% if userid in users.all %}
+			<p id="prayerscore" style="color: red;">Prayers: {{ prayerscore }}</p>
+			{% else %}
+			<p id="prayerscore">Prayers: {{ prayerscore }} </p>
+			{% endif %}
 		{% else %}
-		<p id="prayerscore">Prayers: {{ prayerscore }} </p>
+			<p id="prayerscore">Prayers: {{ prayerscore }} </p>
 		{% endif %}
 		<img class="seperator" src="/static/PrayingHands.bmp" />
 		<p id="postprayer">{{ prayer }} <p>
-		{% if userid in users.all %}
+		{% if user.is_authenticated %}
+			{% if userid in users.all %}
 			<p id="youpray">√ You've prayed for this!</p>
-		{% else %}
+			{% else %}
 			<button id="upvote" onclick="voteitem({{ id }})" return false;>I prayed for this! </button>
+			{% endif %}
+		{% else %}
+			<a href="/accounts/login/?next=/post/{{ id }}/"><button id="upvote" return false;>I prayed for this! </button></a>
 		{% endif %}
 		<div class="fb-like" data-href="http://127.0.0.1:8000{{ path }}" data-send="false" data-layout="button_count" data-width="450" data-show-faces="true" data-font="lucida grande"></div>
 

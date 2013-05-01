@@ -15,47 +15,53 @@ from django.utils.safestring import mark_safe
 import helper_func
 
 def submit(request, group_name="none"):
-    top_groups = helper_func.calc_top_groups()
-    saved_groups = helper_func.find_saved_groups(request.user)
-    path = request.path
-    if request.method == "POST":
-        form = PrayerForm(request.POST)
-        if form.is_valid():
-            dt = datetime.datetime.now()
-            dtclean = dt.strftime('%Y-%m-%d %H:%M:%S')
-            hotness = hot(0, dt)
-            try:
-                group = Groups.objects.get(groupname=request.POST['group'])
-            except Groups.DoesNotExist:
-                form._errors["group"] = ErrorList([request.POST['group'] + u" does not exist"])
-                return render_to_response('submit.html', {'form': form, 'user': request.user, 'doesnotexist': True, 'top_groups': top_groups, 'saved_groups': saved_groups}, context_instance=RequestContext(request))
-            p= Prayer(subject = request.POST['subject'], prayer = request.POST['prayer'], timestamp=dtclean, prayerscore=0, hotness=hotness, group=group)
-            p.save()
-            group.prayer_count += 1
-            group.save()
-            post = Prayer.objects.get(timestamp=dtclean)
-            postid = post.id
-            return HttpResponseRedirect('/post/' + str(postid) +'/')
+    if request.user.is_authenticated():
+        top_groups = helper_func.calc_top_groups()
+        saved_groups = helper_func.find_saved_groups(request.user)
+        path = request.path
+        if request.method == "POST":
+            form = PrayerForm(request.POST)
+            if form.is_valid():
+                dt = datetime.datetime.now()
+                dtclean = dt.strftime('%Y-%m-%d %H:%M:%S')
+                hotness = hot(0, dt)
+                try:
+                    group = Groups.objects.get(groupname=request.POST['group'])
+                except Groups.DoesNotExist:
+                    form._errors["group"] = ErrorList([request.POST['group'] + u" does not exist"])
+                    return render_to_response('submit.html', {'form': form, 'user': request.user, 'doesnotexist': True, 'top_groups': top_groups, 'saved_groups': saved_groups}, context_instance=RequestContext(request))
+                p= Prayer(subject = request.POST['subject'], prayer = request.POST['prayer'], timestamp=dtclean, prayerscore=0, hotness=hotness, group=group)
+                p.save()
+                group.prayer_count += 1
+                group.save()
+                post = Prayer.objects.get(timestamp=dtclean)
+                postid = post.id
+                return HttpResponseRedirect('/post/' + str(postid) +'/')
+        else:
+            if "group" in path:
+                form = PrayerForm(initial={'group': group_name})
+            else: 
+                form = PrayerForm()
+        return render_to_response('submit.html', {'form': form, 'user': request.user, 'top_groups': top_groups, 'saved_groups': saved_groups}, context_instance=RequestContext(request))
     else:
-        if "group" in path:
-            form = PrayerForm(initial={'group': group_name})
-        else: 
-            form = PrayerForm()
-    return render_to_response('submit.html', {'form': form, 'user': request.user, 'top_groups': top_groups, 'saved_groups': saved_groups}, context_instance=RequestContext(request))
+        return HttpResponseRedirect("/accounts/login/?next=/submit/")
 
 def submit_group(request):
-    top_groups = helper_func.calc_top_groups()
-    saved_groups = helper_func.find_saved_groups(request.user)
-    if request.method == "POST":
-        form = GroupForm(request.POST)
-        if form.is_valid():
-            group= Groups(groupname= request.POST['group'], privacy= request.POST['privacy'])
-            group.save()
-            groupname = request.POST['group']
-            return HttpResponseRedirect('/submitgroup/' + str(groupname) + '/success/')
+    if request.user.is_authenticated():
+        top_groups = helper_func.calc_top_groups()
+        saved_groups = helper_func.find_saved_groups(request.user)
+        if request.method == "POST":
+            form = GroupForm(request.POST)
+            if form.is_valid():
+                group= Groups(groupname= request.POST['group'], privacy= request.POST['privacy'])
+                group.save()
+                groupname = request.POST['group']
+                return HttpResponseRedirect('/submitgroup/' + str(groupname) + '/success/')
+        else:
+            form = GroupForm()
+        return render_to_response('submitgroup.html', {'form': form, 'user': request.user, 'top_groups': top_groups, 'saved_groups': saved_groups}, context_instance=RequestContext(request))
     else:
-        form = GroupForm()
-    return render_to_response('submitgroup.html', {'form': form, 'user': request.user, 'top_groups': top_groups, 'saved_groups': saved_groups}, context_instance=RequestContext(request))
+        return HttpResponseRedirect('/accounts/login/?next=/submitgroup/')
 
 def submit_group_success(request, groupname):
     top_groups = helper_func.calc_top_groups()
@@ -74,41 +80,39 @@ def new(request):
     return render_to_response('new.html', {'prayers': obj_list, 'timestamps': timedifflist, 'current_time': dtclean, 'path': path, 'user': request.user, 'top_groups': top_groups, 'saved_groups': saved_groups})
 
 def post_page(request, postid):
-    if request.user.is_authenticated():
-        if request.is_ajax():
-            prayer = Prayer.objects.get(id=postid)
-            prayer.prayerscore = int(prayer.prayerscore) + 1
-            prayer.prayed_users.add(request.user)
-            prayer.save()
-            return HttpResponse(status=200)
-        else:
-            top_groups = helper_func.calc_top_groups()
-            saved_groups = helper_func.find_saved_groups(request.user)
-            date = datetime.datetime.now()
-            prayed = False
-            prayer = Prayer.objects.get(id=postid)
-            users = prayer.prayed_users
-            subject = prayer.subject
-            timestamp = prayer.timestamp.astimezone(timezone('US/Central'))
-            timestampdt = datetime.datetime(timestamp.year, timestamp.month, timestamp.day, timestamp.hour, timestamp.minute, timestamp.second)
-            prayer_post = prayer.prayer
-            this_group = Groups.objects.get(groupname=prayer.group.groupname)
-            this_group_name = this_group.groupname
-            pid = postid
-            prayer_score = prayer.prayerscore
-            prayer.hotness = hot(prayer_score, timestampdt)
-            prayer.save()
-            return render_to_response('post_page.html', 
-                                     {'prayerscore': prayer_score, 'users': users, 
-                                      'subject': subject, 'timestamp': timestamp, 
-                                        'prayer': prayer_post, 'userid': request.user, 
-                                        'path': request.get_full_path, 'id': postid,
-                                        'top_groups': top_groups, 'saved_groups': saved_groups, 'this_group': this_group_name
-                                        }, 
-                                            context_instance=RequestContext(request)
-                                       )
+    if request.is_ajax():
+        prayer = Prayer.objects.get(id=postid)
+        prayer.prayerscore = int(prayer.prayerscore) + 1
+        prayer.prayed_users.add(request.user)
+        prayer.save()
+        return HttpResponse(status=200)
     else:
-        return HttpResponseRedirect("/accounts/login/?next=/post/" + postid + "/")
+        top_groups = helper_func.calc_top_groups()
+        saved_groups = helper_func.find_saved_groups(request.user)
+        date = datetime.datetime.now()
+        prayed = False
+        prayer = Prayer.objects.get(id=postid)
+        users = prayer.prayed_users
+        subject = prayer.subject
+        timestamp = prayer.timestamp.astimezone(timezone('US/Central'))
+        timestampdt = datetime.datetime(timestamp.year, timestamp.month, timestamp.day, timestamp.hour, timestamp.minute, timestamp.second)
+        prayer_post = prayer.prayer
+        this_group = Groups.objects.get(groupname=prayer.group.groupname)
+        this_group_name = this_group.groupname
+        pid = postid
+        prayer_score = prayer.prayerscore
+        prayer.hotness = hot(prayer_score, timestampdt)
+        prayer.save()
+        return render_to_response('post_page.html', 
+                                 {'prayerscore': prayer_score, 'users': users, 
+                                  'subject': subject, 'timestamp': timestamp, 
+                                    'prayer': prayer_post, 'userid': request.user, 
+                                    'path': request.get_full_path, 'id': postid,
+                                    'top_groups': top_groups, 'saved_groups': saved_groups, 'this_group': this_group_name
+                                    }, 
+                                        context_instance=RequestContext(request)
+                                   )
+    
 
 
 def top_today(request):
