@@ -373,3 +373,6 @@ def managegroups(request, groupid="none"):
     else:
         return HttpResponseRedirect("/accounts/login/?next=/managegroups/")
 
+def my_praylist(request):
+    if request.user.is_authenticated():
+        return render_to_response('mypraylist.html', {'user':request.user})
