@@ -186,6 +186,14 @@
 
 }
 
+.nextprevsep {
+	color: gray;
+	padding-top: 3px;
+	position: absolute;
+	font-size: 19;
+
+
+}
 
 #number {
 	float: left;
@@ -342,15 +350,11 @@
 
 }
 
-
-.separator {
-	color: gray;
-	padding-top: 3px;
-	position: absolute;
-	font-size: 19;
-
-
+.seperator {
+	height: 50px;
+	width: 50px;
 }
+
 
 .spacer {
 	display: block;
