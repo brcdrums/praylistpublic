@@ -69,14 +69,13 @@
     {% if count_next > 9 %}
         {% if count == 10 %}
         <div>
-        <a href="{{ root_path }}/" style="display:inline-block;" ><button class="nextprev">previous</button></a>
-        <span class="separator">//</span> 
+        <a href="{{ root_path }}/" style="display:inline-block;" ><button class="nextprev">&#60;&#60; previous</button></a>
         {% elif count > 11 %}
-        <a href="{{root_path}}/count={{ count|add:"-10" }}" style="display:inline-block;" ><button class="nextprev">Previous</button></a>
-        <span>|</span> 
+        <a href="{{root_path}}/count={{ count|add:"-10" }}" style="display:inline-block;" ><button class="nextprev">&#60;&#60; Previous</button></a>
+        <span class="separator">//</span> 
         {% endif %}
         {% if prayers|length > 9 %}
-        <a href="{{ root_path }}/count={{ count_next }}/" style="display:inline-block;"><button class="nextprev">Next</button></a>
+        <a href="{{ root_path }}/count={{ count_next }}/" style="display:inline-block;"><button class="nextprev">Next &#62;&#62;</button></a>
         {% endif %}
         </div>
     {% endif %}
