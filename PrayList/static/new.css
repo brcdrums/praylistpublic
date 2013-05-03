@@ -164,6 +164,27 @@
 	cursor: default;
 }
 
+.nextprev {
+	background:#00A0D1;
+	background:-moz-linear-gradient(top,#00A0D1 0%,#008DB8 100%);
+	background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#00A0D1),color-stop(100%,#008DB8));
+	background:-webkit-linear-gradient(top,#00A0D1 0%,#008DB8 100%);
+	background:-o-linear-gradient(top,#00A0D1 0%,#008DB8 100%);
+	background:-ms-linear-gradient(top,#00A0D1 0%,#008DB8 100%);
+	background:linear-gradient(top,#00A0D1 0%,#008DB8 100%);
+	border:1px solid #095B7E;
+	border-radius:40px;
+	cursor: hand;
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#00A0D1',endColorstr='#008DB8',GradientType=0);
+	padding:3px 10px;
+	color:#cfebf3;
+	font-family:'Helvetica Neue',sans-serif;
+	font-size:12px;
+	-moz-border-radius:40px;
+	-webkit-border-radius:40px;
+
+}
+
 
 #number {
 	float: left;
@@ -321,9 +342,13 @@
 }
 
 
-.seperator {
-	height: 50px;
-	width: 50px;
+.separator {
+	color: gray;
+	padding-top: 3px;
+	position: absolute;
+	font-size: 19;
+
+
 }
 
 .spacer {
