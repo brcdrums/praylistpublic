@@ -3,7 +3,7 @@ from django import forms
 class PrayerForm(forms.Form):
     subject = forms.CharField(max_length=150)
     prayer = forms.CharField(widget=forms.Textarea)
-    group = forms.CharField(max_length=30)
+    prayer_group = forms.CharField(max_length=30)
 
 class GroupForm(forms.Form):
     group = forms.CharField(max_length=30)

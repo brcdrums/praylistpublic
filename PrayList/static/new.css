@@ -50,7 +50,7 @@
 	border-radius: 4px;
 	font-size: large;
 	padding: 5px 10px 10px 10px;
-	width: 250px;
+	width: 300px;
 	list-style-type: none;
 }
 
@@ -82,7 +82,7 @@
 #id_group {
 	height: 50px;
 	font-size: 24;
-	width: 250px;
+	width: 300px;
 }
 
 #id_prayer {
@@ -90,6 +90,12 @@
 	font-size: 14;
 	margin-top: 5px;
 	vertical-align: text-top;
+	width: 500px;
+}
+
+#id_prayer_group {
+	height: 50px;
+	font-size: 24;
 	width: 500px;
 }
 
