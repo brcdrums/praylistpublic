@@ -291,7 +291,7 @@
 #prayers {
  	background-position: top;
  	clear: left;
- 	display: inline-block;
+ 	display: block;
  	padding-top: 20px;
  	width: 85%;
  }
@@ -316,7 +316,6 @@
  	background-position: top;
  	clear: left;
 	display:block;
- 	overflow: hidden; 	
  	padding-top: 50px;
  	width: 85%;
 }

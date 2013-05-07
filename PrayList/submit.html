@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-	<h1 class = >Submit a Prayer</h1>
+	<h1>Submit a Prayer</h1>
 
 	{% if form.errors %}
 		<p style="color: red;">
@@ -45,7 +45,7 @@
         $('.suggestedgroupitem a').click(function(event) {
             event.preventDefault();
             var grouptext = $(event.currentTarget).text();
-            $('#id_prayer_group').val(grouptext);
+            $('#id_group').val(grouptext);
         });
 
     </script>
