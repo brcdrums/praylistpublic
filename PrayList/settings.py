@@ -143,6 +143,7 @@ INSTALLED_APPS = (
     'tagging',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+    'south'
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
