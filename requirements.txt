@@ -5,3 +5,4 @@ tagging==0.2.1
 django-tagging==0.3.1
 pytz==2013b
 wsgiref==0.1.2
+South==0.7.6
