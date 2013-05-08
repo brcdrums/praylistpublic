@@ -34,7 +34,7 @@ def submit(request, group_name="none"):
                 p= Prayer(subject = request.POST['subject'], prayer = request.POST['prayer'], timestamp=dtclean, prayerscore=0, hotness=hotness, group=group)
                 p.save()
                 group.prayer_count += 1
-                group.total_hotness = calc_group_hotness(group)
+                group.total_hotness = helper_func.calc_group_hotness(group)
                 group.save()
                 post = Prayer.objects.get(timestamp=dtclean)
                 postid = post.id
@@ -90,7 +90,14 @@ def post_page(request, postid):
         prayer = Prayer.objects.get(id=postid)
         prayer.prayerscore = int(prayer.prayerscore) + 1
         prayer.prayed_users.add(request.user)
+        timestamp = prayer.timestamp.astimezone(timezone('US/Central'))
+        timestampdt = datetime.datetime(timestamp.year, timestamp.month, timestamp.day, timestamp.hour, timestamp.minute, timestamp.second)
+        prayer.hotness = hot(prayer.prayerscore, timestampdt)
         prayer.save()
+        this_group = Groups.objects.get(groupname=prayer.group.groupname)
+        this_group_name = this_group.groupname
+        this_group.total_hotness = helper_func.calc_group_hotness(this_group)
+        this_group.save()
         return HttpResponse(status=200)
     else:
         top_groups = helper_func.calc_top_groups()
@@ -105,6 +112,8 @@ def post_page(request, postid):
         prayer_post = prayer.prayer
         this_group = Groups.objects.get(groupname=prayer.group.groupname)
         this_group_name = this_group.groupname
+        this_group.total_hotness = helper_func.calc_group_hotness(this_group)
+        this_group.save()
         pid = postid
         prayer_score = prayer.prayerscore
         prayer.hotness = hot(prayer_score, timestampdt)
