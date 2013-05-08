@@ -4,6 +4,7 @@ from django.utils.timezone import utc
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import auth
+from reddit_hotness import hot
 
 def humanizeTimeDiff(timestamp = None):
     """
@@ -53,8 +54,15 @@ def calculate_time_diff(request, obj_list):
         timedifflist[index + 1] = humanizeTimeDiff(obj.timestamp)
     return timedifflist
 
+def calc_group_hotness(thegroup):
+    total_hotness = 0
+    prayers = Prayer.objects.filter(group = thegroup).order_by("-prayerscore")
+    for prayer in prayers:
+        total_hotness += prayer.hotness
+    return total_hotness
+
 def calc_top_groups():
-    grouplist = Groups.objects.order_by("-prayer_count")
+    grouplist = Groups.objects.order_by("-total_hotness")
     return grouplist
 
 def find_saved_groups(user):

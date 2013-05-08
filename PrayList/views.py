@@ -33,6 +33,7 @@ def submit(request, group_name="none"):
                 p= Prayer(subject = request.POST['subject'], prayer = request.POST['prayer'], timestamp=dtclean, prayerscore=0, hotness=hotness, group=group)
                 p.save()
                 group.prayer_count += 1
+                group.total_hotness = calc_group_hotness(group)
                 group.save()
                 post = Prayer.objects.get(timestamp=dtclean)
                 postid = post.id

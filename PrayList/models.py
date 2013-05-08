@@ -7,6 +7,7 @@ class Groups(models.Model):
     privacy = models.BooleanField()
     users_favorited = models.ManyToManyField(User, related_name='favorited')
     prayer_count = models.IntegerField(default=0)
+    total_hotness = models.IntegerField(default=0)
 
 class Prayer(models.Model):
     number = 1
