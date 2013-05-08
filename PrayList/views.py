@@ -61,7 +61,10 @@ def submit_group(request, group_name="none"):
                 return HttpResponseRedirect('/success/'+ str(groupname))
         else:
             data = {'group': group_name, 'privacy': 0}
-            form = GroupForm(data)
+            if group_name == "none":
+                form = GroupForm()
+            else:
+                form = GroupForm(data)
         return render_to_response('submitgroup.html', {'form': form, 'user': request.user, 'top_groups': top_groups, 'saved_groups': saved_groups, 'group_name': group_name}, context_instance=RequestContext(request))
     else:
         return HttpResponseRedirect('/accounts/login/?next=/submitgroup/')
