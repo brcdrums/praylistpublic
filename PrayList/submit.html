@@ -22,9 +22,9 @@
         </div>
         <div class="spacer"></div>
         <div class="field">
-            {{ form.group.errors }}
+            {{ form.prayer_group.errors }}
             {% if doesnotexist %}
-            <a href="/submitgroup/">Click here to create it!</a>
+            <a href="/submitgroup/{{ group_name }}">Click here to create it!</a>
             <br>
             {% endif %}
             <label for="group">Group:</label>

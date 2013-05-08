@@ -26,10 +26,11 @@ def submit(request, group_name="none"):
                 dtclean = dt.strftime('%Y-%m-%d %H:%M:%S')
                 hotness = hot(0, dt)
                 try:
-                    group = Groups.objects.get(groupname=request.POST['group'])
+                    group = Groups.objects.get(groupname=request.POST['prayer_group'])
                 except Groups.DoesNotExist:
-                    form._errors["group"] = ErrorList([request.POST['group'] + u" does not exist"])
-                    return render_to_response('submit.html', {'form': form, 'user': request.user, 'doesnotexist': True, 'top_groups': top_groups, 'saved_groups': saved_groups}, context_instance=RequestContext(request))
+                    form._errors["prayer_group"] = ErrorList([u"The group \'" + request.POST['prayer_group'] + u"\' does not exist"])
+                    group_name = request.POST['prayer_group']
+                    return render_to_response('submit.html', {'form': form, 'user': request.user, 'doesnotexist': True, 'top_groups': top_groups, 'saved_groups': saved_groups, 'group_name': group_name}, context_instance=RequestContext(request))
                 p= Prayer(subject = request.POST['subject'], prayer = request.POST['prayer'], timestamp=dtclean, prayerscore=0, hotness=hotness, group=group)
                 p.save()
                 group.prayer_count += 1
@@ -40,14 +41,14 @@ def submit(request, group_name="none"):
                 return HttpResponseRedirect('/post/' + str(postid) +'/')
         else:
             if "group" in path:
-                form = PrayerForm(initial={'group': group_name})
+                form = PrayerForm(initial={'prayer_group': group_name})
             else: 
                 form = PrayerForm()
         return render_to_response('submit.html', {'form': form, 'user': request.user, 'top_groups': top_groups, 'saved_groups': saved_groups}, context_instance=RequestContext(request))
     else:
         return HttpResponseRedirect("/accounts/login/?next=/submit/")
 
-def submit_group(request):
+def submit_group(request, group_name="none"):
     if request.user.is_authenticated():
         top_groups = helper_func.calc_top_groups()
         saved_groups = helper_func.find_saved_groups(request.user)
@@ -57,10 +58,11 @@ def submit_group(request):
                 group= Groups(groupname= request.POST['group'], privacy= request.POST['privacy'])
                 group.save()
                 groupname = request.POST['group']
-                return HttpResponseRedirect('/submitgroup/' + str(groupname) + '/success/')
+                return HttpResponseRedirect('/success/'+ str(groupname))
         else:
-            form = GroupForm()
-        return render_to_response('submitgroup.html', {'form': form, 'user': request.user, 'top_groups': top_groups, 'saved_groups': saved_groups}, context_instance=RequestContext(request))
+            data = {'group': group_name, 'privacy': 0}
+            form = GroupForm(data)
+        return render_to_response('submitgroup.html', {'form': form, 'user': request.user, 'top_groups': top_groups, 'saved_groups': saved_groups, 'group_name': group_name}, context_instance=RequestContext(request))
     else:
         return HttpResponseRedirect('/accounts/login/?next=/submitgroup/')
 

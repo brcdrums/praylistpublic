@@ -11,7 +11,6 @@ ADMINS = (
 MANAGERS = ADMINS
 
 db_url = os.environ.get('CLEARDB_DATABASE_URL')
-print db_url
 db_url_parts = urlparse.urlparse(db_url)
 
 db_name = db_url_parts[2].replace('/', '').split('?')[0]
