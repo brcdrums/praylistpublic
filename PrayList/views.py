@@ -55,6 +55,9 @@ def submit_group(request, group_name="none"):
         if request.method == "POST":
             form = GroupForm(request.POST)
             if form.is_valid():
+                if " " in request.POST['group']:
+                    form._errors['group'] = ErrorList([u"Spaces are not allowed"])
+                    return render_to_response('submitgroup.html', {'form': form, 'user': request.user, 'top_groups': top_groups, 'saved_groups': saved_groups, 'group_name': group_name}, context_instance=RequestContext(request))
                 group= Groups(groupname= request.POST['group'], privacy= request.POST['privacy'])
                 group.save()
                 groupname = request.POST['group']
