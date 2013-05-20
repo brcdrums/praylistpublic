@@ -20,3 +20,7 @@ class Prayer(models.Model):
     hotness = models.IntegerField()
     group = models.ForeignKey(Groups)
 
+class UserProfile(models.Model):
+    user = models.OneToOneField(User)
+    saved_prayer_custom = models.CharField(max_length=100)
+    saved_prayer = models.ManyToManyField(Prayer)
