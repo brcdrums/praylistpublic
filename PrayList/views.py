@@ -120,6 +120,8 @@ def post_page(request, postid):
         prayed = False
         prayer = Prayer.objects.get(id=postid)
         users = prayer.prayed_users
+        userobj = User.objects.get(username=request.user)
+        saved_prayers = userobj.profile.saved_prayer
         subject = prayer.subject
         timestamp = prayer.timestamp.astimezone(timezone('US/Central'))
         timestampdt = datetime.datetime(timestamp.year, timestamp.month, timestamp.day, timestamp.hour, timestamp.minute, timestamp.second)
@@ -135,7 +137,7 @@ def post_page(request, postid):
         return render_to_response('post_page.html', 
                                  {'prayerscore': prayer_score, 'users': users, 
                                   'subject': subject, 'timestamp': timestamp, 
-                                    'prayer': prayer_post, 'userid': request.user, 
+                                    'prayer': prayer_post, 'prayerobj': prayer, 'userid': request.user, 'saved_prayers': saved_prayers,
                                     'path': request.get_full_path, 'id': postid,
                                     'top_groups': top_groups, 'saved_groups': saved_groups, 'this_group': this_group_name
                                     }, 
