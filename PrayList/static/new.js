@@ -94,11 +94,11 @@ function voteitem(postid) {
 
 function subscribe(groupid, groupname, isTop) {
     if(isTop==="True") {
-        $(".topsavebutton[class*=" + groupid + "]").replaceWith("<button class=\"topsavebutton " + groupid + "\" onclick=\"unsubscribe(" + groupid + ", \'" + groupname + "\', \'True\')\" style=\"opacity:100;\">unsave</button>");
+        $(".topsavebutton[class*='" + groupname + "']").replaceWith("<button class=\"topsavebutton " + groupname + "\" onclick=\"unsubscribe(" + groupid + ", \'" + groupname + "\', \'True\')\" style=\"opacity:100;\">unsave</button>");
     } else {
-        $(".topsavebutton[class*=" + groupid + "]").replaceWith("<button class=\"topsavebutton " + groupid + "\" onclick=\"unsubscribe(" + groupid + ", \'" + groupname + "\', \'True\')\" style=\"opacity:0;\">unsave</button>");
+        $(".topsavebutton[class*='" + groupname + "']").replaceWith("<button class=\"topsavebutton " + groupname + "\" onclick=\"unsubscribe(" + groupid + ", \'" + groupname + "\', \'True\')\" style=\"opacity:0;\">unsave</button>");
     }
-    $(".subscribe[class*=" + groupid + "]").replaceWith("<button class=\"subscribe " + groupid + "\" onclick=\"unsubscribe(" + groupid + ", \'" + groupname + "\')\">Saved!</button>");
+    $(".subscribe[class*='" + groupname + "']").replaceWith("<button class=\"subscribe " + groupname + "\" onclick=\"unsubscribe(" + groupid + ", \'" + groupname + "\')\">Saved!</button>");
     $.ajax({
         url: "/managegroups/" + groupid + "/",
         success: function(html) {
@@ -114,11 +114,11 @@ function subscribe(groupid, groupname, isTop) {
 
 function unsubscribe(groupid, groupname, isTop) {
      if(isTop==="True") {
-        $(".topsavebutton[class*=" + groupid + "]").replaceWith("<button class=\"topsavebutton " + groupid + "\" onclick=\"subscribe(" + groupid + ", \'" + groupname + "\', \'True\')\" style=\"opacity:100;\">save</button>");
+        $(".topsavebutton[class*='" + groupname + "']").replaceWith("<button class=\"topsavebutton " + groupname + "\" onclick=\"subscribe(" + groupid + ", \'" + groupname + "\', \'True\')\" style=\"opacity:100;\">save</button>");
     } else {
-        $(".topsavebutton[class*=" + groupid + "]").replaceWith("<button class=\"topsavebutton " + groupid + "\" onclick=\"subscribe(" + groupid + ", \'" + groupname + "\', \'True\')\" style=\"opacity:0;\">save</button>");          
+        $(".topsavebutton[class*='" + groupname + "']").replaceWith("<button class=\"topsavebutton " + groupname + "\" onclick=\"subscribe(" + groupid + ", \'" + groupname + "\', \'True\')\" style=\"opacity:0;\">save</button>");          
     }
-    $(".subscribe[class*=" + groupid + "]").replaceWith("<button class=\"subscribe "+ groupid + "\" onclick=\"subscribe(" + groupid + ", \'" + groupname + "\')\">Save</button>");
+    $(".subscribe[class*='" + groupname + "']").replaceWith("<button class=\"subscribe "+ groupname + "\" onclick=\"subscribe(" + groupid + ", \'" + groupname + "\')\">Save</button>");
     $.ajax({
         url: "/managegroups/" + groupid + "/unsubscribe/",
         success: function(html) {
