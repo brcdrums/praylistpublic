@@ -128,5 +128,13 @@ function unsubscribe(groupid, groupname, isTop) {
     });
 }; 
 
+function mypraylistsave(postid) {
+    $.ajax({
+        url: "/mypraylist/add/" + postid + "/",
+        success: function(html) {
+            $('.mypraylistsave').replaceWith("<p id=\"myprayadded\">This Prayer is in Your Praylist</p>");
 
+}
+});
+}
 

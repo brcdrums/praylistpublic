@@ -1,6 +1,7 @@
 from django.db import models
 import datetime
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
 
 class Groups(models.Model):
     groupname = models.CharField(max_length=30)
@@ -21,6 +22,17 @@ class Prayer(models.Model):
     group = models.ForeignKey(Groups)
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(User)
+    user = models.OneToOneField(User, unique=True)
     saved_prayer_custom = models.CharField(max_length=100)
     saved_prayer = models.ManyToManyField(Prayer)
+  
+    def __str__(self):  
+          return "%s's profile" % self.user  
+ 
+def create_user_profile(sender, instance, created, **kwargs):  
+    if created:  
+       profile, created = UserProfile.objects.get_or_create(user=instance)  
+ 
+post_save.connect(create_user_profile, sender=User) 
+ 
+User.profile = property(lambda u: u.get_profile() )

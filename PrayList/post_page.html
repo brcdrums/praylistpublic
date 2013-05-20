@@ -24,6 +24,7 @@
 		{% else %}
 			<a href="/accounts/login/?next=/post/{{ id }}/"><button id="upvote" return false;>I prayed for this! </button></a>
 		{% endif %}
+		<button class="mypraylistsave" onclick="mypraylistsave({{ id }})">Add this to MyPrayList</button>
 		<div class="fb-like" data-href="http://127.0.0.1:8000{{ path }}" data-send="false" data-layout="button_count" data-width="450" data-show-faces="true" data-font="lucida grande"></div>
 
 	</div>

@@ -1,5 +1,5 @@
 from forms import PrayerForm, GroupForm
-from models import Prayer, Groups
+from models import Prayer, Groups, UserProfile
 from django.shortcuts import render_to_response
 from django.shortcuts import HttpResponseRedirect, HttpResponse
 import datetime
@@ -7,6 +7,7 @@ from django.template import RequestContext
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.views import logout
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
 from pytz import timezone
 from reddit_hotness import hot
 from tagging.models import Tag, TaggedItem
@@ -93,18 +94,25 @@ def new(request, count=0):
 
 def post_page(request, postid):
     if request.is_ajax():
-        prayer = Prayer.objects.get(id=postid)
-        prayer.prayerscore = int(prayer.prayerscore) + 1
-        prayer.prayed_users.add(request.user)
-        timestamp = prayer.timestamp.astimezone(timezone('US/Central'))
-        timestampdt = datetime.datetime(timestamp.year, timestamp.month, timestamp.day, timestamp.hour, timestamp.minute, timestamp.second)
-        prayer.hotness = hot(prayer.prayerscore, timestampdt)
-        prayer.save()
-        this_group = Groups.objects.get(groupname=prayer.group.groupname)
-        this_group_name = this_group.groupname
-        this_group.total_hotness = helper_func.calc_group_hotness(this_group)
-        this_group.save()
-        return HttpResponse(status=200)
+        if "add" in request.path:
+            prayer = Prayer.objects.get(id=postid)
+            userobj = User.objects.get(username=request.user)
+            userobj.profile.saved_prayer.add(prayer)
+            userobj.save()
+            return HttpResponse(status=200)
+        else:
+            prayer = Prayer.objects.get(id=postid)
+            prayer.prayerscore = int(prayer.prayerscore) + 1
+            prayer.prayed_users.add(request.user)
+            timestamp = prayer.timestamp.astimezone(timezone('US/Central'))
+            timestampdt = datetime.datetime(timestamp.year, timestamp.month, timestamp.day, timestamp.hour, timestamp.minute, timestamp.second)
+            prayer.hotness = hot(prayer.prayerscore, timestampdt)
+            prayer.save()
+            this_group = Groups.objects.get(groupname=prayer.group.groupname)
+            this_group_name = this_group.groupname
+            this_group.total_hotness = helper_func.calc_group_hotness(this_group)
+            this_group.save()
+            return HttpResponse(status=200)
     else:
         top_groups = helper_func.calc_top_groups()
         saved_groups = helper_func.find_saved_groups(request.user)
@@ -393,4 +401,6 @@ def managegroups(request, groupid="none"):
 
 def my_praylist(request):
     if request.user.is_authenticated():
-        return render_to_response('mypraylist.html', {'user':request.user})
+        top_groups = helper_func.calc_top_groups()
+        saved_groups = helper_func.find_saved_groups(request.user)
+        return render_to_response('mypraylist.html', {'user':request.user, 'top_groups': top_groups, 'saved_groups': saved_groups})
