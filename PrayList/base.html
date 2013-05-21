@@ -82,6 +82,7 @@
 			{% endfor %}
 		</ul>
 		{% if user.is_authenticated %}
+		<a id="mypraylisttop" href="/mypraylist/">MyPraylist</a>
 		<ul id='mygroups'>
 		<li id="mygroupsfirst">My Groups</li>
 		{% for group in saved_groups %}

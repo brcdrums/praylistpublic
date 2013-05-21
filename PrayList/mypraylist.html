@@ -1,4 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>My Praylist</h1>
+<h1 style="text-align: center;">My Praylist</h1>
+
+<div id="mypraylist">
+    {% for saved_p in saved_prayers.all %}
+    <input type="checkbox"><a class="savedprayerlinks" href="/post/{{ saved_p.id }}/">{{ saved_p.subject }}</a>
+    <br><br>
+    {% endfor %}
+</div>
+
 {% endblock %}

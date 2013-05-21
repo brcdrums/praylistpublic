@@ -170,6 +170,27 @@
 	cursor: default;
 }
 
+#mypraylist {
+	padding-left: 400px;
+}
+
+#mypraylisttop {
+	display: inline-block;
+	text-decoration: none;
+	text-align: right;
+	display: inline-block;
+	list-style: none;
+	color: blue;
+	background-color: white;
+	position: absolute;
+	float: right;
+	right:120px;
+	padding-right: 5px;
+	padding-top: 16px;
+	
+
+}
+
 .nextprev {
 	background:#00A0D1;
 	background:-moz-linear-gradient(top,#00A0D1 0%,#008DB8 100%);
@@ -353,6 +374,17 @@
 	background-color: #BACDE8;
 	text-decoration: none;
 
+}
+
+.savedprayerlinks {
+	text-decoration: none;
+	padding-top: 10px;
+	padding-left: 10px;
+}
+
+.savedprayerlinks:visited {
+	text-decoration: none;
+	color: blue;
 }
 
 .seperator {
