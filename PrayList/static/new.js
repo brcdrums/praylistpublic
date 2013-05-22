@@ -42,6 +42,15 @@ $(document).ready(function(){
         labelPosition: "left"
     });
 
+    
+
+    $('.prettycheckbox').click(function() {
+        $(this).addClass("disabled");
+        // $.ajax({
+        //     url: "/"     
+        // });
+    });
+
 });
 
 // function getCookie(name) {
@@ -85,6 +94,8 @@ function voteitem(postid) {
                 var div = $("<p id=\"youpray\">√ You've prayed for this!</p>").hide();
                 $(this).replaceWith(div);
                 $('#youpray').fadeIn('slow');
+                $('#youpray').after('<button class="mypraylistsave" onclick="mypraylistsave(' + postid + ')">Add this to my Daily PrayList</button><br>');
+                $('.mypraylistsave').fadeIn('slow');
             var scorenum = parseInt(document.getElementById("prayerscore").innerHTML.slice(9));
             $('#prayerscore').fadeOut('slow', function(){
                 var newscore = scorenum + 1;
