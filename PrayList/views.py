@@ -1,5 +1,5 @@
 from forms import PrayerForm, GroupForm
-from models import Prayer, Groups, UserProfile
+from models import Prayer, Groups, UserProfile, DailyPrayer
 from django.shortcuts import render_to_response
 from django.shortcuts import HttpResponseRedirect, HttpResponse
 import datetime
@@ -407,12 +407,21 @@ def my_praylist(request):
         saved_groups = helper_func.find_saved_groups(request.user)
         userobj = User.objects.get(username=request.user)
         saved_prayers = userobj.profile.saved_prayer
-        return render_to_response('mypraylist.html', {'user':request.user, 'top_groups': top_groups, 'saved_groups': saved_groups, 'saved_prayers': saved_prayers})
+        daily = DailyPrayer.objects.all()
+        prayed_today = []
+        dt = datetime.datetime.now()
+        today = dt.strftime('%Y-%m-%d')
+        for obj in daily:
+            if obj.timestamp.strftime('%Y-%m-%d') == today:
+                prayed_today.append(obj.prayer_id)
+        return render_to_response('mypraylist.html', {'user':request.user, 'top_groups': top_groups, 'saved_groups': saved_groups, 'saved_prayers': saved_prayers, 'prayed_today': prayed_today})
 
 def mypraylist_check(request, postid):
     if request.is_ajax():
         prayer = Prayer.objects.get(id=postid)
         userobj = User.objects.get(username=request.user)
-        userobj.profile.saved_prayer.add(prayer)
-        userobj.save()
+        dt = datetime.datetime.now()
+        dtclean = dt.strftime('%Y-%m-%d %H:%M:%S')          
+        daily = DailyPrayer(prayed_user=userobj, prayer_id=prayer, timestamp=dtclean)
+        daily.save()
         return HttpResponse(200)

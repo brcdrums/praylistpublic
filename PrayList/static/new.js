@@ -51,7 +51,8 @@ $(document).ready(function(){
         $.ajax({
             url: "/mypraylist/check/" + data,
             success: function(html) {
-                // $(this).after("<p>prayed</p>");
+                // needs to have feedback on when it was posted
+                // $().after("<p>prayed</p>");
             }   
         });
     });

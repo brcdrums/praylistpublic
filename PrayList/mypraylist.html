@@ -4,10 +4,17 @@
 
 <div id="mypraylist">
     {% for saved_p in saved_prayers.all %}
-    <div class="savedprayercheckwrapper">
-    <input type="checkbox" class="savedprayercheck {{ saved_p.id }}" name="box" /><label for="box" style="vertical-align: top; display: inline-block; padding-top: 6px;"><a class="savedprayerlinks" href="/post/{{ saved_p.id }}/">{{ saved_p.subject }}</a></label>
-    <br><br>
-    </div>
+        {% if saved_p in prayed_today %}
+        <div class="savedprayercheckwrapper">
+        <input type="checkbox" class="savedprayercheck {{ saved_p.id }}" name="box" display="none;" disabled /><label for="box" style="vertical-align: top; display: inline-block; padding-top: 6px;"><a class="savedprayerlinks" href="/post/{{ saved_p.id }}/">{{ saved_p.subject }}</a></label>
+        <br><br>
+        </div>
+        {% else %}
+        <div class="savedprayercheckwrapper">
+        <input type="checkbox" class="savedprayercheck {{ saved_p.id }}" name="box" /><label for="box" style="vertical-align: top; display: inline-block; padding-top: 6px;"><a class="savedprayerlinks" href="/post/{{ saved_p.id }}/">{{ saved_p.subject }}</a></label>
+        <br><br>
+        </div>
+        {% endif %}
     {% endfor %}
 </div>
 
