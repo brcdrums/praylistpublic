@@ -4,7 +4,7 @@
 
 <div id="mypraylist">
     {% for saved_p in saved_prayers.all %}
-    <input type="checkbox"><a class="savedprayerlinks" href="/post/{{ saved_p.id }}/">{{ saved_p.subject }}</a>
+    <input type="checkbox" class="savedprayercheck" value="yes" id="answer" name="box" /><label for="box" style="vertical-align: top; display: inline-block; padding-top: 6px;"><a class="savedprayerlinks" href="/post/{{ saved_p.id }}/">{{ saved_p.subject }}</a></label>
     <br><br>
     {% endfor %}
 </div>

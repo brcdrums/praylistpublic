@@ -37,6 +37,11 @@ $(document).ready(function(){
             $(this).children("button").css('opacity', 0);
     });
 
+    $('input.savedprayercheck').prettyCheckable({
+        color: 'green',
+        labelPosition: "left"
+    });
+
 });
 
 // function getCookie(name) {
