@@ -409,3 +409,10 @@ def my_praylist(request):
         saved_prayers = userobj.profile.saved_prayer
         return render_to_response('mypraylist.html', {'user':request.user, 'top_groups': top_groups, 'saved_groups': saved_groups, 'saved_prayers': saved_prayers})
 
+def mypraylist_check(request, postid):
+    if request.is_ajax():
+        prayer = Prayer.objects.get(id=postid)
+        userobj = User.objects.get(username=request.user)
+        userobj.profile.saved_prayer.add(prayer)
+        userobj.save()
+        return HttpResponse(200)

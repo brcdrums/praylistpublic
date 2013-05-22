@@ -25,10 +25,16 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, unique=True)
     saved_prayer_custom = models.CharField(max_length=100)
     saved_prayer = models.ManyToManyField(Prayer)
-  
+
     def __str__(self):  
           return "%s's profile" % self.user  
- 
+
+class DailyPrayer(models.Model):
+    prayed_user = models.ForeignKey(User)
+    prayer_id = models.ForeignKey(Prayer)
+    timestamp = models.DateTimeField()
+
+    
 def create_user_profile(sender, instance, created, **kwargs):  
     if created:  
        profile, created = UserProfile.objects.get_or_create(user=instance)  

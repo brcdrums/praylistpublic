@@ -46,9 +46,14 @@ $(document).ready(function(){
 
     $('.prettycheckbox').click(function() {
         $(this).addClass("disabled");
-        // $.ajax({
-        //     url: "/"     
-        // });
+        var data = $(this).children("input").attr('class').slice(17);
+        console.log(data);
+        $.ajax({
+            url: "/mypraylist/check/" + data,
+            success: function(html) {
+                // $(this).after("<p>prayed</p>");
+            }   
+        });
     });
 
 });

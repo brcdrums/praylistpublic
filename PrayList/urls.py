@@ -53,6 +53,7 @@ urlpatterns = patterns('',
     url(r'^managegroups/(?P<groupid>\d{1,3})/unsubscribe/$', views.managegroups),
     url(r'^mypraylist/$', views.my_praylist),
     url(r'^mypraylist/add/(?P<postid>\d{1,3})/$', views.post_page),
+    url(r'^mypraylist/check/(?P<postid>\d{1,3})/$', views.mypraylist_check),
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
