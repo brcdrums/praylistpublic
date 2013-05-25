@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+<a href="#" class="btn btn-success btn-small" style="float:right;"><i class="icon-white icon-pencil"></i> Edit </a>
 <h1 style="text-align: center;">Daily Praylist</h1>
 
 <div id="mypraylist">
@@ -16,6 +17,16 @@
         </div>
         {% endif %}
     {% endfor %}
+    <br><br><br>
+    <form>
+        <fieldset style="border:none;">
+        <label>Add a prayer!</label>
+        <br>
+        <input type="text" placeholder="Type something…">
+        <br>
+        <button type="submit" class="btn">Submit</button>
+        </fieldset>
+    </form>
 </div>
 
 {% endblock %}

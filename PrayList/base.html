@@ -1,12 +1,16 @@
 <html lang="en">
+{% block head %}
 <head>
 	<link rel="stylesheet" type="text/css" href="/static/new.css" />
 	<link rel="stylesheet" href="/static/prettyCheckable.css">
 	<script type="text/javascript" src="/static/jquery.js"></script>
 	<script type="text/javascript" src="/static/new.js"></script>
-	<script src="/static/prettyCheckable.js"></script>	
+	<script src="/static/prettyCheckable.js"></script>
+    <link href="/static/bootstrap.min.css" rel="stylesheet" media="screen">
+    <script src="/static/bootstrap.min.js"></script>
 	<title>{% block title %}{% endblock %}</title>
 </head>
+{% endblock %}
 <body>
 	<div id="fb-root"></div>
 	<script>(function(d, s, id) {

@@ -412,7 +412,8 @@ def my_praylist(request):
         dt = datetime.datetime.now()
         today = dt.strftime('%Y-%m-%d')
         for obj in daily:
-            if obj.timestamp.strftime('%Y-%m-%d') == today:
+            stamp = obj.timestamp.astimezone(timezone('US/Central'))
+            if stamp.strftime('%Y-%m-%d') == today:
                 prayed_today.append(obj.prayer_id)
         return render_to_response('mypraylist.html', {'user':request.user, 'top_groups': top_groups, 'saved_groups': saved_groups, 'saved_prayers': saved_prayers, 'prayed_today': prayed_today})
 
