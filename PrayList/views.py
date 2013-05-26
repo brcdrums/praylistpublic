@@ -402,13 +402,13 @@ def managegroups(request, groupid="none"):
         return HttpResponseRedirect("/accounts/login/?next=/managegroups/")
 
 def my_praylist(request):
-    # form = NewCustomPrayer()
     if request.method == "POST":
-        # if form.is_valid():
+        dt = datetime.datetime.now()
+        dtclean = dt.strftime('%Y-%m-%d %H:%M:%S')
         userobj = User.objects.get(username=request.user)
         custom_p = request.POST['newprayer']
-        userobj.profile.saved_prayer_custom.add(custom_p)
-        userobj.save()
+        new_p = DailyPrayer(prayed_user=userobj, timestamp=dtclean, custom_prayer=custom_p)
+        new_p.save()
     if request.user.is_authenticated():
         top_groups = helper_func.calc_top_groups()
         saved_groups = helper_func.find_saved_groups(request.user)

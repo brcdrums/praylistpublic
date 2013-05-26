@@ -30,7 +30,7 @@ class UserProfile(models.Model):
 
 class DailyPrayer(models.Model):
     prayed_user = models.ForeignKey(User)
-    prayer_id = models.ForeignKey(Prayer)
+    prayer_id = models.ForeignKey(Prayer, null=True)
     timestamp = models.DateTimeField()
     custom_prayer = models.CharField(max_length=100, default='None')
 
