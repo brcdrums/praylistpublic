@@ -23,7 +23,6 @@ class Prayer(models.Model):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, unique=True)
-    saved_prayer_custom = models.CharField(max_length=100)
     saved_prayer = models.ManyToManyField(Prayer)
 
     def __str__(self):  
@@ -33,6 +32,7 @@ class DailyPrayer(models.Model):
     prayed_user = models.ForeignKey(User)
     prayer_id = models.ForeignKey(Prayer)
     timestamp = models.DateTimeField()
+    custom_prayer = models.CharField(max_length=100, default='None')
 
     
 def create_user_profile(sender, instance, created, **kwargs):  

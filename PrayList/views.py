@@ -402,6 +402,13 @@ def managegroups(request, groupid="none"):
         return HttpResponseRedirect("/accounts/login/?next=/managegroups/")
 
 def my_praylist(request):
+    # form = NewCustomPrayer()
+    if request.method == "POST":
+        # if form.is_valid():
+        userobj = User.objects.get(username=request.user)
+        custom_p = request.POST['newprayer']
+        userobj.profile.saved_prayer_custom.add(custom_p)
+        userobj.save()
     if request.user.is_authenticated():
         top_groups = helper_func.calc_top_groups()
         saved_groups = helper_func.find_saved_groups(request.user)
@@ -415,7 +422,7 @@ def my_praylist(request):
             stamp = obj.timestamp.astimezone(timezone('US/Central'))
             if stamp.strftime('%Y-%m-%d') == today:
                 prayed_today.append(obj.prayer_id)
-        return render_to_response('mypraylist.html', {'user':request.user, 'top_groups': top_groups, 'saved_groups': saved_groups, 'saved_prayers': saved_prayers, 'prayed_today': prayed_today})
+        return render_to_response('mypraylist.html', {'user':request.user, 'top_groups': top_groups, 'saved_groups': saved_groups, 'saved_prayers': saved_prayers, 'prayed_today': prayed_today}, context_instance=RequestContext(request))
 
 def mypraylist_check(request, postid):
     if request.is_ajax():

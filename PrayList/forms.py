@@ -11,3 +11,4 @@ class GroupForm(forms.Form):
     privacy = forms.TypedChoiceField(
             choices=options, widget=forms.RadioSelect, coerce=int
         )
+    

@@ -6,6 +6,7 @@
 <div id="mypraylist">
     {% for saved_p in saved_prayers.all %}
         {% if saved_p in prayed_today %}
+
         <div class="savedprayercheckwrapper">
         <input type="checkbox" class="savedprayercheck {{ saved_p.id }}" name="box" display="none;" disabled /><label for="box" style="vertical-align: top; display: inline-block; padding-top: 6px;"><a class="savedprayerlinks" href="/post/{{ saved_p.id }}/">{{ saved_p.subject }}</a></label>
         <br><br>
@@ -18,11 +19,11 @@
         {% endif %}
     {% endfor %}
     <br><br><br>
-    <form>
+    <form method="post"> {% csrf_token %}
         <fieldset style="border:none;">
-        <label>Add a prayer!</label>
-        <br>
-        <input type="text" placeholder="Type something…">
+        <label for="newprayer">Add a prayer!</label>
+        
+        <input type="text" placeholder="Type something…" name="newprayer">
         <br>
         <button type="submit" class="btn">Submit</button>
         </fieldset>
