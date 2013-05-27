@@ -415,13 +415,14 @@ def my_praylist(request):
             new_p.save()
             daily = DailyPrayer(prayed_user=userobj, timestamp=dtclean, saved_prayer_custom= new_p)
             daily.save()
-
     if request.user.is_authenticated():
         top_groups = helper_func.calc_top_groups()
         saved_groups = helper_func.find_saved_groups(request.user)
         userobj = User.objects.get(username=request.user)
         saved_prayers = userobj.profile.saved_prayer
+        saved_prayers_list = userobj.profile.saved_prayer.all()
         custom_prayers = SavedPrayerCustom.objects.filter(prayed_user=userobj)
+        allprayers = chain(saved_prayers_list, custom_prayers)
         daily = DailyPrayer.objects.all()
         prayed_today = []
         dt = datetime.datetime.now()
@@ -433,7 +434,7 @@ def my_praylist(request):
                     prayed_today.append(obj.saved_prayer_custom)
                 else:
                     prayed_today.append(obj.prayer_id)
-        return render_to_response('mypraylist.html', {'user':request.user, 'top_groups': top_groups, 'saved_groups': saved_groups, 'saved_prayers': saved_prayers, 'prayed_today': prayed_today, 'form': form, 'daily': daily}, context_instance=RequestContext(request))
+        return render_to_response('mypraylist.html', {'user':request.user, 'top_groups': top_groups, 'saved_groups': saved_groups, 'saved_prayers': allprayers, 'prayed_today': prayed_today, 'form': form, 'daily': daily}, context_instance=RequestContext(request))
 
 def mypraylist_check(request, postid):
     if request.is_ajax():
@@ -444,3 +445,4 @@ def mypraylist_check(request, postid):
         daily = DailyPrayer(prayed_user=userobj, prayer_id=prayer, timestamp=dtclean)
         daily.save()
         return HttpResponse(200)
+

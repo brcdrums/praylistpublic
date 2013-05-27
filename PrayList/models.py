@@ -3,6 +3,8 @@ import datetime
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 
+
+
 class Groups(models.Model):
     groupname = models.CharField(max_length=30)
     privacy = models.BooleanField()
@@ -49,3 +51,4 @@ def create_user_profile(sender, instance, created, **kwargs):
 post_save.connect(create_user_profile, sender=User) 
  
 User.profile = property(lambda u: u.get_profile() )
+
