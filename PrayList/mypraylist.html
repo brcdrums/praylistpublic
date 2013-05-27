@@ -8,20 +8,22 @@
     {% if saved_p.custom_prayer %}
         {% if saved_p in prayed_today %}
         <div class="savedprayercheckwrapper">
-        <input type="checkbox" class="savedprayercheck custom" name="box" display="none;" disabled /><label for="box" style="vertical-align: top; display: inline-block; padding-top: 6px; padding-left: 5px;"> {{ saved_p.custom_prayer }}</label>
+        <input type="checkbox" class="savedprayercheck c{{ saved_p.id }}" name="box" display="none;" disabled /><label for="box" style="vertical-align: top; display: inline-block; padding-top: 6px; padding-left: 5px;"> {{ saved_p.custom_prayer }}</label>
+        </div>
         {% else %}
         <div class="savedprayercheckwrapper">
-        <input type="checkbox" class="savedprayercheck custom" name="box" display="none;" /><label for="box" style="vertical-align: top; display: inline-block; padding-top: 6px; padding-left: 5px;"> {{ saved_p.custom_prayer }}</label>
+        <input type="checkbox" class="savedprayercheck c{{ saved_p.id }}" name="box" display="none;" /><label for="box" style="vertical-align: top; display: inline-block; padding-top: 6px; padding-left: 5px;"> {{ saved_p.custom_prayer }}</label>
+        </div>
         {% endif %}
     {% else %}
         {% if saved_p in prayed_today %}
         <div class="savedprayercheckwrapper">
         <input type="checkbox" class="savedprayercheck {{ saved_p.id }}" name="box" display="none;" disabled /><label for="box" style="vertical-align: top; display: inline-block; padding-top: 6px;"><a class="savedprayerlinks" href="/post/{{ saved_p.id }}/">{{ saved_p.subject }}</a></label>
-        <br><br>
+        </div>
         {% else %}
         <div class="savedprayercheckwrapper">
         <input type="checkbox" class="savedprayercheck {{ saved_p.id }}" name="box" display="none;" /><label for="box" style="vertical-align: top; display: inline-block; padding-top: 6px;"><a class="savedprayerlinks" href="/post/{{ saved_p.id }}/">{{ saved_p.subject }}</a></label>
-        
+        </div>
         {% endif %}
     {% endif %}
     {% endfor %}

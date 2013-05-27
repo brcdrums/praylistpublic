@@ -413,8 +413,6 @@ def my_praylist(request):
             custom_p = request.POST['newprayer']
             new_p = SavedPrayerCustom(timestamp=dtclean, custom_prayer=custom_p, prayed_user=userobj)
             new_p.save()
-            daily = DailyPrayer(prayed_user=userobj, timestamp=dtclean, saved_prayer_custom= new_p)
-            daily.save()
     if request.user.is_authenticated():
         top_groups = helper_func.calc_top_groups()
         saved_groups = helper_func.find_saved_groups(request.user)
@@ -430,19 +428,27 @@ def my_praylist(request):
         for obj in daily:
             stamp = obj.timestamp.astimezone(timezone('US/Central'))
             if stamp.strftime('%Y-%m-%d') == today:
-                if obj.prayer_id == "null":
-                    prayed_today.append(obj.saved_prayer_custom)
-                else:
+                if obj.prayer_id:
                     prayed_today.append(obj.prayer_id)
+                else:
+                    prayed_today.append(obj.saved_prayer_custom)
         return render_to_response('mypraylist.html', {'user':request.user, 'top_groups': top_groups, 'saved_groups': saved_groups, 'saved_prayers': allprayers, 'prayed_today': prayed_today, 'form': form, 'daily': daily}, context_instance=RequestContext(request))
 
 def mypraylist_check(request, postid):
     if request.is_ajax():
-        prayer = Prayer.objects.get(id=postid)
-        userobj = User.objects.get(username=request.user)
-        dt = datetime.datetime.now()
-        dtclean = dt.strftime('%Y-%m-%d %H:%M:%S')          
-        daily = DailyPrayer(prayed_user=userobj, prayer_id=prayer, timestamp=dtclean)
-        daily.save()
-        return HttpResponse(200)
+        if "c" in postid:
+            custom_p = SavedPrayerCustom.objects.get(id=postid[1:])
+            userobj = User.objects.get(username=request.user)
+            dt = datetime.datetime.now()
+            dtclean = dt.strftime('%Y-%m-%d %H:%M:%S')     
+            daily = DailyPrayer(prayed_user=userobj, timestamp=dtclean, saved_prayer_custom=custom_p)
+            daily.save()
+        else:
+            prayer = Prayer.objects.get(id=postid)    
+            userobj = User.objects.get(username=request.user)
+            dt = datetime.datetime.now()
+            dtclean = dt.strftime('%Y-%m-%d %H:%M:%S')     
+            daily = DailyPrayer(prayed_user=userobj, prayer_id=prayer, timestamp=dtclean)
+            daily.save()
+            return HttpResponse(200)
 
