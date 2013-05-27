@@ -14,6 +14,8 @@ from tagging.models import Tag, TaggedItem
 from django.forms.util import ErrorList
 from django.utils.safestring import mark_safe
 import helper_func
+from itertools import chain
+
 
 def submit(request, group_name="none"):
     if request.user.is_authenticated():
@@ -409,7 +411,7 @@ def my_praylist(request):
             dtclean = dt.strftime('%Y-%m-%d %H:%M:%S')
             userobj = User.objects.get(username=request.user)
             custom_p = request.POST['newprayer']
-            new_p = DailyPrayer(prayed_user=userobj, timestamp=dtclean, custom_prayer=custom_p)
+            new_p = SavedPrayerCustom(timestamp=dtclean, custom_prayer=custom_p, prayed_user=userobj)
             new_p.save()
 
     if request.user.is_authenticated():
@@ -417,7 +419,8 @@ def my_praylist(request):
         saved_groups = helper_func.find_saved_groups(request.user)
         userobj = User.objects.get(username=request.user)
         saved_prayers = userobj.profile.saved_prayer
-        saved_prayers.append(userobj.profile.saved_prayer_custom)
+        custom_prayers = SavedPrayerCustom.objects.filter(prayed_user=userobj)
+        all_saved_prayers = chain(saved_prayers, custom_prayers)
         daily = DailyPrayer.objects.all()
         prayed_today = []
         dt = datetime.datetime.now()
@@ -426,7 +429,7 @@ def my_praylist(request):
             stamp = obj.timestamp.astimezone(timezone('US/Central'))
             if stamp.strftime('%Y-%m-%d') == today:
                 prayed_today.append(obj.prayer_id)
-        return render_to_response('mypraylist.html', {'user':request.user, 'top_groups': top_groups, 'saved_groups': saved_groups, 'saved_prayers': saved_prayers, 'prayed_today': prayed_today, 'form': form, 'daily': daily}, context_instance=RequestContext(request))
+        return render_to_response('mypraylist.html', {'user':request.user, 'top_groups': top_groups, 'saved_groups': saved_groups, 'saved_prayers': all_saved_prayers, 'prayed_today': prayed_today, 'form': form, 'daily': daily}, context_instance=RequestContext(request))
 
 def mypraylist_check(request, postid):
     if request.is_ajax():
