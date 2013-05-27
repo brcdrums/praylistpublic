@@ -28,8 +28,9 @@ class SavedPrayerCustom(models.Model):
 
 class DailyPrayer(models.Model):
     prayed_user = models.ForeignKey(User)
-    prayer_id = models.ForeignKey(Prayer)
+    prayer_id = models.ForeignKey(Prayer, null=True)
     timestamp = models.DateTimeField()
+    saved_prayer_custom = models.ForeignKey(SavedPrayerCustom, null=True)
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, unique=True)
