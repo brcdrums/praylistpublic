@@ -42,7 +42,7 @@ $(document).ready(function(){
         labelPosition: "left"
     });
 
-    
+
 
     $('.prettycheckbox').click(function() {
         $(this).addClass("disabled");
@@ -52,10 +52,12 @@ $(document).ready(function(){
             url: "/mypraylist/check/" + data,
             success: function(html) {
                 // needs to have feedback on when it was posted
-                $().after("<p>prayed</p>");
+                // $().after("<p>prayed</p>");
             }   
         });
     });
+
+   
 
 });
 
@@ -159,4 +161,6 @@ function mypraylistsave(postid) {
 }
 });
 }
+
+
 

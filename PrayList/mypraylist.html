@@ -4,14 +4,17 @@
 <h1 style="text-align: center;">Daily Praylist</h1>
 
 <div id="mypraylist">
+    {% for obj in daily %}
+    <p>{{ obj.prayer_id }}</p>
+    {% endfor %}
     {% for saved_p in saved_prayers.all %}
         {% if saved_p in prayed_today %}
-
         <div class="savedprayercheckwrapper">
         <input type="checkbox" class="savedprayercheck {{ saved_p.id }}" name="box" display="none;" disabled /><label for="box" style="vertical-align: top; display: inline-block; padding-top: 6px;"><a class="savedprayerlinks" href="/post/{{ saved_p.id }}/">{{ saved_p.subject }}</a></label>
         <br><br>
         </div>
         {% else %}
+
         <div class="savedprayercheckwrapper">
         <input type="checkbox" class="savedprayercheck {{ saved_p.id }}" name="box" /><label for="box" style="vertical-align: top; display: inline-block; padding-top: 6px;"><a class="savedprayerlinks" href="/post/{{ saved_p.id }}/">{{ saved_p.subject }}</a></label>
         <br><br>
@@ -19,11 +22,10 @@
         {% endif %}
     {% endfor %}
     <br><br><br>
-    <form method="post"> {% csrf_token %}
+    <form method="post" id="newcustomprayer"> {% csrf_token %}   
         <fieldset style="border:none;">
         <label for="newprayer">Add a prayer!</label>
-        
-        <input type="text" placeholder="Type something…" name="newprayer">
+        {{ form.newprayer }}
         <br>
         <button type="submit" class="btn">Submit</button>
         </fieldset>

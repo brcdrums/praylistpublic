@@ -1,4 +1,4 @@
-from forms import PrayerForm, GroupForm
+from forms import PrayerForm, GroupForm, NewCustomPrayer
 from models import Prayer, Groups, UserProfile, DailyPrayer
 from django.shortcuts import render_to_response
 from django.shortcuts import HttpResponseRedirect, HttpResponse
@@ -381,7 +381,7 @@ def groups_top_all(request, group, count=0):
     today = dt.strftime('%Y-%m-%d') 
     return render_to_response('top_page.html', {'prayers': obj_list, 'today': today, 'user': request.user, 'path': path, 'groupname': group, 'top_groups': top_groups, 'saved_groups': saved_groups, 'count': count_int, 'count_next': count_next, 'root_path': root_path})
 
-def managegroups(request, groupid="none"):        
+def managegroups(rilyequest, groupid="none"):        
     if request.user.is_authenticated():
         if request.is_ajax():
             if "unsubscribe" in request.path:
@@ -402,18 +402,22 @@ def managegroups(request, groupid="none"):
         return HttpResponseRedirect("/accounts/login/?next=/managegroups/")
 
 def my_praylist(request):
+    form = NewCustomPrayer(request.POST)
     if request.method == "POST":
-        dt = datetime.datetime.now()
-        dtclean = dt.strftime('%Y-%m-%d %H:%M:%S')
-        userobj = User.objects.get(username=request.user)
-        custom_p = request.POST['newprayer']
-        new_p = DailyPrayer(prayed_user=userobj, timestamp=dtclean, custom_prayer=custom_p)
-        new_p.save()
+        if form.is_valid:
+            dt = datetime.datetime.now()
+            dtclean = dt.strftime('%Y-%m-%d %H:%M:%S')
+            userobj = User.objects.get(username=request.user)
+            custom_p = request.POST['newprayer']
+            new_p = DailyPrayer(prayed_user=userobj, timestamp=dtclean, custom_prayer=custom_p)
+            new_p.save()
+
     if request.user.is_authenticated():
         top_groups = helper_func.calc_top_groups()
         saved_groups = helper_func.find_saved_groups(request.user)
         userobj = User.objects.get(username=request.user)
         saved_prayers = userobj.profile.saved_prayer
+        saved_prayers.append(userobj.profile.saved_prayer_custom)
         daily = DailyPrayer.objects.all()
         prayed_today = []
         dt = datetime.datetime.now()
@@ -422,7 +426,7 @@ def my_praylist(request):
             stamp = obj.timestamp.astimezone(timezone('US/Central'))
             if stamp.strftime('%Y-%m-%d') == today:
                 prayed_today.append(obj.prayer_id)
-        return render_to_response('mypraylist.html', {'user':request.user, 'top_groups': top_groups, 'saved_groups': saved_groups, 'saved_prayers': saved_prayers, 'prayed_today': prayed_today}, context_instance=RequestContext(request))
+        return render_to_response('mypraylist.html', {'user':request.user, 'top_groups': top_groups, 'saved_groups': saved_groups, 'saved_prayers': saved_prayers, 'prayed_today': prayed_today, 'form': form, 'daily': daily}, context_instance=RequestContext(request))
 
 def mypraylist_check(request, postid):
     if request.is_ajax():

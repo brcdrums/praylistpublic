@@ -11,4 +11,6 @@ class GroupForm(forms.Form):
     privacy = forms.TypedChoiceField(
             choices=options, widget=forms.RadioSelect, coerce=int
         )
-    
+
+class NewCustomPrayer(forms.Form):
+    newprayer = forms.CharField(max_length=50)
