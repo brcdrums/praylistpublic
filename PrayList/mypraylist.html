@@ -1,7 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
-<a href="#" class="btn btn-success btn-small" style="float:right;"><i class="icon-white icon-pencil"></i> Edit </a>
-<a href="#" class="btn btn-success btn-small" style="float:right;"><i class="icon-white icon-minus-sign"></i></a>
+<a href="#" class="btn btn-success btn-small editbutton" style="float:right;"><i class="icon-white icon-pencil"></i> Edit </a>
+<script type="text/javascript">
+    $('.editbutton').click(function(event) {
+        event.preventDefault();
+        $('.dangerbutton').removeClass('hide')    
+    });
+</script>
 <h1 style="text-align: center;">Daily Praylist</h1>
 
 <div id="mypraylist">
@@ -9,20 +14,24 @@
     {% if saved_p.custom_prayer %}
         {% if saved_p in prayed_today %}
         <div class="savedprayercheckwrapper">
+        <a href="#" class="btn btn-danger btn-mini dangerbutton hide"><i class="icon-white icon-minus-sign dangericon"></i></a>
         <input type="checkbox" class="savedprayercheck c{{ saved_p.id }}" name="box" display="none;" disabled /><label for="box" style="vertical-align: top; display: inline-block; padding-top: 6px; padding-left: 5px;"> {{ saved_p.custom_prayer }}</label>
         </div>
         {% else %}
         <div class="savedprayercheckwrapper">
+        <a href="#" class="btn btn-danger btn-mini dangerbutton hide"><i class="icon-white icon-minus-sign dangericon"></i></a>
         <input type="checkbox" class="savedprayercheck c{{ saved_p.id }}" name="box" display="none;" /><label for="box" style="vertical-align: top; display: inline-block; padding-top: 6px; padding-left: 5px;"> {{ saved_p.custom_prayer }}</label>
         </div>
         {% endif %}
     {% else %}
         {% if saved_p in prayed_today %}
         <div class="savedprayercheckwrapper">
+        <a href="#" class="btn btn-danger btn-mini dangerbutton hide"><i class="icon-white icon-minus-sign dangericon"></i></a>    
         <input type="checkbox" class="savedprayercheck {{ saved_p.id }}" name="box" display="none;" disabled /><label for="box" style="vertical-align: top; display: inline-block; padding-top: 6px;"><a class="savedprayerlinks" href="/post/{{ saved_p.id }}/">{{ saved_p.subject }}</a></label>
         </div>
         {% else %}
         <div class="savedprayercheckwrapper">
+        <a href="#" class="btn btn-danger btn-mini dangerbutton hide"><i class="icon-white icon-minus-sign dangericon"></i></a>
         <input type="checkbox" class="savedprayercheck {{ saved_p.id }}" name="box" display="none;" /><label for="box" style="vertical-align: top; display: inline-block; padding-top: 6px;"><a class="savedprayerlinks" href="/post/{{ saved_p.id }}/">{{ saved_p.subject }}</a></label>
         </div>
         {% endif %}

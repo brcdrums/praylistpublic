@@ -7,6 +7,17 @@
 	width: 492px;
 }
 
+.btn.btn-danger.btn-mini.dangerbutton {
+	float: left; 
+	margin-top: 8px;
+
+}
+
+.btn.btn-danger.btn-mini.dangerbutton.hide {
+	display: none;
+}
+
+
 .centerize {
 	display: block;
     margin: 0 auto;
