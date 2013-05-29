@@ -736,7 +736,7 @@
 }
 
 #topnav {
-	background-image: url("/static/Clouds.svg");
+	background-image: url("/static/img/Clouds.svg");
 	border-bottom: solid;
 	border-width: 1px;	
 	position: relative;

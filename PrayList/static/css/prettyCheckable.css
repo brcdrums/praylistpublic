@@ -26,7 +26,7 @@
 }
 
 .prettycheckbox.green a,
-.prettyradio.green a{ background-image: url(prettyCheckable-green.png);}
+.prettyradio.green a{ background-image: url(/static/img/prettyCheckable-green.png);}
 
 .prettycheckbox.red a,
 .prettyradio.red a{ background-image: url(prettyCheckable-red.png);}
