@@ -413,6 +413,7 @@ def my_praylist(request):
             custom_p = request.POST['newprayer']
             new_p = SavedPrayerCustom(timestamp=dtclean, custom_prayer=custom_p, prayed_user=userobj)
             new_p.save()
+        return HttpResponseRedirect('')
     if request.user.is_authenticated():
         top_groups = helper_func.calc_top_groups()
         saved_groups = helper_func.find_saved_groups(request.user)
