@@ -162,5 +162,25 @@ function mypraylistsave(postid) {
 });
 }
 
+function deletedaily(data) {
+    if(data.indexOf("c") !== -1) {
+        // var element = ".savedprayercheckwrapper " + data
+        $.ajax({
+            url: "/mypraylist/delete/custom/" + data,
+            success: function(html) {
+                console.log(data);
+                $("div."+data).remove();
+            }
+        });
+    } else {
+        $.ajax({
+            url: "/mypraylist/delete/" + data,
+            success: function(html) {
+                $("div."+data).remove();
+            }
+        });
+    }
+    
+}
 
 

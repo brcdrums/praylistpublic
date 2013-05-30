@@ -452,3 +452,13 @@ def mypraylist_check(request, postid):
             daily.save()
             return HttpResponse(200)
 
+def delete_daily(request, postid):
+    if "c" in postid:
+        custom_p = SavedPrayerCustom.objects.get(id=postid[1:])
+        custom_p.delete()
+        return HttpResponse(200)
+    else:
+        prayer = Prayer.objects.get(id=postid)
+        prayer.delete()
+        return HttpResponse(200)
+

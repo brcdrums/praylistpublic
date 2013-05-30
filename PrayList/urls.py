@@ -55,6 +55,8 @@ urlpatterns = patterns('',
     url(r'^mypraylist/add/(?P<postid>\d{1,3})/$', views.post_page),
     url(r'^mypraylist/check/(?P<postid>\d{1,3})/$', views.mypraylist_check),
     url(r'^mypraylist/check/(?P<postid>c\d{1,3})/$', views.mypraylist_check),
+    url(r'^mypraylist/delete/custom/(?P<postid>c\d{1,3})/$', views.delete_daily),
+    url(r'^mypraylist/delete/(?P<postid>\d{1,3})/$', views.delete_daily),
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
