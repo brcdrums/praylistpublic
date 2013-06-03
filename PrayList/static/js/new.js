@@ -166,7 +166,7 @@ function deletedaily(data) {
     if(data.indexOf("c") !== -1) {
         // var element = ".savedprayercheckwrapper " + data
         $.ajax({
-            url: "/mypraylist/delete/custom/" + data,
+            url: "/mypraylist/delete/custom/" + data + "/",
             success: function(html) {
                 console.log(data);
                 $("div."+data).remove();
@@ -174,7 +174,7 @@ function deletedaily(data) {
         });
     } else {
         $.ajax({
-            url: "/mypraylist/delete/" + data,
+            url: "/mypraylist/delete/" + data + "/",
             success: function(html) {
                 $("div."+data).remove();
             }

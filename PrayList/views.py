@@ -383,7 +383,7 @@ def groups_top_all(request, group, count=0):
     today = dt.strftime('%Y-%m-%d') 
     return render_to_response('top_page.html', {'prayers': obj_list, 'today': today, 'user': request.user, 'path': path, 'groupname': group, 'top_groups': top_groups, 'saved_groups': saved_groups, 'count': count_int, 'count_next': count_next, 'root_path': root_path})
 
-def managegroups(rilyequest, groupid="none"):        
+def managegroups(request, groupid="none"):        
     if request.user.is_authenticated():
         if request.is_ajax():
             if "unsubscribe" in request.path:
@@ -459,7 +459,13 @@ def delete_daily(request, postid):
         custom_p.delete()
         return HttpResponse(200)
     else:
+        userobj = User.objects.get(username=request.user)
         prayer = Prayer.objects.get(id=postid)
-        prayer.delete()
+        daily = DailyPrayer.objects.all()
+        if prayer in daily:
+            dailyprayer = DailyPrayer.objects.get(prayer_id=prayer)
+            dailyprayer.delete()
+        saved_prayer = userobj.profile.saved_prayer.get(id=postid)
+        saved_prayer.delete()
         return HttpResponse(200)
 

@@ -306,6 +306,10 @@
 
 }
 
+.populargrouplink {
+	padding: 1;
+}
+
 .populargroupitem {
 	display: inline-block;
 	list-style-type: none;
@@ -324,7 +328,7 @@
 
 .populargroupitemselected {
 	display: inline-block;
-	/*padding: 1px;*/
+	padding: 1px;
 	text-decoration: none;
 }
 
