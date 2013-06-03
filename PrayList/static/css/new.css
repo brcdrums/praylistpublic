@@ -187,11 +187,12 @@
 }
 
 #mypraylist {
-	margin-left:41%;
+	margin-left:auto;
 	margin-right:auto;
-	width:25%;
+	width:20%;
 	padding: 0;
 }
+
 
 .mypraylistsave {
 	background:#00A0D1;
@@ -279,6 +280,10 @@
 	font-size: 19;
 
 
+}
+
+#newcustomprayer {
+	padding-left: 20px;
 }
 
 #number {
@@ -443,6 +448,10 @@
 	display: inline-block;
 	vertical-align: top;
 
+}
+
+.savedprayercheckwrapper {
+	padding-left: 50px;
 }
 
 

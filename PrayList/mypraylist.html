@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
-<a href="#" class="btn btn-success btn-small editbutton" style="float:right;"><i class="icon-white icon-pencil"></i> Edit </a>
+<div id="mypraylist">
+<a href="#" class="btn btn-success btn-small editbutton" style="float: right;"><i class="icon-white icon-pencil"></i> Edit </a>
 <script type="text/javascript">
     $('.editbutton').click(function(event) {
         event.preventDefault();
@@ -8,7 +9,7 @@
     });
 </script>
 <h1 style="text-align: center;">Daily Praylist</h1>
-<div id="mypraylist">
+    
     {% for saved_p in saved_prayers %}
     {% if saved_p.custom_prayer %}
         {% if saved_p in prayed_today %}
@@ -35,6 +36,10 @@
         </div>
         {% endif %}
     {% endif %}
+    {% empty %}
+    <br>
+    <p>There are no prayers in your daily praylist.</p>
+
     {% endfor %}
     <!-- {% for saved_p in saved_prayers %}
     <div class="savedprayercheckwrapper">
@@ -52,7 +57,7 @@
         <!-- {% endif %} -->
         <!-- {% endif %} -->
     <!-- {% endfor %} -->
-    <br><br><br>
+    <br><br>
     <form method="post" id="newcustomprayer"> {% csrf_token %}   
         <fieldset style="border:none;">
         <label for="newprayer">Add a prayer!</label>
