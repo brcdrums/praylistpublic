@@ -39,7 +39,10 @@ class UserProfile(models.Model):
     def __str__(self):  
           return "%s's profile" % self.user  
 
-
+class PrayedFor(models.Model):
+    user = models.ManyToManyField(User)
+    prayer = models.ManyToManyField(Prayer)
+    timestamp = models.DateTimeField()
 
     
 def create_user_profile(sender, instance, created, **kwargs):  

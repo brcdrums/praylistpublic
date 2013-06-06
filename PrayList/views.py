@@ -433,7 +433,8 @@ def my_praylist(request):
                     prayed_today.append(obj.prayer_id)
                 else:
                     prayed_today.append(obj.saved_prayer_custom)
-        return render_to_response('mypraylist.html', {'user':request.user, 'top_groups': top_groups, 'saved_groups': saved_groups, 'saved_prayers': allprayers, 'prayed_today': prayed_today, 'form': form, 'daily': daily}, context_instance=RequestContext(request))
+        userprayers = Prayer.objects.filter(prayed_users=userobj)
+        return render_to_response('mypraylist.html', {'user':request.user, 'top_groups': top_groups, 'saved_groups': saved_groups, 'saved_prayers': allprayers, 'prayed_today': prayed_today, 'form': form, 'daily': daily, 'userprayers': userprayers}, context_instance=RequestContext(request))
 
 def mypraylist_check(request, postid):
     if request.is_ajax():
