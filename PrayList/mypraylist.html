@@ -9,7 +9,6 @@
     });
 </script>
 <h1 style="text-align: center;">Daily Praylist</h1>
-    
     {% for saved_p in saved_prayers %}
     {% if saved_p.custom_prayer %}
         {% if saved_p in prayed_today %}
@@ -69,20 +68,20 @@
 </div>
 <br><br>
 <div id="prayerstats" style="text-align: center;">
-    {% if prayed_today == 1 %}
+    {% if prayed_for_today == 1 %}
     <h3>You've prayed 1 time today, 
     {% else %}
-    <h3>You've prayed {{ prayed_today }} times today, 
+    <h3>You've prayed {{ prayed_for_today }} times today, 
     {% endif %}
-    {% if prayed_month == 1 %}
+    {% if prayed_for_month == 1 %}
     1 time this month,
     {% else %}
-    {{ prayed_month }} time(s) this month, 
+    {{ prayed_for_month }} time(s) this month, 
     {% endif %}
-    {% if prayed_year == 1 %}
+    {% if prayed_for_year == 1 %}
     and 1 time this year </h3>
     {% else %}
-    and {{ prayed_year }} time(s) this year </h3>
+    and {{ prayed_for_year }} time(s) this year </h3>
     {% endif %}
 </div>
 
