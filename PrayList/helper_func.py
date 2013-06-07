@@ -1,10 +1,11 @@
-from models import Prayer, Groups
+from models import Prayer, Groups, PrayedFor
 import datetime
 from django.utils.timezone import utc
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import auth
 from reddit_hotness import hot
+from pytz import timezone
 
 def humanizeTimeDiff(timestamp = None):
     """
@@ -72,13 +73,22 @@ def find_saved_groups(user):
             saved_groups.append(group)
     return saved_groups
 
-def has_prayed_today(userobj, prayer):
+def has_prayed_today(userobj, prayer, custom=False):
     prayed = False
-    if userobj in prayer.prayed_users:
+    if custom == False:
+        if userobj in prayer.prayed_users.all():
             dt = datetime.datetime.now()
             dtclean = dt.strftime('%Y-%m-%d')
-            prayed_for = PrayedFor.objects.filter(prayed_user=userobj)
-            for prayed in prayed_for:
-                if prayed.timestamp.strftime('%Y-%m-%d') == dtclean:
-                    prayed = True 
-    return prayed
+            prayed_for = PrayedFor.objects.filter(prayed_user=userobj, prayer=prayer)
+            for has_prayed in prayed_for:
+                    if has_prayed.timestamp.astimezone(timezone('US/Central')).strftime('%Y-%m-%d') == dtclean:
+                        prayed = True 
+        return prayed
+    else:
+        dt = datetime.datetime.now()
+        dtclean = dt.strftime('%Y-%m-%d')
+        prayed_for = PrayedFor.objects.filter(prayed_user=userobj, prayer_custom=prayer)
+        for has_prayed in prayed_for:
+            if has_prayed.timestamp.astimezone(timezone('US/Central')).strftime('%Y-%m-%d') == dtclean:
+                prayed = True 
+        return None
