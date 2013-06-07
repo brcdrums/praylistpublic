@@ -5,7 +5,7 @@
 		<p id="poststamp">Posted {{ timestamp }} </p>
 		<h1 id="postsubject">{{ subject }}</h1>
 		{% if user.is_authenticated %}
-			{% if userid in users.all %}
+			{% if prayed == True %}
 			<p id="prayerscore" style="color: red;">Prayers: {{ prayerscore }}</p>
 			{% else %}
 			<p id="prayerscore">Prayers: {{ prayerscore }} </p>
@@ -16,7 +16,7 @@
 		<img class="seperator" src="/static/img/PrayingHands.bmp" />
 		<p id="postprayer">{{ prayer }} <p>
 		{% if user.is_authenticated %}
-			{% if userid in users.all %}
+			{% if prayed == True %}
 			<p id="youpray">√ You've prayed for this!</p>
 			{% else %}
 			<button id="upvote" onclick="voteitem({{ id }})" return false;>I prayed for this! </button>
@@ -24,7 +24,7 @@
 		{% else %}
 			<a href="/accounts/login/?next=/post/{{ id }}/"><button id="upvote" return false;>I prayed for this! </button></a>
 		{% endif %}
-		{% if userid in users.all %}
+		{% if prayed == True %}
 			{% if prayerobj in saved_prayers.all %}
 			<p id="myprayadded">This prayer is in your Daily Praylist</p>
 			{% else %}

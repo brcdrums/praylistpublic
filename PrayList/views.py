@@ -105,7 +105,8 @@ def post_page(request, postid):
         else:
             prayer = Prayer.objects.get(id=postid)
             prayer.prayerscore = int(prayer.prayerscore) + 1
-            prayer.prayed_users.add(request.user)
+            if request.user not in prayer.prayed_users:
+                prayer.prayed_users.add(request.user)
             timestamp = prayer.timestamp.astimezone(timezone('US/Central'))
             timestampdt = datetime.datetime(timestamp.year, timestamp.month, timestamp.day, timestamp.hour, timestamp.minute, timestamp.second)
             prayer.hotness = hot(prayer.prayerscore, timestampdt)
@@ -124,9 +125,7 @@ def post_page(request, postid):
         top_groups = helper_func.calc_top_groups()
         saved_groups = helper_func.find_saved_groups(request.user)
         date = datetime.datetime.now()
-        prayed = False
         prayer = Prayer.objects.get(id=postid)
-        users = prayer.prayed_users
         userobj = User.objects.get(username=request.user)
         saved_prayers = userobj.profile.saved_prayer
         subject = prayer.subject
@@ -135,18 +134,14 @@ def post_page(request, postid):
         prayer_post = prayer.prayer
         this_group = Groups.objects.get(groupname=prayer.group.groupname)
         this_group_name = this_group.groupname
-        this_group.total_hotness = helper_func.calc_group_hotness(this_group)
-        this_group.save()
-        pid = postid
         prayer_score = prayer.prayerscore
-        prayer.hotness = hot(prayer_score, timestampdt)
-        prayer.save()
+        prayed = helper_func.has_prayed_today(userobj, prayer)
         return render_to_response('post_page.html', 
-                                 {'prayerscore': prayer_score, 'users': users, 
+                                 {'prayerscore': prayer_score, 
                                   'subject': subject, 'timestamp': timestamp, 
                                     'prayer': prayer_post, 'prayerobj': prayer, 'userid': request.user, 'saved_prayers': saved_prayers,
                                     'path': request.get_full_path, 'id': postid,
-                                    'top_groups': top_groups, 'saved_groups': saved_groups, 'this_group': this_group_name
+                                    'top_groups': top_groups, 'saved_groups': saved_groups, 'this_group': this_group_name, 'prayed': prayed,
                                     }, 
                                         context_instance=RequestContext(request)
                                    )

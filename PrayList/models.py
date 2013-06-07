@@ -26,12 +26,6 @@ class SavedPrayerCustom(models.Model):
     custom_prayer = models.CharField(max_length=50)
     prayed_user = models.ForeignKey(User)
 
-class DailyPrayer(models.Model):
-    prayed_user = models.ForeignKey(User)
-    prayer_id = models.ForeignKey(Prayer, null=True)
-    timestamp = models.DateTimeField()
-    saved_prayer_custom = models.ForeignKey(SavedPrayerCustom, null=True)
-
 class UserProfile(models.Model):
     user = models.OneToOneField(User, unique=True)
     saved_prayer = models.ManyToManyField(Prayer)
@@ -42,6 +36,7 @@ class UserProfile(models.Model):
 class PrayedFor(models.Model):
     prayed_user = models.ForeignKey(User, null=True)
     prayer = models.ForeignKey(Prayer, null=True)
+    prayer_custom = models.ForeignKey(SavedPrayerCustom, null=True)
     timestamp = models.DateTimeField()
 
     

@@ -71,3 +71,14 @@ def find_saved_groups(user):
         if user in group.users_favorited.all():
             saved_groups.append(group)
     return saved_groups
+
+def has_prayed_today(userobj, prayer):
+    prayed = False
+    if userobj in prayer.prayed_users:
+            dt = datetime.datetime.now()
+            dtclean = dt.strftime('%Y-%m-%d')
+            prayed_for = PrayedFor.objects.filter(prayed_user=userobj)
+            for prayed in prayed_for:
+                if prayed.timestamp.strftime('%Y-%m-%d') == dtclean:
+                    prayed = True 
+    return prayed
