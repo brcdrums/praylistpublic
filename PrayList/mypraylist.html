@@ -69,8 +69,21 @@
 </div>
 <br><br>
 <div id="prayerstats" style="text-align: center;">
-    <h3>You've prayed 0 times today, 0 times this month, and 0 times this year </h3>
-    <p>{{ userprayers|length }} </p>
+    {% if prayed_today == 1 %}
+    <h3>You've prayed 1 time today, 
+    {% else %}
+    <h3>You've prayed {{ prayed_today }} times today, 
+    {% endif %}
+    {% if prayed_month == 1 %}
+    1 time this month,
+    {% else %}
+    {{ prayed_month }} time(s) this month, 
+    {% endif %}
+    {% if prayed_year == 1 %}
+    and 1 time this year </h3>
+    {% else %}
+    and {{ prayed_year }} time(s) this year </h3>
+    {% endif %}
 </div>
 
 {% endblock %}

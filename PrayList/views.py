@@ -117,7 +117,7 @@ def post_page(request, postid):
             dt = datetime.datetime.now()
             dtclean = dt.strftime('%Y-%m-%d %H:%M:%S')  
             userobj = User.objects.get(username=request.user)
-            prayedfor = PrayedFor(prayed_user_for=userobj, prayer=prayer, timestamp=dtclean)
+            prayedfor = PrayedFor(prayed_user=userobj, prayer=prayer, timestamp=dtclean)
             prayedfor.save()
             return HttpResponse(status=200)
     else:
@@ -438,8 +438,26 @@ def my_praylist(request):
                     prayed_today.append(obj.prayer_id)
                 else:
                     prayed_today.append(obj.saved_prayer_custom)
-        userprayers = Prayer.objects.filter(prayed_users=userobj)
-        return render_to_response('mypraylist.html', {'user':request.user, 'top_groups': top_groups, 'saved_groups': saved_groups, 'saved_prayers': allprayers, 'prayed_today': prayed_today, 'form': form, 'daily': daily, 'userprayers': userprayers}, context_instance=RequestContext(request))
+        userprayers = PrayedFor.objects.filter(prayed_user=userobj)
+        prayed_today = 0
+        prayed_month = 0
+        prayed_year = 0
+        today = dt.strftime('%Y-%m-%d') 
+        month = dt.strftime('%Y-%m')
+        year = dt.strftime('%Y')
+        for prayer in userprayers:
+            if prayer.timestamp.astimezone(timezone('US/Central')).strftime('%Y-%m-%d') == today:
+                prayed_today += 1
+                prayed_month += 1
+                prayed_year += 1
+                break
+            elif prayer.timestamp.astimezone(timezone('US/Central')).strftime('%Y-%m') == month:
+                prayed_month += 1
+                prayed_year += 1
+                break
+            elif prayer.timestamp.astimezone(timezone('US/Central')).strftime('%Y') == year:
+                prayed_year += 1
+        return render_to_response('mypraylist.html', {'user':request.user, 'top_groups': top_groups, 'saved_groups': saved_groups, 'saved_prayers': allprayers, 'prayed_today': prayed_today, 'form': form, 'daily': daily, 'userprayers': userprayers, 'prayed_today': prayed_today, 'prayed_month': prayed_month, 'prayed_year': prayed_year}, context_instance=RequestContext(request))
 
 def mypraylist_check(request, postid):
     if request.is_ajax():
