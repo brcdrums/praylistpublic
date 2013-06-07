@@ -40,7 +40,7 @@ class UserProfile(models.Model):
           return "%s's profile" % self.user  
 
 class PrayedFor(models.Model):
-    user = models.ManyToManyField(User)
+    prayed_user = models.ManyToManyField(User)
     prayer = models.ManyToManyField(Prayer)
     timestamp = models.DateTimeField()
 

@@ -1,5 +1,5 @@
 from forms import PrayerForm, GroupForm, NewCustomPrayer
-from models import Prayer, Groups, UserProfile, DailyPrayer, SavedPrayerCustom
+from models import Prayer, Groups, UserProfile, DailyPrayer, SavedPrayerCustom, PrayedFor
 from django.shortcuts import render_to_response
 from django.shortcuts import HttpResponseRedirect, HttpResponse
 import datetime
@@ -114,6 +114,11 @@ def post_page(request, postid):
             this_group_name = this_group.groupname
             this_group.total_hotness = helper_func.calc_group_hotness(this_group)
             this_group.save()
+            dt = datetime.datetime.now()
+            dtclean = dt.strftime('%Y-%m-%d %H:%M:%S')  
+            userobj = User.objects.get(username=request.user)
+            prayedfor = PrayedFor(user=userobj, prayer=prayer, timestamp=dtclean)
+            prayedfor.save()
             return HttpResponse(status=200)
     else:
         top_groups = helper_func.calc_top_groups()
