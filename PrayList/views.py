@@ -479,10 +479,6 @@ def delete_daily(request, postid):
     else:
         userobj = User.objects.get(username=request.user)
         prayer = Prayer.objects.get(id=postid)
-        daily = DailyPrayer.objects.all()
-        if prayer in daily:
-            dailyprayer = DailyPrayer.objects.get(prayer_id=prayer)
-            dailyprayer.delete()
         userobj.profile.saved_prayer.remove(prayer)
         return HttpResponse(200)
 
