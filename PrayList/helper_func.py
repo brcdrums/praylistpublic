@@ -91,4 +91,4 @@ def has_prayed_today(userobj, prayer, custom=False):
         for has_prayed in prayed_for:
             if has_prayed.timestamp.astimezone(timezone('US/Central')).strftime('%Y-%m-%d') == dtclean:
                 prayed = True 
-        return None
+        return prayed

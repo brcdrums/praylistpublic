@@ -423,16 +423,15 @@ def my_praylist(request):
         custom_prayers = SavedPrayerCustom.objects.filter(prayed_user=userobj)
         allprayers = chain(saved_prayers_list, custom_prayers)
         userprayers = PrayedFor.objects.filter(prayed_user=userobj)
-        userprayers1 = PrayedFor.objects.filter(prayed_user=userobj).values_list('prayer', flat=True)
         prayed_today = []
         dt = datetime.datetime.now()
         today = dt.strftime('%Y-%m-%d') 
         for obj in saved_prayers_list:
             if helper_func.has_prayed_today(userobj, obj):
                 prayed_today.append(obj.id)
-        # for obj in custom_prayers:
-        #     if helper_func.has_prayed_today(userobj, obj, True):
-        #         prayed_today.append(obj.id)
+        for obj in custom_prayers:
+            if helper_func.has_prayed_today(userobj, obj, True):
+                prayed_today.append(obj.id)
         prayed_for_today = 0
         prayed_for_month = 0
         prayed_for_year = 0
@@ -444,14 +443,14 @@ def my_praylist(request):
                 prayed_for_today += 1
                 prayed_for_month += 1
                 prayed_for_year += 1
-                break
+                continue
             elif prayer.timestamp.astimezone(timezone('US/Central')).strftime('%Y-%m') == month:
                 prayed_for_month += 1
                 prayed_for_year += 1
-                break
+                continue
             elif prayer.timestamp.astimezone(timezone('US/Central')).strftime('%Y') == year:
                 prayed_for_year += 1
-        return render_to_response('mypraylist.html', {'user':request.user, 'top_groups': top_groups, 'saved_groups': saved_groups, 'saved_prayers': allprayers, 'prayed_today': prayed_today, 'form': form, 'userprayers': userprayers1, 'prayed_for_today': prayed_for_today, 'prayed_for_month': prayed_for_month, 'prayed_for_year': prayed_for_year}, context_instance=RequestContext(request))
+        return render_to_response('mypraylist.html', {'user':request.user, 'top_groups': top_groups, 'saved_groups': saved_groups, 'saved_prayers': allprayers, 'prayed_today': prayed_today, 'form': form, 'userprayers': custom_prayers, 'prayed_for_today': prayed_for_today, 'prayed_for_month': prayed_for_month, 'prayed_for_year': prayed_for_year}, context_instance=RequestContext(request))
 
 def mypraylist_check(request, postid):
     if request.is_ajax():
@@ -460,16 +459,16 @@ def mypraylist_check(request, postid):
             userobj = User.objects.get(username=request.user)
             dt = datetime.datetime.now()
             dtclean = dt.strftime('%Y-%m-%d %H:%M:%S')     
-            daily = DailyPrayer(prayed_user=userobj, timestamp=dtclean, saved_prayer_custom=custom_p)
-            daily.save()
+            new_p = PrayedFor(prayed_user=userobj, timestamp=dtclean, prayer_custom=custom_p)
+            new_p.save()
             return HttpResponse(200)
         else:
             prayer = Prayer.objects.get(id=postid)    
             userobj = User.objects.get(username=request.user)
             dt = datetime.datetime.now()
             dtclean = dt.strftime('%Y-%m-%d %H:%M:%S')     
-            daily = DailyPrayer(prayed_user=userobj, prayer_id=prayer, timestamp=dtclean)
-            daily.save()
+            new_p = PrayedFor(prayed_user=userobj, timestamp=dtclean, prayer=prayer)
+            new_p.save()
             return HttpResponse(200)
 
 def delete_daily(request, postid):

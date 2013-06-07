@@ -99,11 +99,9 @@ function voteitem(postid) {
         url: "/post/" + postid + "/",
         success: function(html) {
             $('#upvote').fadeOut('slow', function() {
-                var div = $("<p id=\"youpray\">√ You've prayed for this!</p>").hide();
+                var div = $("<p id=\"youpray\">√ You've prayed for this today!</p>").hide();
                 $(this).replaceWith(div);
                 $('#youpray').fadeIn('slow');
-                $('#youpray').after('<button class="mypraylistsave" onclick="mypraylistsave(' + postid + ')">Add this to my Daily PrayList</button><br>');
-                $('.mypraylistsave').fadeIn('slow');
             var scorenum = parseInt(document.getElementById("prayerscore").innerHTML.slice(9));
             $('#prayerscore').fadeOut('slow', function(){
                 var newscore = scorenum + 1;

@@ -5,7 +5,7 @@
 		<p id="poststamp">Posted {{ timestamp }} </p>
 		<h1 id="postsubject">{{ subject }}</h1>
 		{% if user.is_authenticated %}
-			{% if prayed == True %}
+			{% if prayed %}
 			<p id="prayerscore" style="color: red;">Prayers: {{ prayerscore }}</p>
 			{% else %}
 			<p id="prayerscore">Prayers: {{ prayerscore }} </p>
@@ -16,23 +16,20 @@
 		<img class="seperator" src="/static/img/PrayingHands.bmp" />
 		<p id="postprayer">{{ prayer }} <p>
 		{% if user.is_authenticated %}
-			{% if prayed == True %}
-			<p id="youpray">√ You've prayed for this!</p>
+			{% if prayed  %}
+			<p id="youpray">√ You've prayed for this today!</p>
 			{% else %}
 			<button id="upvote" onclick="voteitem({{ id }})" return false;>I prayed for this! </button>
+			<br>
 			{% endif %}
 		{% else %}
 			<a href="/accounts/login/?next=/post/{{ id }}/"><button id="upvote" return false;>I prayed for this! </button></a>
 		{% endif %}
-		{% if prayed == True %}
-			{% if prayerobj in saved_prayers.all %}
-			<p id="myprayadded">This prayer is in your Daily Praylist</p>
-			{% else %}
-			<button class="mypraylistsave" onclick="mypraylistsave({{ id }})">Add this to my Daily PrayList</button>
-			<br><br>
-			{% endif %}
+		{% if prayerobj in saved_prayers.all %}
+		<p id="myprayadded">This prayer is in your Daily Praylist</p>
+		{% else %}
+		<button class="mypraylistsave" onclick="mypraylistsave({{ id }})">Add this to my Daily PrayList</button>
 		{% endif %}
 		<div class="fb-like" data-href="http://127.0.0.1:8000{{ path }}" data-send="false" data-layout="button_count" data-width="450" data-show-faces="true" data-font="lucida grande"></div>
-
 	</div>
 {% endblock %}
