@@ -117,7 +117,7 @@ def post_page(request, postid):
             dt = datetime.datetime.now()
             dtclean = dt.strftime('%Y-%m-%d %H:%M:%S')  
             userobj = User.objects.get(username=request.user)
-            prayedfor = PrayedFor(user=userobj, prayer=prayer, timestamp=dtclean)
+            prayedfor = PrayedFor(prayed_user=userobj, prayer=prayer, timestamp=dtclean)
             prayedfor.save()
             return HttpResponse(status=200)
     else:
