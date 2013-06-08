@@ -435,7 +435,6 @@ def my_praylist(request):
         prayed_for_today = 0
         prayed_for_month = 0
         prayed_for_year = 0
-        today = dt.strftime('%Y-%m-%d') 
         month = dt.strftime('%Y-%m')
         year = dt.strftime('%Y')
         for prayer in userprayers:
@@ -450,7 +449,7 @@ def my_praylist(request):
                 continue
             elif prayer.timestamp.astimezone(timezone('US/Central')).strftime('%Y') == year:
                 prayed_for_year += 1
-        return render_to_response('mypraylist.html', {'user':request.user, 'top_groups': top_groups, 'saved_groups': saved_groups, 'saved_prayers': allprayers, 'prayed_today': prayed_today, 'form': form, 'userprayers': custom_prayers, 'prayed_for_today': prayed_for_today, 'prayed_for_month': prayed_for_month, 'prayed_for_year': prayed_for_year}, context_instance=RequestContext(request))
+        return render_to_response('mypraylist.html', {'today': today, 'user':request.user, 'top_groups': top_groups, 'saved_groups': saved_groups, 'saved_prayers': allprayers, 'prayed_today': prayed_today, 'form': form, 'userprayers': custom_prayers, 'prayed_for_today': prayed_for_today, 'prayed_for_month': prayed_for_month, 'prayed_for_year': prayed_for_year}, context_instance=RequestContext(request))
 
 def mypraylist_check(request, postid):
     if request.is_ajax():

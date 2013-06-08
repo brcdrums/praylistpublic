@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 <div id="mypraylist">
-<a href="#" class="btn btn-success btn-small editbutton" style="float: right;"><i class="icon-white icon-pencil"></i> Edit </a>
+<a href="#" class="btn btn-success btn-small editbutton" style="float: right; display: inline- block;"><i class="icon-white icon-pencil"></i> Edit </a>
 <script type="text/javascript">
     $('.editbutton').click(function(event) {
         event.preventDefault();
@@ -9,7 +9,6 @@
     });
 </script>
 <h1 style="text-align: center;">Daily Praylist</h1>
-    <p> u {{ prayed_today }}</p>
     {% for saved_p in saved_prayers %}
     {% if saved_p.custom_prayer %}
         {% if saved_p.id in prayed_today %}
@@ -77,12 +76,12 @@
     {% if prayed_for_month == 1 %}
     1 time this month,
     {% else %}
-    {{ prayed_for_month }} time(s) this month, 
+    {{ prayed_for_month }} times this month, 
     {% endif %}
     {% if prayed_for_year == 1 %}
     and 1 time this year </h3>
     {% else %}
-    and {{ prayed_for_year }} time(s) this year </h3>
+    and {{ prayed_for_year }} times this year </h3>
     {% endif %}
 </div>
 
