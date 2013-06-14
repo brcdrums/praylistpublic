@@ -1,5 +1,5 @@
-from forms import PrayerForm, GroupForm, NewCustomPrayer
-from models import Prayer, Groups, UserProfile, SavedPrayerCustom, PrayedFor
+from forms import PrayerForm, GroupForm, NewCustomPrayer, CommentForm
+from models import Prayer, Groups, UserProfile, SavedPrayerCustom, PrayedFor, Comments
 from django.shortcuts import render_to_response
 from django.shortcuts import HttpResponseRedirect, HttpResponse
 import datetime
@@ -122,6 +122,16 @@ def post_page(request, postid):
             prayedfor.save()
             return HttpResponse(status=200)
     else:
+        if request.method == "POST":
+            form = CommentForm(request.POST)
+            if form.is_valid():
+                dt = datetime.datetime.now()
+                dtclean = dt.strftime('%Y-%m-%d %H:%M:%S')
+                prayer = Prayer.objects.get(id=postid)
+                comment = Comments(prayer=prayer, body=request.POST['comment'], posted_on=dtclean, user=request.user)
+                comment.save()
+                return HttpResponseRedirect('')
+        form = CommentForm()
         top_groups = helper_func.calc_top_groups()
         saved_groups = helper_func.find_saved_groups(request.user)
         date = datetime.datetime.now()
@@ -141,7 +151,7 @@ def post_page(request, postid):
                                   'subject': subject, 'timestamp': timestamp, 
                                     'prayer': prayer_post, 'prayerobj': prayer, 'userid': request.user, 'saved_prayers': saved_prayers,
                                     'path': request.get_full_path, 'id': postid,
-                                    'top_groups': top_groups, 'saved_groups': saved_groups, 'this_group': this_group_name, 'prayed': prayed,
+                                    'top_groups': top_groups, 'saved_groups': saved_groups, 'this_group': this_group_name, 'prayed': prayed, 'form': form,
                                     }, 
                                         context_instance=RequestContext(request)
                                    )
