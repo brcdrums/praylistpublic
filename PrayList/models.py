@@ -39,7 +39,14 @@ class PrayedFor(models.Model):
     prayer_custom = models.ForeignKey(SavedPrayerCustom, null=True)
     timestamp = models.DateTimeField()
 
-    
+class Comments(models.Model):
+    prayer = models.ForeignKey(Prayer)
+    body = models.CharField(max_length=2000)
+    posted_on = models.DateTimeField()
+    edited_on = models.DateTimeField(null=True)
+    user = models.ForeignKey(User)
+    parent = models.ForeignKey('Comments', null=True)
+
 def create_user_profile(sender, instance, created, **kwargs):  
     if created:  
        profile, created = UserProfile.objects.get_or_create(user=instance)  
