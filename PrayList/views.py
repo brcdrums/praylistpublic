@@ -132,10 +132,11 @@ def post_page(request, postid):
                 comment.save()
                 return HttpResponseRedirect('')
         form = CommentForm()
+        prayer = Prayer.objects.get(id=postid)
+        comments = Comments.objects.filter(prayer=prayer).order_by("-posted_on")
         top_groups = helper_func.calc_top_groups()
         saved_groups = helper_func.find_saved_groups(request.user)
         date = datetime.datetime.now()
-        prayer = Prayer.objects.get(id=postid)
         userobj = User.objects.get(username=request.user)
         saved_prayers = userobj.profile.saved_prayer
         subject = prayer.subject
@@ -151,7 +152,7 @@ def post_page(request, postid):
                                   'subject': subject, 'timestamp': timestamp, 
                                     'prayer': prayer_post, 'prayerobj': prayer, 'userid': request.user, 'saved_prayers': saved_prayers,
                                     'path': request.get_full_path, 'id': postid,
-                                    'top_groups': top_groups, 'saved_groups': saved_groups, 'this_group': this_group_name, 'prayed': prayed, 'form': form,
+                                    'top_groups': top_groups, 'saved_groups': saved_groups, 'this_group': this_group_name, 'prayed': prayed, 'form': form, 'comments': comments
                                     }, 
                                         context_instance=RequestContext(request)
                                    )
